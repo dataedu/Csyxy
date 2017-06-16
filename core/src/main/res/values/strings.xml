@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Core</string>
+    <string name="rootUrl">http://wap.cztljx.org/</string>
+
+    <string name="net_no2">网络异常哦</string>
+    <string name="nodata">还没有数据哦</string>
+    <string name="data_fail">服务异常哦</string>
+    <string name="login_fail">登录失败</string>
+    <string name="searchnodata">没有搜索到哦</string>
+    <string name="search_fail">搜索失败</string>
+
+    <string name="about_copyright_cn">长沙医学院版权所有</string>
+    <string name="about_copyright_zn">Copyright ©2017 All Rights Reserved</string>
+</resources>

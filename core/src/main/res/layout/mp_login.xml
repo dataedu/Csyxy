@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lt="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#f4f4f4"
+    android:elevation="3dp">
+
+    <LinearLayout
+        android:id="@+id/putview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/top"
+            android:layout_width="fill_parent"
+            android:layout_height="48dip"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+            <Button
+                android:id="@+id/back"
+                style="@style/login_back"
+                android:layout_width="70dip"
+                android:layout_height="48dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:id="@+id/title"
+                style="@style/login_title_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="48dip"
+                android:text="登录"
+                android:layout_centerHorizontal="true"
+                android:textColor="#212121" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="#c9c9c9" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" >
+                <ImageView
+                    android:layout_height="16dp"
+                    android:layout_width="10dp"
+                    android:src="@mipmap/uid"/>
+                <com.dk.edu.core.view.edittext.CleanEditText
+                    android:id="@+id/uid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:drawableRight="@mipmap/clear_press"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="输入账号"
+                    android:textSize="12sp"
+                    android:textColor="#212121"
+                    android:maxLines="1"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="#c9c9c9"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" >
+                <ImageView
+                    android:layout_height="16dp"
+                    android:layout_width="8dp"
+                    android:src="@mipmap/pwd"/>
+                <com.dk.edu.core.view.edittext.CleanEditText
+                    android:id="@+id/psw"
+                    android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:drawableRight="@mipmap/clear_press"
+                    android:gravity="center_vertical"
+                    android:hint="输入密码"
+                    android:inputType="textPassword"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:textColor="#212121" />
+                <TextView
+                    android:id="@+id/showPwsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="显示密码"
+                    android:textSize="12sp"
+                    android:textColor="#2196f3"
+                    android:onClick="showPws"/>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/yzm_view"
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="#c9c9c9"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/yzm_lin"
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone">
+                <ImageView
+                    android:layout_height="16dp"
+                    android:layout_width="8dp"
+                    android:src="@mipmap/pwd"/>
+                <com.dk.edu.core.view.edittext.CleanEditText
+                    android:id="@+id/yzm"
+                    android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:drawableRight="@mipmap/clear_press"
+                    android:gravity="center_vertical"
+                    android:hint="输入验证码"
+                    android:inputType="text"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:textColor="#212121" />
+                <LinearLayout
+                    android:layout_height="22dp"
+                    android:layout_width="71dp"
+                    android:background="#ffebd0">
+                    <com.dk.edu.core.view.ValidationCode
+                        android:id="@+id/valicode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        lt:textSize="13sp"
+                        lt:text="">
+                    </com.dk.edu.core.view.ValidationCode>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="#c9c9c9" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ok"
+            android:layout_width="fill_parent"
+            android:layout_height="42dp"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="20dip"
+            android:layout_marginBottom="20dip"
+            android:elevation="3dp"
+            android:background="@color/gray_c9"
+            android:onClick="tologin"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/ok_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确定"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+            <com.dk.edu.core.view.DrawHookView
+                android:id="@+id/progress"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:visibility="gone">
+            </com.dk.edu.core.view.DrawHookView>
+
+            <com.dk.edu.core.view.DrawCheckMarkView
+                android:id="@+id/progress_check"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:visibility="gone">
+            </com.dk.edu.core.view.DrawCheckMarkView>
+
+            <com.dk.edu.core.view.DrawCrossMarkView
+                android:id="@+id/progress_cross"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:visibility="gone">
+            </com.dk.edu.core.view.DrawCrossMarkView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

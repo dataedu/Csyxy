@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="58dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="#f4f4f4"
+    tools:context="com.dk.edu.csyxy.fragment.NavFragment">
+
+    <com.dk.edu.csyxy.fragment.NavigationButton
+        android:id="@+id/nav_item_cyxx"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp" />
+
+    <com.dk.edu.csyxy.fragment.NavigationButton
+        android:id="@+id/nav_item_ydoa"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp" />
+
+    <com.dk.edu.csyxy.fragment.NavigationButton
+        android:id="@+id/nav_item_cygn"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp" />
+
+    <com.dk.edu.csyxy.fragment.NavigationButton
+        android:id="@+id/nav_item_grzx"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp" />
+</LinearLayout>

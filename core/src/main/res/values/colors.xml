@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#C83842</color>
+    <color name="colorPrimaryDark">#C83842</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="about_blue">#2196f3</color>
+    <color name="black50">#7f000000</color>
+    <color name="white">#ffffff</color>
+    <color name="gray_c9">#c9c9c9</color>
+    <color name="transparent">#00000000</color>
+    <color name="linecolor">#e5e5e5</color>
+    <color name="ripple_bg_pressed">#FF21272B</color>
+    <color name="list_divider_color">#DADADA</color>
+    <color name="rcap_gray">#c9c9c9</color>
+    <color name="bg">#ededed</color>
+</resources>
