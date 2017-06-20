@@ -6,13 +6,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.BaseFragment;
 import com.dk.edu.core.util.DeviceUtil;
-import com.dk.edu.core.view.RecycleViewDivider;
+import com.dk.edu.core.view.RecycleViewDividerNoPadding;
 import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.adapter.CygnAdapter;
@@ -33,6 +34,7 @@ public class CygnFragment extends BaseFragment{
     RecyclerView app_recycler_view;
     private ErrorLayout mError;
     CygnAdapter uAdapter;//非自定义oa app
+    RelativeLayout layout_bg;
 
     @Override
     protected int getLayoutId() {
@@ -43,13 +45,14 @@ public class CygnFragment extends BaseFragment{
     protected void initWidget(View root) {
         super.initWidget(root);
         mContext = getContext();
+        layout_bg = findView(R.id.layout_bg);
         app_recycler_view = (RecyclerView) root.findViewById(R.id.app_recycler_view);
         mError = (ErrorLayout) root.findViewById(R.id.main_error);
 
-        RecycleViewDivider vDivider = new RecycleViewDivider(getActivity(), GridLayoutManager.VERTICAL, 1, Color.rgb(201, 201, 201));
-        RecycleViewDivider hDivider = new RecycleViewDivider(getActivity(), GridLayoutManager.HORIZONTAL, 1, Color.rgb(201, 201, 201));
+        RecycleViewDividerNoPadding vDivider = new RecycleViewDividerNoPadding(getActivity(), GridLayoutManager.VERTICAL, 1, Color.rgb(201, 201, 201));
+        RecycleViewDividerNoPadding hDivider = new RecycleViewDividerNoPadding(getActivity(), GridLayoutManager.HORIZONTAL, 1, Color.rgb(201, 201, 201));
         RecyclerView.ItemAnimator animator = new DefaultItemAnimator();
-        uAdapter = new CygnAdapter(mContext,mData);
+        uAdapter = new CygnAdapter(mContext,mData,layout_bg);
         app_recycler_view.setLayoutManager(new GridLayoutManager(mContext, 4, GridLayoutManager.VERTICAL, false));
         app_recycler_view.setAdapter(uAdapter);
         app_recycler_view.setItemAnimator(animator);
@@ -91,4 +94,6 @@ public class CygnFragment extends BaseFragment{
         mData.add(new OaItemEntity("迎新办理","迎新办理","app_yxbl"));
         uAdapter.notifyDataSetChanged();
     }
+
+
 }

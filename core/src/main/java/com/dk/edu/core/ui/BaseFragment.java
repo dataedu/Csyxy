@@ -3,7 +3,6 @@ package com.dk.edu.core.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,7 @@ import com.dk.edu.core.util.ImageLoader;
  * fragment基类
  * 作者：janabo on 2017/1/4 14:27
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends BaseLazyFragment {
     protected View mRoot;
     protected Bundle mBundle;
     private RequestManager mImgLoader;

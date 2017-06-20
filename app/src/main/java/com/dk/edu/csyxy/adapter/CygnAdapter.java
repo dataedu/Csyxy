@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dk.edu.core.util.ImageUtil;
+import com.dk.edu.core.util.SnackBarUtil;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.entity.OaItemEntity;
 
@@ -22,10 +24,12 @@ public class CygnAdapter extends RecyclerView.Adapter<CygnAdapter.MyViewHolder>{
     private List<OaItemEntity> mData;
     private Context mContext;
     LayoutInflater inflater;
+    private RelativeLayout layout_bg;
 
-    public CygnAdapter(Context mContext,List<OaItemEntity> mData){
+    public CygnAdapter(Context mContext,List<OaItemEntity> mData,RelativeLayout layout_bg){
         this.mContext = mContext;
         this.mData = mData;
+        this.layout_bg = layout_bg;
         inflater = LayoutInflater.from(mContext);
     }
 
@@ -61,7 +65,7 @@ public class CygnAdapter extends RecyclerView.Adapter<CygnAdapter.MyViewHolder>{
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    SnackBarUtil.showShort(layout_bg,"建设中");
                 }
             });
         }

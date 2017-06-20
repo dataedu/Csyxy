@@ -68,6 +68,16 @@
 
         <activity android:name="com.dk.edu.csyxy.ui.UserInfoActivity"
             android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.dk.edu.csyxy.ui.TxlPersonsActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name="com.dk.edu.csyxy.ui.SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Transparent"/>
     </application>
 
 </manifest>

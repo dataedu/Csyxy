@@ -39,18 +39,22 @@ public class CyxxFragment extends BaseFragment{
     public void getData(){
         //将fragment装进列表中
         fragments = new ArrayList<>();
-        fragments.add(new NewsFragment());
+        fragments.add(NewsFragment.newInstance("http://192.168.3.110:8086/mp-csyxy/apps/tabs/news?type=zjcy&"));
         fragments.add(new CenterPersonFragment());
         fragments.add(new CenterPersonFragment());
         fragments.add(HttpWebFragment.newInstance("http://www.csmu.edu.cn/Mobile/index.aspx"));
-        fragments.add(new CenterPersonFragment());
-        fragments.add(new CenterPersonFragment());
-        fragments.add(new CenterPersonFragment());
+        fragments.add(new TxlFragment());
+        fragments.add(NewsFragment.newInstance("http://192.168.3.110:8086/mp-csyxy/apps/tabs/news?type=rcyj&"));
+        fragments.add(NewsFragment.newInstance("http://192.168.3.110:8086/mp-csyxy/apps/tabs/news?type=ybxx&"));
         fragments.add(HttpWebFragment.newInstance("http://www.csmu.edu.cn/Mobile/index.aspx"));
         fragments.add(new CenterPersonFragment());
-        fragments.add(new CenterPersonFragment());
+        fragments.add(NewsFragment.newInstance("http://192.168.3.110:8086/mp-csyxy/apps/tabs/news?type=dzjs&"));
         fragments.add(new CenterPersonFragment());
 
+//        #############
+//        fragments.add(new CenterPersonFragment());
+//        fragments.add(new CenterPersonFragment());
+//        fragments.add(new CenterPersonFragment());
         //将名称加载tab名字列表，正常情况下，我们应该在values/arrays.xml中进行定义然后调用
         titles = new ArrayList<>();
         titles.add("走进长医");

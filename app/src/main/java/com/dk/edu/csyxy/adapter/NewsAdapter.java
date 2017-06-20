@@ -34,9 +34,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
         View v;
         if(viewType == 0){
             v = mInflater.inflate(R.layout.mp_news_item,parent,false);
-        }else if(viewType == -1){
-            v = mInflater.inflate(R.layout.core_item_footer,parent,false);
-        }else{
+        }
+// else if(viewType == -1){
+//            v = mInflater.inflate(R.layout.core_item_footer,parent,false);
+//        }
+        else{
             v = mInflater.inflate(R.layout.core_headview,parent,false);
             HeaderView headerView = new HeaderView();
             headerView.init(v,mContext);
@@ -52,7 +54,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
             holder.title.setText(news.getName());
             holder.time.setText(news.getPublishTime());
             if (news.getImage() == null ){
-                holder.image.setVisibility(View.GONE);
+       //         holder.image.setVisibility(View.GONE);
             } else {
                 holder.image.setVisibility(View.VISIBLE);
                 Glide.with(mContext).load(news.getImage()).fitCenter().into(holder.image);
@@ -62,16 +64,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
 
     @Override
     public int getItemViewType(int position) {
-        if (position + 1 == getItemCount()) {
-            return -1;
-        } else {
+//        if (position + 1 == getItemCount()) {
+//            return -1;
+//        } else {
             return mData.get(position).getmType();
-        }
+//        }
     }
 
     @Override
     public int getItemCount() {
-        return mData.size()==0?0:mData.size()+1;
+//        return mData.size()==0?0:mData.size()+1;
+        return mData.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

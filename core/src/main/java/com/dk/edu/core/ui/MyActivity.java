@@ -30,8 +30,8 @@ public abstract class MyActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView ( getLayoutID ( ) );
-        initView();
         mContext = this;
+        initView();
         initialize();
     }
 

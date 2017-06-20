@@ -11,13 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.dk.edu.core.util.DeviceUtil;
 
 /**
- * 分割线
- * 作者：janabo on 2017/6/9 14:10
+ * 作者：janabo on 2017/6/16 16:25
  */
-public class RecycleViewDivider extends RecyclerView.ItemDecoration {
+public class RecycleViewDividerNoPadding extends RecyclerView.ItemDecoration {
 
     private Paint mPaint;
     private Drawable mDivider;
@@ -33,7 +31,7 @@ public class RecycleViewDivider extends RecyclerView.ItemDecoration {
      * @param context
      * @param orientation 列表方向
      */
-    public RecycleViewDivider(Context context, int orientation) {
+    public RecycleViewDividerNoPadding(Context context, int orientation) {
         if (orientation != LinearLayoutManager.VERTICAL && orientation != LinearLayoutManager.HORIZONTAL) {
             throw new IllegalArgumentException("请输入正确的参数！");
         }
@@ -53,7 +51,7 @@ public class RecycleViewDivider extends RecyclerView.ItemDecoration {
      * @param orientation 列表方向
      * @param drawableId  分割线图片
      */
-    public RecycleViewDivider(Context context, int orientation, int drawableId) {
+    public RecycleViewDividerNoPadding(Context context, int orientation, int drawableId) {
         this(context, orientation);
         mDivider = ContextCompat.getDrawable(context, drawableId);
         mDividerHeight = mDivider.getIntrinsicHeight();
@@ -67,7 +65,7 @@ public class RecycleViewDivider extends RecyclerView.ItemDecoration {
      * @param dividerHeight 分割线高度
      * @param dividerColor  分割线颜色
      */
-    public RecycleViewDivider(Context context, int orientation, int dividerHeight, int dividerColor) {
+    public RecycleViewDividerNoPadding(Context context, int orientation, int dividerHeight, int dividerColor) {
         this(context, orientation);
         mDividerHeight = dividerHeight;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -96,10 +94,8 @@ public class RecycleViewDivider extends RecyclerView.ItemDecoration {
 
     //绘制横向 item 分割线
     private void drawHorizontal(Canvas canvas, RecyclerView parent) {
-//        final int left = parent.getPaddingLeft();
-//        final int right = parent.getMeasuredWidth() - parent.getPaddingRight();
-        final int left = DeviceUtil.dip2px(mContent,10);
-        final int right = parent.getMeasuredWidth() - DeviceUtil.dip2px(mContent,10);
+        final int left = parent.getPaddingLeft();
+        final int right = parent.getMeasuredWidth() - parent.getPaddingRight();
         final int childSize = parent.getChildCount();
         for (int i = 0; i < childSize - 1; i++) {
             final View child = parent.getChildAt(i);
