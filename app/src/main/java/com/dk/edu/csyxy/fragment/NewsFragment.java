@@ -7,6 +7,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.dk.edu.core.http.HttpUtil;
@@ -14,6 +16,7 @@ import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.BaseFragment;
 import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.core.view.RecycleViewDivider;
+import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.adapter.NewsAdapter;
 import com.dk.edu.csyxy.entity.News;
@@ -25,7 +28,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 新闻模块
@@ -64,6 +69,7 @@ public class NewsFragment extends BaseFragment{
     protected void initMyData() {
         mRefresh = findView(R.id.swipe_refresh);
         mRecyclerView = findView(R.id.rv_listview);
+        news.clear();
         news.add(new News(1));
         nAdapter = new NewsAdapter(getContext(),news);
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -104,7 +110,8 @@ public class NewsFragment extends BaseFragment{
                     if (!isLoading) {
                         isLoading = true;
                         pageNo++;
-                        loadMore();
+//                        loadMore();
+                        getList();
                         Log.d("test", "load more completed");
                         isLoading = false;
                     }
@@ -126,10 +133,15 @@ public class NewsFragment extends BaseFragment{
 
         mRefresh.setRefreshing(true);
         getList();
+
     }
 
     public void getList(){
-        HttpUtil.getInstance().postJsonObjectRequest(mType + "pageNo=" + pageNo, null, new HttpListener<JSONObject>() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("type",mType);
+        map.put("pageNo",pageNo);
+
+        HttpUtil.getInstance().postJsonObjectRequest("apps/tabs/news", map, new HttpListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
                 try {
@@ -160,26 +172,6 @@ public class NewsFragment extends BaseFragment{
             public void onError(VolleyError error) {
                 nAdapter.notifyDataSetChanged();
                 mRefresh.setRefreshing(false);
-            }
-        });
-    }
-
-    public void loadMore(){
-        HttpUtil.getInstance().gsonRequest(new TypeToken<PageMsg<News>>(){}, "http://ydoa.czlgj.com:9064/ydxy/apps/xxxw/list?pageNo="+pageNo, null, new HttpListener<PageMsg<News>>() {
-            @Override
-            public void onSuccess(PageMsg<News> result) {
-                totalPages = result.getTotalPages();
-                if(result.getList() != null && result.getList().size()>0) {
-                    news.addAll(result.getList());
-                    nAdapter.notifyDataSetChanged();
-                    nAdapter.notifyItemRemoved(nAdapter.getItemCount());
-                }else{
-                    nAdapter.notifyItemRemoved(nAdapter.getItemCount());
-                }
-            }
-            @Override
-            public void onError(VolleyError error) {
-                nAdapter.notifyItemRemoved(nAdapter.getItemCount());
             }
         });
     }

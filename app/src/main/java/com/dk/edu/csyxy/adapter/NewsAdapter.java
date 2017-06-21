@@ -1,18 +1,27 @@
 package com.dk.edu.csyxy.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.entity.News;
+import com.dk.edu.csyxy.fragment.NewsFragment;
 import com.dk.edu.csyxy.ui.HeaderView;
+import com.dk.edu.csyxy.ui.NewsDetailActivity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -50,7 +59,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if(getItemViewType(position) == 0){
-            News news = mData.get(position);
+            final News news = mData.get(position);
             holder.title.setText(news.getName());
             holder.time.setText(news.getPublishTime());
             if (news.getImage() == null ){
@@ -59,6 +68,21 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
                 holder.image.setVisibility(View.VISIBLE);
                 Glide.with(mContext).load(news.getImage()).fitCenter().into(holder.image);
             }
+
+            holder.newsdetail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ViewCompat.setTransitionName(v, "detail_element");
+
+                    Intent intent = new Intent(mContext, NewsDetailActivity.class);
+                    intent.putExtra("news", (Serializable) news);
+                    ActivityOptionsCompat options =
+                            ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mContext,v,
+                                    mContext.getString(R.string.transition__img));
+                    ActivityCompat.startActivity((Activity) mContext,intent,options.toBundle());
+                    ((Activity) mContext).overridePendingTransition(R.anim.slide_up, R.anim.scale_down);
+                }
+            });
         }
     }
 
@@ -80,11 +104,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView image;
         private TextView title,time;
+
+        private LinearLayout newsdetail;
+
         public MyViewHolder(View v) {
             super(v);
             image = (ImageView) itemView.findViewById(R.id.news_img);// 取得实例
             title = (TextView) itemView.findViewById(R.id.news_title);// 取得实例
             time = (TextView) itemView.findViewById(R.id.news_time);// 取得实例
+
+            newsdetail = (LinearLayout) itemView.findViewById(R.id.newsdetail);
         }
     }
 }

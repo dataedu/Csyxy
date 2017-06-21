@@ -78,6 +78,11 @@
             android:name="com.dk.edu.csyxy.ui.SearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent"/>
+
+        <activity
+            android:name="com.dk.edu.csyxy.ui.NewsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Transparent"/>
     </application>
 
 </manifest>

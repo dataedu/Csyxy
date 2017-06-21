@@ -39,16 +39,16 @@ public class CyxxFragment extends BaseFragment{
     public void getData(){
         //将fragment装进列表中
         fragments = new ArrayList<>();
-        fragments.add(NewsFragment.newInstance("http://192.168.3.110:8086/mp-csyxy/apps/tabs/news?type=zjcy&"));
+        fragments.add(NewsFragment.newInstance("zjcy"));
         fragments.add(new CenterPersonFragment());
         fragments.add(new CenterPersonFragment());
         fragments.add(HttpWebFragment.newInstance("http://www.csmu.edu.cn/Mobile/index.aspx"));
         fragments.add(new TxlFragment());
-        fragments.add(NewsFragment.newInstance("http://192.168.3.110:8086/mp-csyxy/apps/tabs/news?type=rcyj&"));
-        fragments.add(NewsFragment.newInstance("http://192.168.3.110:8086/mp-csyxy/apps/tabs/news?type=ybxx&"));
+        fragments.add(NewsFragment.newInstance("rcyj"));
+        fragments.add(NewsFragment.newInstance("ybxx"));
         fragments.add(HttpWebFragment.newInstance("http://www.csmu.edu.cn/Mobile/index.aspx"));
         fragments.add(new CenterPersonFragment());
-        fragments.add(NewsFragment.newInstance("http://192.168.3.110:8086/mp-csyxy/apps/tabs/news?type=dzjs&"));
+        fragments.add(NewsFragment.newInstance("dzjs"));
         fragments.add(new CenterPersonFragment());
 
 //        #############

@@ -1,10 +1,12 @@
 package com.dk.edu.csyxy.entity;
 
+import java.io.Serializable;
+
 /**
  * 新闻
  * 作者：janabo on 2017/6/13 17:11
  */
-public class News {
+public class News implements Serializable{
     private String id;
     private String content; //内容
     private String image;//图片

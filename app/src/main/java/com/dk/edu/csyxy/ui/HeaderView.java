@@ -1,10 +1,14 @@
 package com.dk.edu.csyxy.ui;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -15,6 +19,7 @@ import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.csyxy.R;
+import com.dk.edu.csyxy.entity.News;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
@@ -28,6 +33,7 @@ import com.jude.rollviewpager.hintview.ColorPointHintView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,17 +84,17 @@ public class HeaderView {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(context,NewsDetailActivity.class);
-//                    News news = new News();
-//                    news.setImage(slideList.get(position).getImage());
-//                    news.setUrl(slideList.get(position).getUrl());
-//                    intent.putExtra("news", (Serializable)news);
-//                    ViewCompat.setTransitionName(v, "detail_element");
-//                    ActivityOptionsCompat options =
-//                            ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,v,
-//                                    context.getString(com.dk.mp.xxxw.R.string.transition__img));
-//                    ActivityCompat.startActivity((Activity) context,intent,options.toBundle());
-//                    ((Activity) context).overridePendingTransition(com.dk.mp.xxxw.R.anim.slide_up, com.dk.mp.xxxw.R.anim.scale_down);
+                    Intent intent = new Intent(context,NewsDetailActivity.class);
+                    News news = new News(1);
+                    news.setImage(slideList.get(position).getImage());
+                    news.setUrl(slideList.get(position).getUrl());
+                    intent.putExtra("news", (Serializable)news);
+                    ViewCompat.setTransitionName(v, "detail_element");
+                    ActivityOptionsCompat options =
+                            ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,v,
+                                    context.getString(R.string.transition__img));
+                    ActivityCompat.startActivity((Activity) context,intent,options.toBundle());
+                    ((Activity) context).overridePendingTransition(R.anim.slide_up, R.anim.scale_down);
                 }
             });
 

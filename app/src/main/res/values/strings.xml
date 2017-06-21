@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">长沙医学院</string>
-    <string name="rootUrl">http://wap.cztljx.org/</string>
+    <!--<string name="rootUrl">http://wap.cztljx.org/</string>-->
 
+    <!--付-->
+    <string name="rootUrl">  http://192.168.3.110:8086/mp-csyxy/</string>
 
     <string name="main_tab_name_grzx">个人中心</string>
     <string name="main_tab_name_cygn">常用功能</string>
