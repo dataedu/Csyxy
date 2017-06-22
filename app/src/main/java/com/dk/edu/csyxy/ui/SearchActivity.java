@@ -122,7 +122,7 @@ public class SearchActivity extends MyActivity {
         mError.setErrorType(ErrorLayout.LOADDATA);
         Map<String, Object> map = new HashMap<>();
         map.put("key", mKeywords.getText().toString());
-        HttpUtil.getInstance().postJsonObjectRequest("http://wap.cztljx.org/apps/txl/query", map, new HttpListener<JSONObject>() {
+        HttpUtil.getInstance().postJsonObjectRequest("apps/txl/query", map, new HttpListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result)  {
                 try {

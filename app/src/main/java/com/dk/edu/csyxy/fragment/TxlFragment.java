@@ -137,7 +137,8 @@ public class TxlFragment extends BaseFragment implements EasyPermissions.Permiss
      * 获取所有部门
      */
     public void getData(){
-        HttpUtil.getInstance().postJsonObjectRequest("http://wap.cztljx.org/apps/txl/getBmList", null, new HttpListener<JSONObject>() {
+        //http://wap.cztljx.org/apps/txl/getBmList
+        HttpUtil.getInstance().postJsonObjectRequest("apps/txl/getBmList", null, new HttpListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result)  {
                 try {

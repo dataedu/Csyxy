@@ -89,7 +89,7 @@ public class TxlPersonsActivity extends MyActivity {
     public void getData(){
         Map<String,Object> map = new HashMap<>();
 //        map.put("id",bmid);
-        HttpUtil.getInstance().postJsonObjectRequest("http://wap.cztljx.org/apps/txl/getlxr?id="+bmid, map, new HttpListener<JSONObject>() {
+        HttpUtil.getInstance().postJsonObjectRequest("apps/txl/getlxr?id="+bmid, map, new HttpListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result)  {
                 try {

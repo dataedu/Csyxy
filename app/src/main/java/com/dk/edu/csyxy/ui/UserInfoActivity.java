@@ -48,6 +48,15 @@ public class UserInfoActivity extends MyActivity {
      * 初始化控件.
      */
     private void findView() {
+
+        Button back = (Button) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         photo = (ImageView) findViewById(R.id.photo);
         username = (TextView) findViewById(R.id.username);
         depart = (TextView) findViewById(R.id.depart);
