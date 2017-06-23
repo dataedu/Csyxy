@@ -40,8 +40,8 @@ public class CyxxFragment extends BaseFragment{
         //将fragment装进列表中
         fragments = new ArrayList<>();
         fragments.add(NewsFragment.newInstance("zjcy"));
-        fragments.add(new CenterPersonFragment());
-        fragments.add(new CenterPersonFragment());
+        fragments.add(NewsFragment.newInstance("xw"));
+        fragments.add(NewsFragment.newInstance("gg"));
         fragments.add(HttpWebFragment.newInstance("http://www.csmu.edu.cn/Mobile/index.aspx"));
         fragments.add(new TxlFragment());
         fragments.add(NewsFragment.newInstance("rcyj"));

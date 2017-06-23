@@ -178,7 +178,7 @@ public class TxlFragment extends BaseFragment implements EasyPermissions.Permiss
             mData.addAll(departments);
             bAdapter.notifyDataSetChanged();
             if(par == 1) {
-                SnackBarUtil.showShort(mdialog, getReString(R.string.net_no2));
+//                SnackBarUtil.showShort(mdialog, getReString(R.string.net_no2));
             }else{
                 SnackBarUtil.showShort(mdialog, getReString(R.string.data_fail));
             }

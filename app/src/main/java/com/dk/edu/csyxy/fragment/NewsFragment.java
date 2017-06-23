@@ -11,10 +11,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.dk.edu.core.dialog.MsgDialog;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.BaseFragment;
 import com.dk.edu.core.util.BroadcastUtil;
+import com.dk.edu.core.util.DeviceUtil;
+import com.dk.edu.core.util.SnackBarUtil;
 import com.dk.edu.core.view.RecycleViewDivider;
 import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
@@ -137,43 +140,66 @@ public class NewsFragment extends BaseFragment{
     }
 
     public void getList(){
-        Map<String, Object> map = new HashMap<>();
-        map.put("type",mType);
-        map.put("pageNo",pageNo);
+        if (DeviceUtil.checkNet()){
 
-        HttpUtil.getInstance().postJsonObjectRequest("apps/tabs/news", map, new HttpListener<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                try {
-                    if(result.getInt("code") == 200){
-                        JSONObject jo = result.getJSONObject("data");
-                        PageMsg<News> pageMsg = new Gson().fromJson(jo.getJSONObject("news").toString(),new TypeToken<PageMsg<News>>(){}.getType());
-                        totalPages = pageMsg.getTotalPages();
-                        if(pageMsg.getList() != null && pageMsg.getList().size()>0) {
-                            news.addAll(pageMsg.getList());
-                            nAdapter.notifyDataSetChanged();
-                            //停止刷新
-                            mRefresh.setRefreshing(false);
-                            //RecyclerView滑动到第一个
-                            mRecyclerView.scrollToPosition(0);
+            Map<String, Object> map = new HashMap<>();
+            map.put("type",mType);
+            map.put("pageNo",pageNo);
+
+            HttpUtil.getInstance().postJsonObjectRequest("apps/tabs/news", map, new HttpListener<JSONObject>() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    try {
+                        if(result.getInt("code") == 200){
+                            JSONObject jo = result.getJSONObject("data");
+                            PageMsg<News> pageMsg = new Gson().fromJson(jo.getJSONObject("news").toString(),new TypeToken<PageMsg<News>>(){}.getType());
+                            totalPages = pageMsg.getTotalPages();
+                            if(pageMsg.getList() != null && pageMsg.getList().size()>0) {
+                                news.addAll(pageMsg.getList());
+                                nAdapter.notifyDataSetChanged();
+                                //停止刷新
+                                mRefresh.setRefreshing(false);
+                                //RecyclerView滑动到第一个
+                                mRecyclerView.scrollToPosition(0);
+                            }else{
+                                mRefresh.setRefreshing(false);
+
+//                                news.add(new News(2));
+//                                nAdapter.notifyDataSetChanged();
+                                MsgDialog.show(mContext, getString(R.string.nodata));
+
+                            }
                         }else{
                             mRefresh.setRefreshing(false);
+
+//                            news.add(new News(3));
+//                            nAdapter.notifyDataSetChanged();
+                            MsgDialog.show(mContext, getString(R.string.data_fail));
+
                         }
-                    }else{
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                         mRefresh.setRefreshing(false);
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+
+//                    news.add(new News(3));
+//                    nAdapter.notifyDataSetChanged();
+                    MsgDialog.show(mContext, getString(R.string.data_fail));
+
                     mRefresh.setRefreshing(false);
                 }
-            }
+            });
+        }else {
+//            news.add(new News(4));
+//            nAdapter.notifyDataSetChanged();
+            MsgDialog.show(mContext, getString(R.string.net_no2));
 
-            @Override
-            public void onError(VolleyError error) {
-                nAdapter.notifyDataSetChanged();
-                mRefresh.setRefreshing(false);
-            }
-        });
+            mRefresh.setRefreshing(false);
+        }
     }
 
 }

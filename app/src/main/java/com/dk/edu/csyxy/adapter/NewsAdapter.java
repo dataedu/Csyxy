@@ -43,11 +43,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
         View v;
         if(viewType == 0){
             v = mInflater.inflate(R.layout.mp_news_item,parent,false);
-        }
-// else if(viewType == -1){
-//            v = mInflater.inflate(R.layout.core_item_footer,parent,false);
-//        }
-        else{
+//        } else if(viewType ==2){
+//            v = mInflater.inflate(R.layout.news_nodata,parent,false);
+//        } else if(viewType ==3){
+//            v = mInflater.inflate(R.layout.news_errorserver,parent,false);
+//        } else if(viewType ==4){
+//            v = mInflater.inflate(R.layout.news_nonet,parent,false);
+        } else{
             v = mInflater.inflate(R.layout.core_headview,parent,false);
             HeaderView headerView = new HeaderView();
             headerView.init(v,mContext);
