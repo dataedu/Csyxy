@@ -47,9 +47,9 @@ public class CyxxFragment extends BaseFragment{
         fragments.add(NewsFragment.newInstance("rcyj"));
         fragments.add(NewsFragment.newInstance("ybxx"));
         fragments.add(HttpWebFragment.newInstance("http://www.csmu.edu.cn/Mobile/index.aspx"));
-        fragments.add(new CenterPersonFragment());
+        fragments.add(HttpWebFragment.newInstance("http://ditu.amap.com/search?id=B02DB049OA&city=430112&geoobj=118.9078%7C32.077678%7C118.915654%7C32.082024&query_type=IDQ&query=%E9%95%BF%E6%B2%99%E5%8C%BB%E5%AD%A6%E9%99%A2&zoom=17 "));
         fragments.add(NewsFragment.newInstance("dzjs"));
-        fragments.add(new CenterPersonFragment());
+        fragments.add(new XyfgFragment());
 
 //        #############
 //        fragments.add(new CenterPersonFragment());

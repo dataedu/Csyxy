@@ -83,6 +83,17 @@
             android:name="com.dk.edu.csyxy.ui.NewsDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent"/>
+
+        <activity
+            android:name="com.dk.edu.csyxy.ui.xyfg.SceneryListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name="com.dk.edu.csyxy.ui.xyfg.SceneryDetailsActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>
