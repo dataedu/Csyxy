@@ -181,9 +181,11 @@ public class YdoaFragment extends BaseFragment{
                         if (json != null){
                             YdoaSchedule yd = new Gson().fromJson(json,YdoaSchedule.class);
 
-                            if (yd.getComment() != null){
+                            if (yd.getComment() != null && !yd.getComment().equals("")){
                                 bezhuIv.setVisibility(View.VISIBLE);
                                 beizhuTv.setText(yd.getComment());
+                            }else {
+                                bezhuIv.setVisibility(View.GONE);
                             }
 
                             if (yd.getScheduleItems() != null){

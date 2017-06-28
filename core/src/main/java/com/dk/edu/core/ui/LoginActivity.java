@@ -19,6 +19,7 @@ import com.dk.edu.core.entity.JsonData;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.util.Base64Utils;
+import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.core.util.CoreSharedPreferencesHelper;
 import com.dk.edu.core.util.SnackBarUtil;
 import com.dk.edu.core.util.StringUtils;
@@ -167,6 +168,7 @@ public class LoginActivity extends MyActivity implements View.OnClickListener{
                         preference.setLoginMsg(userId,Base64Utils.getBase64(pass.trim().toString()),pass.trim().toString());
                         preference.setUserInfo(result.getJSONObject("data").toString());
                         preference.setValue(TimeUtils.getToday()+userId,"false");
+                        BroadcastUtil.sendBroadcast(mContext,"user");
 //                        new PushUtil(mContext).setTag();
                         new Handler().postDelayed(new Runnable() {//等待成功动画结束
                             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
