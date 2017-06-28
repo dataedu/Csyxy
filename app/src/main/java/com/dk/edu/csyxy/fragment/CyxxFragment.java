@@ -42,7 +42,7 @@ public class CyxxFragment extends BaseFragment{
         fragments.add(NewsFragment.newInstance("zjcy"));
         fragments.add(NewsFragment.newInstance("xw"));
         fragments.add(NewsFragment.newInstance("gg"));
-        fragments.add(HttpWebFragment.newInstance("http://www.csmu.edu.cn/Mobile/index.aspx"));
+        fragments.add(HttpWebFragment.newInstance("http://www.csmu.edu.cn/mobilerecruit/default.aspx"));
         fragments.add(new TxlFragment());
         fragments.add(NewsFragment.newInstance("rcyj"));
         fragments.add(NewsFragment.newInstance("ybxx"));

@@ -7,8 +7,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.dk.edu.core.dialog.MsgDialog;
@@ -17,9 +15,7 @@ import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.BaseFragment;
 import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.core.util.DeviceUtil;
-import com.dk.edu.core.util.SnackBarUtil;
 import com.dk.edu.core.view.RecycleViewDivider;
-import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.adapter.NewsAdapter;
 import com.dk.edu.csyxy.entity.News;

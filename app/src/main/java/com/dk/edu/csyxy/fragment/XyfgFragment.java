@@ -1,15 +1,10 @@
 package com.dk.edu.csyxy.fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.android.volley.VolleyError;
-import com.dk.edu.core.entity.Department;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.BaseFragment;
@@ -23,7 +18,6 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -87,7 +81,5 @@ public class XyfgFragment extends BaseFragment {
             }
         });
     }
-
-
 
 }

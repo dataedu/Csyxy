@@ -1,25 +1,32 @@
 package com.dk.edu.csyxy.fragment;
 
 import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import com.android.volley.VolleyError;
+import com.dk.edu.core.dialog.MsgDialog;
+import com.dk.edu.core.widget.ErrorLayout;
+import com.dk.edu.csyxy.adapter.YdoaScheduleAdapter;
+import com.dk.edu.csyxy.entity.YdoaSchedule;
+import com.dk.edu.csyxy.entity.YdoaUserinfo;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.BaseFragment;
 import com.dk.edu.core.util.CoreSharedPreferencesHelper;
 import com.dk.edu.core.util.DeviceUtil;
-import com.dk.edu.core.util.StringUtils;
-import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.adapter.YdOaAdapter;
 import com.dk.edu.csyxy.entity.YdOaEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import android.os.Handler;
+import android.widget.TextView;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -32,20 +39,28 @@ import java.util.List;
 public class YdoaFragment extends BaseFragment{
 
     private Context mContext;
-    private GridView other_recycler_view;//其它管理
+    private ErrorLayout error;
+
     private GridView oprition_recycler_view;//业务管理
     private LinearLayout oprition_layout;
-    private LinearLayout other_layout;
-    private YdOaAdapter bAdapter;
     private YdOaAdapter oAdapter;
+    List<YdOaEntity> oData = new ArrayList<YdOaEntity>();
+
     private CoreSharedPreferencesHelper helper;
     private String userIdDes = "";
 
-    List<YdOaEntity> bData = new ArrayList<YdOaEntity>();
-    List<YdOaEntity> oData = new ArrayList<YdOaEntity>();
-    List<YdOaEntity> aData = new ArrayList<YdOaEntity>();
+    private TextView userinfo_lastname, userinfo_name, userinfo_department;
 
-    private ErrorLayout errorLayout;
+    private LinearLayout bezhuIv;
+    private TextView beizhuTv;
+
+    //主题内容
+    private LinearLayout themeIv;
+    private TextView themeTv;
+    private RecyclerView mRecyclerView;
+    private YdoaScheduleAdapter mAdapter;
+    List<YdoaSchedule.ScheduleItemsBean> mData = new ArrayList<>();
+
 
     @Override
     protected int getLayoutId() {
@@ -53,104 +68,175 @@ public class YdoaFragment extends BaseFragment{
     }
 
     @Override
-    protected void initWidget(View root) {
-        super.initWidget(root);
+    public void onResume() {
+        super.onResume();
 
         helper = new CoreSharedPreferencesHelper(getActivity());
         userIdDes = helper.getValue("userIdDes");
         Log.e("userIdDes++++++++", userIdDes+"");
 
         initView();
+
         if(DeviceUtil.checkNet()){
+            error.setErrorType(ErrorLayout.LOADDATA);
+            getUserInfo();
+            getSchedule();
             getList();
         }else{
-           errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
+            setUserindo();
+            error.setErrorType(ErrorLayout.HIDE_LAYOUT);
+            MsgDialog.show(mContext, getString(R.string.net_no2));
         }
 
     }
 
     private void initView(){
         mContext = getActivity();
-        errorLayout = findView(R.id.error_layout);
-        other_recycler_view = findView(R.id.other_recycler_view);
+        error = findView(R.id.error_layout);
+
+        userinfo_lastname = findView(R.id.userinfo_lastname);
+        userinfo_name = findView(R.id.userinfo_name);
+        userinfo_department = findView(R.id.userinfo_department);
+
         oprition_recycler_view = findView(R.id.oprition_recycler_view);
         oprition_layout = findView(R.id.oprition_layout);
-        other_layout = findView(R.id.other_layout);
-        bAdapter = new YdOaAdapter(bData,mContext, userIdDes);
-        oprition_recycler_view.setAdapter(bAdapter);
         oAdapter = new YdOaAdapter(oData,mContext,userIdDes);
-        other_recycler_view.setAdapter(oAdapter);
+        oprition_recycler_view.setAdapter(oAdapter);
+
+        bezhuIv = findView(R.id.bezhuIv);
+        beizhuTv = findView(R.id.beizhuTv);
+
+        themeIv = findView(R.id.themeIv);
+        themeTv = findView(R.id.themeTv);
+        mRecyclerView = findView(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize ( true );
+        mRecyclerView.setLayoutManager ( new LinearLayoutManager( mContext ) );
+        mAdapter = new YdoaScheduleAdapter(mContext,mData);
+        mRecyclerView.setAdapter ( mAdapter );
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+    }
+
+    private void getUserInfo() {
+        HttpUtil.getInstance().postJsonObjectRequest("apps/oa/getUserInfo", null, new HttpListener<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject result)  {
+                try {
+                    if (result.getInt("code") != 200) {
+                        MsgDialog.show(mContext, getString(R.string.data_fail));
+                        setUserindo();
+                    }else{
+                        YdoaUserinfo ydoaUserinfo = new Gson().fromJson(result.getJSONObject("data").toString(),YdoaUserinfo.class);
+                        helper.setValue("ydoaUserinfo",result.getJSONObject("data").toString());
+                        error.setErrorType(ErrorLayout.HIDE_LAYOUT);
+                        if (ydoaUserinfo != null){
+                            String name = ydoaUserinfo.getUserName();
+                            if (name != null){
+                                userinfo_lastname.setText(name.subSequence(0,1));
+                            }
+                            userinfo_name.setText(ydoaUserinfo.getUserName());
+                            userinfo_department.setText(ydoaUserinfo.getRole());
+
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    error.setErrorType(ErrorLayout.HIDE_LAYOUT);
+                    MsgDialog.show(mContext, getString(R.string.data_fail));
+                    setUserindo();
+                }
+            }
+            @Override
+            public void onError(VolleyError error3) {
+                MsgDialog.show(mContext, getString(R.string.data_fail));
+                error.setErrorType(ErrorLayout.HIDE_LAYOUT);
+                setUserindo();
+            }
+        });
+
+    }
+
+    private void setUserindo(){
+        if (helper.getValue("ydoaUserinfo") != null){
+            YdoaUserinfo ydoaUserinfo = new Gson().fromJson(helper.getValue("ydoaUserinfo"),YdoaUserinfo.class);
+
+            String name = ydoaUserinfo.getUserName();
+            if (name != null){
+                userinfo_lastname.setText(name.subSequence(0,1));
+            }
+            userinfo_name.setText(ydoaUserinfo.getUserName());
+            userinfo_department.setText(ydoaUserinfo.getRole());
+        }
+    }
+
+    private void getSchedule() {
+        HttpUtil.getInstance().postJsonObjectRequest("apps/oa/leaderSchedule", null, new HttpListener<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject result)  {
+                try {
+                    if (result.getInt("code") != 200) {
+                        MsgDialog.show(mContext, getString(R.string.data_fail));
+                    }else{
+                        String json =  result.getJSONObject("data").toString();
+                        if (json != null){
+                            YdoaSchedule yd = new Gson().fromJson(json,YdoaSchedule.class);
+
+                            if (yd.getComment() != null){
+                                bezhuIv.setVisibility(View.VISIBLE);
+                                beizhuTv.setText(yd.getComment());
+                            }
+
+                            if (yd.getScheduleItems() != null){
+                                mData.clear();
+                                mData.addAll(yd.getScheduleItems());
+                                if (mData.size() > 0){
+                                    themeIv.setVisibility(View.VISIBLE);
+                                    themeTv.setText(yd.getTitle());
+
+                                    mAdapter.notify(mData);
+                                }
+                            }
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    MsgDialog.show(mContext, getString(R.string.data_fail));
+                }
+            }
+            @Override
+            public void onError(VolleyError error) {
+                MsgDialog.show(mContext, getString(R.string.data_fail));
+            }
+        });
+
     }
 
     public void getList() {
-        errorLayout.setErrorType(ErrorLayout.LOADDATA);
         HttpUtil.getInstance().postJsonObjectRequest("apps/xyfg/getImageList", null, new HttpListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result)  {
                 try {
                     if (result.getInt("code") != 200) {
-                        errorLayout.setErrorType(ErrorLayout.DATAFAIL);
+                        MsgDialog.show(mContext, getString(R.string.data_fail));
                     }else{
-                        errorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
                         String json =  result.getJSONArray("data").toString();
                         List<YdOaEntity> list1 = new Gson().fromJson(json,new TypeToken<List<YdOaEntity>>(){}.getType());
-                        if(list1 == null){
-                            mHander.sendEmptyMessage(0);
-                        }else if(list1.size() == 0){
-                            mHander.sendEmptyMessage(-1);
-                        }else {
-                            aData.clear();
-                            aData.addAll(list1);
-                            mHander.sendEmptyMessage(1);
-                        }
+                       if (list1.size()>0){
+                           oData.clear();
+                           oprition_layout.setVisibility(View.VISIBLE);
+                           oData.addAll(list1);
+                           oAdapter.notifyDataSetChanged();
+                       }
                     }
                 }catch (Exception e){
                     e.printStackTrace();
-                    errorLayout.setErrorType(ErrorLayout.DATAFAIL);
+                    MsgDialog.show(mContext, getString(R.string.data_fail));
                 }
             }
             @Override
             public void onError(VolleyError error) {
-                errorLayout.setErrorType(ErrorLayout.DATAFAIL);
+                MsgDialog.show(mContext, getString(R.string.data_fail));
             }
         });
     }
-
-    Handler mHander = new Handler(){
-        public void handleMessage(android.os.Message msg) {
-            switch (msg.what) {
-                case -1:
-                    errorLayout.setErrorType(ErrorLayout.NODATA);
-                    break;
-                case 0:
-                    errorLayout.setErrorType(ErrorLayout.DATAFAIL);
-                    break;
-                case 1:
-                    bData.clear();
-                    oData.clear();
-                    for(YdOaEntity o : aData){
-                        if(StringUtils.isNotEmpty(o.getDetailUrl()))
-                            bData.add(o);
-                        else
-                            oData.add(o);
-                    }
-                    if(bData.size()>0)
-                        oprition_layout.setVisibility(View.VISIBLE);
-                    else
-                        oprition_layout.setVisibility(View.GONE);
-                    if(oData.size()>0)
-                        other_layout.setVisibility(View.VISIBLE);
-                    else
-                        other_layout.setVisibility(View.GONE);
-
-                    bAdapter.notifyDataSetChanged();
-                    oAdapter.notifyDataSetChanged();
-                    errorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
-                    break;
-                default:
-                    break;
-            }
-
-        };
-    };
 }

@@ -55,5 +55,4 @@ public static LinearLayout getViews(final Context context, List<SceneryEntity> l
 		return line;
 	}
 
-
 }

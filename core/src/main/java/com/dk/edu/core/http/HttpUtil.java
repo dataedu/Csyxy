@@ -122,6 +122,7 @@ public class HttpUtil {
             param.put("uid", loginMsg.getUid());
             param.put("pwd", loginMsg.getPsw());
             httpRequest = new HttpRequest.Builder(getUrl(url)).setMethod(Request.Method.POST).addParam(param).build();
+            Log.e("-----",loginMsg.getUid() + "======" + loginMsg.getPsw());
         }else if("login".equals(url)){
                 httpRequest = new HttpRequest.Builder(getUrl(url)).setMethod(Request.Method.POST).addParam(param).build();
         }else {

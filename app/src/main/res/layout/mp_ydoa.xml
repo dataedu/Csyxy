@@ -6,161 +6,176 @@
     android:background="#ededed"
     android:orientation="vertical" >
 
-   <!-- <LinearLayout
-        android:layout_height="60dp"
-        android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:padding="10dp">
-
-        <LinearLayout
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/circle_border_def"
-            android:gravity="center">
-            <TextView
-                android:textColor="#ffffff"
-                android:text="王"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="28sp"/>
-        </LinearLayout>
-        <TextView
-            android:textColor="#212121"
-            android:text="王晓伟"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textSize="24sp"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:background="@drawable/department_bg_radius"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp">
-            <TextView
-                android:textColor="#ffffff"
-                android:text="校办秘书"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="16sp"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/recentUse_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:background="@color/white">
-        <include
-            layout="@layout/core_line"/>
-        <TextView
-            android:layout_height="31dp"
-            android:layout_width="match_parent"
-            android:text="最近使用的管理"
-            android:textColor="#A6A6A6"
-            android:textSize="12sp"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="10dp">
-        </TextView>
-        <include
-            layout="@layout/core_line_padding"/>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:background="#ffffff">
-        </android.support.v7.widget.RecyclerView>
-        <include
-            layout="@layout/core_line"/>
-    </LinearLayout>-->
-
-
-    <LinearLayout
+    <com.dk.edu.core.widget.ErrorLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:orientation="vertical">
+        android:id="@+id/error_layout"
+        android:gravity="center_horizontal"/>
 
-        <com.dk.edu.core.widget.ErrorLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:id="@+id/error_layout"
-            android:gravity="center_horizontal"/>
+            android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/oprition_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:background="@color/white"
-            android:visibility="gone">
-            <include
-                layout="@layout/core_line"/>
-            <TextView
-                android:layout_height="31dp"
+            <LinearLayout
+                android:layout_height="60dp"
                 android:layout_width="match_parent"
-                android:text="业务管理"
-                android:textColor="#A6A6A6"
-                android:textSize="12sp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="10dp">
-            </TextView>
-            <include
-                layout="@layout/core_line_padding"/>
+                android:padding="10dp">
 
-            <GridView
-                android:id="@+id/oprition_recycler_view"
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/circle_border_def"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/userinfo_lastname"
+                        android:textColor="#ffffff"
+                        android:text=""
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textSize="28sp"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/userinfo_name"
+                    android:textColor="#212121"
+                    android:text=""
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="24sp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/department_bg_radius"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp">
+                    <TextView
+                        android:id="@+id/userinfo_department"
+                        android:textColor="#ffffff"
+                        android:text=""
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/recentUse_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:numColumns="4" >
-            </GridView>
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:background="@color/white">
+                <LinearLayout
+                    android:id="@+id/themeIv"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <include
+                        layout="@layout/core_line"/>
+                    <TextView
+                        android:id="@+id/themeTv"
+                        android:layout_height="31dp"
+                        android:layout_width="match_parent"
+                        android:text="主题"
+                        android:textColor="#212121"
+                        android:textSize="15sp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp">
+                    </TextView>
+                    <include
+                        layout="@layout/core_line_padding"/>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:background="#ffffff">
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
 
-            <include
-                layout="@layout/core_line"/>
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/bezhuIv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone"
+                    android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/other_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:background="@color/white"
-            android:layout_marginBottom="10dp"
-            android:visibility="gone">
-            <include
-                layout="@layout/core_line"/>
-            <TextView
-                android:layout_height="31dp"
-                android:layout_width="match_parent"
-                android:text="其他管理"
-                android:textColor="#A6A6A6"
-                android:textSize="12sp"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="10dp">
-            </TextView>
-            <include
-                layout="@layout/core_line_padding"/>
+                    <include
+                        layout="@layout/core_line"/>
 
-            <GridView
-                android:id="@+id/other_recycler_view"
+                    <TextView
+                        android:layout_height="31dp"
+                        android:layout_width="match_parent"
+                        android:text="备注"
+                        android:textColor="#A6A6A6"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp">
+                    </TextView>
+                    <include
+                        layout="@layout/core_line"/>
+
+                    <TextView
+                        android:id="@+id/beizhuTv"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:text=""
+                        android:textColor="#212121"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="3dp"
+                        android:gravity="center_vertical"
+                        android:layout_margin="10dp">
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/oprition_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:numColumns="4" >
-            </GridView>
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:visibility="gone">
+                <include
+                    layout="@layout/core_line"/>
+                <TextView
+                    android:layout_height="31dp"
+                    android:layout_width="match_parent"
+                    android:text="业务管理"
+                    android:textColor="#A6A6A6"
+                    android:textSize="12sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp">
+                </TextView>
+                <include
+                    layout="@layout/core_line_padding"/>
 
-            <include
-                layout="@layout/core_line"/>
+                <GridView
+                    android:id="@+id/oprition_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:numColumns="4" >
+                </GridView>
+
+                <include
+                    layout="@layout/core_line"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

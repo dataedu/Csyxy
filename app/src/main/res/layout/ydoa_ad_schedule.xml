@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ydoa_week"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="xxxxx"
+            android:textColor="#A6A6A6"
+            android:textSize="13sp"
+            android:gravity="center_vertical">
+        </TextView>
+
+        <TextView
+            android:id="@+id/ydoa_date"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="xxxxxx"
+            android:textColor="#A6A6A6"
+            android:layout_marginTop="3dp"
+            android:textSize="13sp"
+            android:gravity="center_vertical">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="13dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/linecolor"/>
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@mipmap/leader_schedule_cell_date"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/linecolor"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="主持人："
+                android:textColor="#A6A6A6"
+                android:layout_marginTop="3dp"
+                android:textSize="13sp"
+                android:gravity="center_vertical">
+            </TextView>
+
+            <TextView
+                android:id="@+id/ydoa_host"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="管老师"
+                android:textColor="#212121"
+                android:layout_marginTop="3dp"
+                android:textSize="13sp"
+                android:gravity="center_vertical">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="组织单位："
+                android:textColor="#A6A6A6"
+                android:layout_marginTop="3dp"
+                android:textSize="13sp"
+                android:gravity="center_vertical">
+            </TextView>
+
+            <TextView
+                android:id="@+id/ydoa_organization"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="教务处"
+                android:textColor="#212121"
+                android:layout_marginTop="3dp"
+                android:textSize="13sp"
+                android:gravity="center_vertical">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="地点："
+                android:textColor="#A6A6A6"
+                android:layout_marginTop="3dp"
+                android:textSize="13sp"
+                android:gravity="center_vertical">
+            </TextView>
+
+            <TextView
+                android:id="@+id/ydoa_location"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="xxxxxxx"
+                android:textColor="#212121"
+                android:layout_marginTop="3dp"
+                android:textSize="13sp"
+                android:gravity="center_vertical">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="内容："
+                android:textColor="#A6A6A6"
+                android:layout_marginTop="3dp"
+                android:textSize="13sp"
+                android:gravity="center_vertical">
+            </TextView>
+
+            <TextView
+                android:id="@+id/ydoa_content"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="xxxxxxxx"
+                android:textColor="#212121"
+                android:lineSpacingExtra="2dp"
+                android:layout_marginTop="3dp"
+                android:textSize="13sp"
+                android:gravity="center_vertical">
+            </TextView>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/linecolor"/>
+
+    </LinearLayout>
+
+</LinearLayout>
