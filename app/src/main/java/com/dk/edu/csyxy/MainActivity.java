@@ -1,13 +1,17 @@
 package com.dk.edu.csyxy;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.dk.edu.core.dialog.AlertDialog;
 import com.dk.edu.core.ui.MyActivity;
 import com.dk.edu.csyxy.fragment.NavFragment;
 import com.dk.edu.csyxy.fragment.NavigationButton;
+import com.dk.edu.csyxy.ui.message.MessageActivity;
 
 /**
  * 主页面
@@ -16,6 +20,7 @@ public class MainActivity extends MyActivity implements NavFragment.OnNavigation
 
     FrameLayout mMainUi;
     private NavFragment mNavBar;
+    private ImageView oa_search;
 
     @Override
     protected int getLayoutID() {
@@ -29,6 +34,14 @@ public class MainActivity extends MyActivity implements NavFragment.OnNavigation
         FragmentManager manager = getSupportFragmentManager();
         mNavBar = (NavFragment)manager.findFragmentById(R.id.fag_nav);
         mNavBar.setup(this, manager, R.id.main_container, this);
+        oa_search = (ImageView) findViewById(R.id.oa_search);
+        oa_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

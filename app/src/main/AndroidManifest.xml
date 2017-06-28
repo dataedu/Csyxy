@@ -94,6 +94,11 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity
+            android:name="com.dk.edu.csyxy.ui.message.MessageActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>
