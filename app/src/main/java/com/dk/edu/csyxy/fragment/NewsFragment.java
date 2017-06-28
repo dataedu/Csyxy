@@ -68,14 +68,16 @@ public class NewsFragment extends BaseFragment{
     protected void initMyData() {
         mRefresh = findView(R.id.swipe_refresh);
         mRecyclerView = findView(R.id.rv_listview);
+
+        mType = getArguments().getString("mType");
         news.clear();
         news.add(new News(1));
-        nAdapter = new NewsAdapter(getContext(),news);
+        nAdapter = new NewsAdapter(getContext(),news,mType);
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration(new RecycleViewDivider(getContext(), GridLayoutManager.HORIZONTAL, 1, Color.rgb(201, 201, 201)));//添加分割线
         mRecyclerView.setAdapter(nAdapter);
-        mType = getArguments().getString("mType");
+
         mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -160,17 +162,17 @@ public class NewsFragment extends BaseFragment{
                             }else{
                                 mRefresh.setRefreshing(false);
 
-//                                news.add(new News(2));
-//                                nAdapter.notifyDataSetChanged();
-                                MsgDialog.show(mContext, getString(R.string.nodata));
+                                news.add(new News(2));
+                                nAdapter.notifyDataSetChanged();
+//                                MsgDialog.show(mContext, getString(R.string.nodata));
 
                             }
                         }else{
                             mRefresh.setRefreshing(false);
 
-//                            news.add(new News(3));
-//                            nAdapter.notifyDataSetChanged();
-                            MsgDialog.show(mContext, getString(R.string.data_fail));
+                            news.add(new News(3));
+                            nAdapter.notifyDataSetChanged();
+//                            MsgDialog.show(mContext, getString(R.string.data_fail));
 
                         }
                     } catch (JSONException e) {
@@ -182,17 +184,17 @@ public class NewsFragment extends BaseFragment{
                 @Override
                 public void onError(VolleyError error) {
 
-//                    news.add(new News(3));
-//                    nAdapter.notifyDataSetChanged();
-                    MsgDialog.show(mContext, getString(R.string.data_fail));
+                    news.add(new News(3));
+                    nAdapter.notifyDataSetChanged();
+//                    MsgDialog.show(mContext, getString(R.string.data_fail));
 
                     mRefresh.setRefreshing(false);
                 }
             });
         }else {
-//            news.add(new News(4));
-//            nAdapter.notifyDataSetChanged();
-            MsgDialog.show(mContext, getString(R.string.net_no2));
+            news.add(new News(4));
+            nAdapter.notifyDataSetChanged();
+//            MsgDialog.show(mContext, getString(R.string.net_no2));
 
             mRefresh.setRefreshing(false);
         }

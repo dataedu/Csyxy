@@ -24,6 +24,7 @@ public class BroadcastUtil {
 		LocalBroadcastManager.getInstance(context).registerReceiver(mRefreshBroadcastReceiver, intentFilter2);
 	}
 
+
 	/**
 	 * 发送广播.
 	 * @param context Context

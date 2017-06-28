@@ -37,6 +37,18 @@
             android:text=""
             android:textSize="12sp"
             android:layout_alignParentBottom="true"/>
+
+        <TextView
+            android:id="@+id/news_time2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="100dp"
+            android:textColor="#9c9c9c"
+            android:text=""
+            android:textSize="12sp"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
 </LinearLayout>

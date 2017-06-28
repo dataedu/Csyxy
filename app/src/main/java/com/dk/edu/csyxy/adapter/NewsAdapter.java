@@ -32,9 +32,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
     List<News> mData;
     LayoutInflater mInflater;
 
-    public NewsAdapter(Context context, List<News> news) {
+    private String mType;
+
+    public NewsAdapter(Context context, List<News> news, String mType) {
         this.mContext = context;
         this.mData = news;
+        this.mType = mType;
         mInflater = LayoutInflater.from(context);
     }
 
@@ -43,16 +46,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
         View v;
         if(viewType == 0){
             v = mInflater.inflate(R.layout.mp_news_item,parent,false);
-//        } else if(viewType ==2){
-//            v = mInflater.inflate(R.layout.news_nodata,parent,false);
-//        } else if(viewType ==3){
-//            v = mInflater.inflate(R.layout.news_errorserver,parent,false);
-//        } else if(viewType ==4){
-//            v = mInflater.inflate(R.layout.news_nonet,parent,false);
+        } else if(viewType ==2){
+            v = mInflater.inflate(R.layout.news_nodata,parent,false);
+        } else if(viewType ==3){
+            v = mInflater.inflate(R.layout.news_errorserver,parent,false);
+        } else if(viewType ==4){
+            v = mInflater.inflate(R.layout.news_nonet,parent,false);
         } else{
             v = mInflater.inflate(R.layout.core_headview,parent,false);
             HeaderView headerView = new HeaderView();
-            headerView.init(v,mContext);
+            headerView.init(v,mContext,mType);
         }
 
         return new MyViewHolder(v);
@@ -62,13 +65,25 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if(getItemViewType(position) == 0){
             final News news = mData.get(position);
-            holder.title.setText(news.getName());
-            holder.time.setText(news.getPublishTime());
-            if (news.getImage() == null ){
-       //         holder.image.setVisibility(View.GONE);
-            } else {
-                holder.image.setVisibility(View.VISIBLE);
-                Glide.with(mContext).load(news.getImage()).fitCenter().into(holder.image);
+
+            if (mType.equals("gg")){
+
+                holder.title.setText(news.getName());
+                holder.image.setVisibility(View.GONE);
+                holder.time2.setVisibility(View.VISIBLE);
+
+                holder.time.setVisibility(View.GONE);
+                holder.time2.setText(news.getPublishTime());
+
+            }else {
+                holder.title.setText(news.getName());
+                holder.time.setText(news.getPublishTime());
+                if (news.getImage() == null ){
+                    //         holder.image.setVisibility(View.GONE);
+                } else {
+                    holder.image.setVisibility(View.VISIBLE);
+                    Glide.with(mContext).load(news.getImage()).fitCenter().into(holder.image);
+                }
             }
 
             holder.newsdetail.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +120,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView image;
-        private TextView title,time;
+        private TextView title,time, time2;
 
         private LinearLayout newsdetail;
 
@@ -114,6 +129,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
             image = (ImageView) itemView.findViewById(R.id.news_img);// 取得实例
             title = (TextView) itemView.findViewById(R.id.news_title);// 取得实例
             time = (TextView) itemView.findViewById(R.id.news_time);// 取得实例
+            time2 = (TextView) itemView.findViewById(R.id.news_time2);
 
             newsdetail = (LinearLayout) itemView.findViewById(R.id.newsdetail);
         }

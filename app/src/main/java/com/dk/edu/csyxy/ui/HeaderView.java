@@ -9,17 +9,21 @@ import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.dk.edu.core.dialog.MsgDialog;
 import com.dk.edu.core.entity.SlideNews;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.util.BroadcastUtil;
+import com.dk.edu.core.util.CoreSharedPreferencesHelper;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.entity.News;
+import com.dk.edu.csyxy.entity.PageMsg;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
@@ -35,21 +39,26 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：janabo on 2017/6/13 16:51
  */
 public class HeaderView {
+
     private RollPagerView mLoopViewPager;
     private TestLoopAdapter mLoopAdapter;
     private List<SlideNews> slideList = new ArrayList<>();
     private Context context;
     private View view;
     private Gson gson = new Gson();
+    private String mType;
 
-    public void init(final View view, final Context context){
+    public void init(final View view, final Context context, String Mtype){
         this.view = view;
+        this.mType = Mtype;
         slideList.add(new SlideNews("1", "http://default", "移动校园,老师学生的好帮手", "res://com.dk.edu.csyxy/" + R.mipmap.banner_def, null));
         mLoopViewPager = (RollPagerView) view.findViewById(R.id.loop_view_pager);
         mLoopViewPager.setPlayDelay(3000);
@@ -130,12 +139,19 @@ public class HeaderView {
 
 
     public void getData(){
-        HttpUtil.getInstance().postJsonObjectRequest("http://ydoa.czlgj.com:9064/ydxy/apps/xxxw/slide", null, new HttpListener<JSONObject>() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("type",mType);
+        map.put("pageNo",1);
+
+        Log.e("===============",mType);
+
+        HttpUtil.getInstance().postJsonObjectRequest("apps/tabs/news", map, new HttpListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
-                if (result.optInt("code") == 200){//成功返回数据
-                    try {
-                        List<SlideNews> list = gson.fromJson(result.getJSONArray("data").toString(),new TypeToken<List<SlideNews>>(){}.getType());
+                try {
+                    if (result.getInt("code") == 200){
+                        JSONObject jo = result.getJSONObject("data");
+                        List<SlideNews> list = gson.fromJson(jo.getJSONArray("slide").toString(),new TypeToken<List<SlideNews>>(){}.getType());
                         if (list.size() != 0) {
                             slideList.clear();
                         }
@@ -143,9 +159,10 @@ public class HeaderView {
                             slideList.addAll(list.subList(0, 4));
                         }
                         mLoopAdapter.notifyDataSetChanged();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -154,5 +171,6 @@ public class HeaderView {
                 error.printStackTrace();
             }
         });
+
     }
 }

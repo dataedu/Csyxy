@@ -3,7 +3,11 @@
     <!--<string name="rootUrl">http://wap.cztljx.org/</string>-->
 
     <!--付-->
-    <string name="rootUrl">  http://192.168.3.110:8086/mp-csyxy/</string>
+    <!--<string name="rootUrl">  http://192.168.3.110:8086/mp-csyxy/</string>-->
+
+    <!--测试哦-->
+    <string name="rootUrl">  http://192.168.1.155:9091/mp-csyxy/</string>
+
 
     <string name="main_tab_name_grzx">个人中心</string>
     <string name="main_tab_name_cygn">常用功能</string>
