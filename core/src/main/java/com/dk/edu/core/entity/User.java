@@ -18,6 +18,15 @@ public class User {
 	private String roles;//权限
 	private List<App> apps;
 	private String birthday;
+	private String userIdDes;
+
+	public String getUserIdDes() {
+		return userIdDes;
+	}
+
+	public void setUserIdDes(String userIdDes) {
+		this.userIdDes = userIdDes;
+	}
 
 	public String getPhoto() {
 		return photo;

@@ -25,8 +25,7 @@ public class YdOaAdapter extends BaseAdapter{
     LayoutInflater inflater;
     
     private String userIdDes = ""; 
-    
-    
+
 	public YdOaAdapter(List<YdOaEntity> mData, Context mContext2, String userIdDes) {
 		super();
 		this.mData = mData;

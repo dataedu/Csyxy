@@ -79,9 +79,9 @@ public class YdoaFragment extends BaseFragment{
 
         if(DeviceUtil.checkNet()){
             error.setErrorType(ErrorLayout.LOADDATA);
-            getUserInfo();
             getSchedule();
             getList();
+            getUserInfo();
         }else{
             setUserindo();
             error.setErrorType(ErrorLayout.HIDE_LAYOUT);
@@ -214,7 +214,7 @@ public class YdoaFragment extends BaseFragment{
     }
 
     public void getList() {
-        HttpUtil.getInstance().postJsonObjectRequest("apps/xyfg/getImageList", null, new HttpListener<JSONObject>() {
+        HttpUtil.getInstance().postJsonObjectRequest("apps/oa/listModule", null, new HttpListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result)  {
                 try {
