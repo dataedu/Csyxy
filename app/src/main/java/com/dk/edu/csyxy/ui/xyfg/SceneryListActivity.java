@@ -1,15 +1,9 @@
 package com.dk.edu.csyxy.ui.xyfg;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 
 import com.android.volley.VolleyError;
@@ -24,6 +18,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SceneryListActivity extends MyActivity implements OnItemClickListener{
 	
@@ -69,9 +68,8 @@ public class SceneryListActivity extends MyActivity implements OnItemClickListen
 	private void initDatas(){
 		errorLayout.setErrorType(ErrorLayout.LOADDATA);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("idType", getIntent().getStringExtra("type"));
-
-		HttpUtil.getInstance().postJsonObjectRequest("apps/xyfg/getImageList", map, new HttpListener<JSONObject>() {
+		String idType = getIntent().getStringExtra("type");
+		HttpUtil.getInstance().postJsonObjectRequest("apps/xyfg/getImageList?idType="+idType, map, new HttpListener<JSONObject>() {
 			@Override
 			public void onSuccess(JSONObject result)  {
 				try {
