@@ -43,6 +43,7 @@ public class HttpWebFragment extends BaseFragment{
     @Override
     protected void initWidget(View root) {
         super.initWidget(root);
+        findView(R.id.layout_top).setVisibility(View.GONE);
         mUrl = getArguments().getString("MURL");
         mWebView = findView(R.id.webview);
         mError = findView(R.id.error_layout);
