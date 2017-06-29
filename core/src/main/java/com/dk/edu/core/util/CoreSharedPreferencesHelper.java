@@ -3,13 +3,13 @@ package com.dk.edu.core.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.dk.edu.core.entity.App;
 import com.dk.edu.core.entity.LoginMsg;
 import com.dk.edu.core.entity.User;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 本地简单的数据存储工具类
@@ -113,17 +113,6 @@ public class CoreSharedPreferencesHelper {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
 
-        try {
-            JSONObject s = new JSONObject(settings.getString("user_info", ""));
-            if (s != null) {
-                JSONArray array = s.getJSONObject("jsonp").getJSONObject("data").getJSONArray("apps");
-                String userid = s.getJSONObject("jsonp").getJSONObject("data").getJSONObject("userId").toString();
-                editor.putString(userid+"oldapp", array.toString());
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         editor.putString("user_info", null);
         editor.putString("user", null);
         editor.putString("loginMsg", null);
@@ -185,6 +174,23 @@ public class CoreSharedPreferencesHelper {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         boolean hello = settings.getBoolean(key, true);
         return hello;
+    }
+
+
+    /**
+     * 获取全部应用图标
+     * @return
+     */
+    public List<App> getAllAppList(){
+        String str = getValue("user_info");
+        List<App> list = new ArrayList<>();
+        if (str != null) {//根据登录的信息获取用户的全部图标信息
+            User user = gson.fromJson(str,User.class);
+            if(user != null && user.getApps()!= null){
+                list.addAll(user.getApps());
+            }
+        }
+        return list;
     }
 
 }

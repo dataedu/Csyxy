@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dk.edu.core.entity.App;
 import com.dk.edu.core.util.ImageUtil;
 import com.dk.edu.core.util.SnackBarUtil;
 import com.dk.edu.csyxy.R;
-import com.dk.edu.csyxy.entity.OaItemEntity;
 
 import java.util.List;
 
@@ -21,12 +21,12 @@ import java.util.List;
  * 作者：janabo on 2017/6/9 14:15
  */
 public class CygnAdapter extends RecyclerView.Adapter<CygnAdapter.MyViewHolder>{
-    private List<OaItemEntity> mData;
+    private List<App> mData;
     private Context mContext;
     LayoutInflater inflater;
     private RelativeLayout layout_bg;
 
-    public CygnAdapter(Context mContext,List<OaItemEntity> mData,RelativeLayout layout_bg){
+    public CygnAdapter(Context mContext, List<App> mData, RelativeLayout layout_bg){
         this.mContext = mContext;
         this.mData = mData;
         this.layout_bg = layout_bg;
@@ -41,9 +41,9 @@ public class CygnAdapter extends RecyclerView.Adapter<CygnAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-            OaItemEntity bean = mData.get(position);
-            holder.imageView.setImageResource(ImageUtil.getResource(bean.getImg()));
-            holder.mTextView.setText(bean.getLabel());
+            App bean = mData.get(position);
+            holder.imageView.setImageResource(ImageUtil.getResource(bean.getIcon()));
+            holder.mTextView.setText(bean.getName());
         }
 
     @Override
