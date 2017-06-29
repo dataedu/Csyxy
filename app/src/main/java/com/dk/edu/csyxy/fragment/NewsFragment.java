@@ -13,7 +13,6 @@ import com.dk.edu.core.entity.SlideNews;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.BaseFragment;
-import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.core.util.DeviceUtil;
 import com.dk.edu.core.view.RecycleViewDivider;
 import com.dk.edu.csyxy.R;
@@ -84,7 +83,6 @@ public class NewsFragment extends BaseFragment{
             @Override
             public void onRefresh() {
                 pageNo = 1;
-                BroadcastUtil.sendBroadcast(getContext(),"ref_headerview");
                 news.clear();
                 news.add(new News(1));
                 getList();
@@ -144,7 +142,6 @@ public class NewsFragment extends BaseFragment{
             Map<String, Object> map = new HashMap<>();
 //            map.put("type",mType);
 //            map.put("pageNo",pageNo);
-
             HttpUtil.getInstance().postJsonObjectRequest("apps/tabs/news?type="+mType+"&pageNo="+pageNo, map, new HttpListener<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject result) {
@@ -153,6 +150,7 @@ public class NewsFragment extends BaseFragment{
                             JSONObject jo = result.getJSONObject("data");
                             //轮播新闻
                             List<SlideNews> slides = gson.fromJson(jo.getJSONArray("slide").toString(),new TypeToken<ArrayList<SlideNews>>(){}.getType());
+                            slideNewses.clear();
                             if(slides!=null){
                                 slideNewses.addAll(slides);
                             }

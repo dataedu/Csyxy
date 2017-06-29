@@ -34,8 +34,9 @@
 	<com.dk.edu.csyxy.ui.xyfg.view.ZoomImageView
 	    android:id="@+id/scenerydetailgridimage"
 		android:layout_width="match_parent"
-		android:layout_gravity="center"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		android:src="@mipmap/ic_launcher"
+		android:scaleType="fitEnd">
 	</com.dk.edu.csyxy.ui.xyfg.view.ZoomImageView>
 	
 </LinearLayout>
