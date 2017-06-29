@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.dk.edu.core.ui.MyActivity;
 import com.dk.edu.core.util.DeviceUtil;
 import com.dk.edu.core.util.Logger;
+import com.dk.edu.core.util.StringUtils;
 import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.entity.News;
@@ -65,21 +66,25 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 
         setNavigationClick ( );
         ErrorLayout layout = (ErrorLayout)findViewById(R.id.errorlayout);
-        if (news.getUrl() == null) {
-            layout.setVisibility(View.VISIBLE);
-            mWebView.setVisibility(View.GONE);
-            layout.setErrorType(ErrorLayout.NODATA);
-        } else {
-            String url = getUrl(news.getUrl());
-            if(DeviceUtil.checkNet()) {
+        if(DeviceUtil.checkNet()) {//检查网络
+            if (StringUtils.isNotEmpty(news.getContent())) {
+                layout.setVisibility(View.GONE);
+                mWebView.setVisibility(View.VISIBLE);
+                mWebView.loadDataWithBaseURL(null, news.getContent(), "text/html", "utf-8", null);
+            }else if(news.getUrl() == null){
+                layout.setVisibility(View.VISIBLE);
+                mWebView.setVisibility(View.GONE);
+                layout.setErrorType(ErrorLayout.NODATA);
+            }else{
+                String url = getUrl(news.getUrl());
                 layout.setVisibility(View.GONE);
                 mWebView.setVisibility(View.VISIBLE);
                 mWebView.loadUrl(url);
-            }else{
-                layout.setVisibility(View.VISIBLE);
-                mWebView.setVisibility(View.GONE);
-                layout.setErrorType(ErrorLayout.NETWORK_ERROR);
             }
+        }else{
+            layout.setVisibility(View.VISIBLE);
+            mWebView.setVisibility(View.GONE);
+            layout.setErrorType(ErrorLayout.NETWORK_ERROR);
         }
     }
 

@@ -25,9 +25,10 @@
         fresco:roundedCornerRadius="1dp" /> -->
         <ImageView 
             android:id="@+id/sceneryimage"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_centerHorizontal="true"
-            android:layout_height="160dp"/>
+            android:layout_height="160dp"
+            android:scaleType="fitXY"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -15,9 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.dk.edu.core.entity.SlideNews;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.entity.News;
-import com.dk.edu.csyxy.fragment.NewsFragment;
 import com.dk.edu.csyxy.ui.HeaderView;
 import com.dk.edu.csyxy.ui.NewsDetailActivity;
 
@@ -30,14 +30,17 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
     Context mContext;
     List<News> mData;
+    List<SlideNews> slideNewses;
     LayoutInflater mInflater;
+    HeaderView headerView;
 
     private String mType;
 
-    public NewsAdapter(Context context, List<News> news, String mType) {
+    public NewsAdapter(Context context, List<News> news, String mType,List<SlideNews> slideNewses) {
         this.mContext = context;
         this.mData = news;
         this.mType = mType;
+        this.slideNewses = slideNewses;
         mInflater = LayoutInflater.from(context);
     }
 
@@ -54,8 +57,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
             v = mInflater.inflate(R.layout.news_nonet,parent,false);
         } else{
             v = mInflater.inflate(R.layout.core_headview,parent,false);
-            HeaderView headerView = new HeaderView();
-            headerView.init(v,mContext,mType);
+            headerView = new HeaderView();
+            headerView.init(v,mContext,mType,slideNewses);
         }
 
         return new MyViewHolder(v);
@@ -65,16 +68,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if(getItemViewType(position) == 0){
             final News news = mData.get(position);
-
             if (mType.equals("gg")){
-
                 holder.title.setText(news.getName());
                 holder.image.setVisibility(View.GONE);
                 holder.time2.setVisibility(View.VISIBLE);
-
                 holder.time.setVisibility(View.GONE);
                 holder.time2.setText(news.getPublishTime());
-
             }else {
                 holder.title.setText(news.getName());
                 holder.time.setText(news.getPublishTime());
@@ -100,6 +99,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
                     ((Activity) mContext).overridePendingTransition(R.anim.slide_up, R.anim.scale_down);
                 }
             });
+        }else if(getItemViewType(position) == 1){
+            if(headerView != null){
+                headerView.updateData(slideNewses);
+            }
         }
     }
 
