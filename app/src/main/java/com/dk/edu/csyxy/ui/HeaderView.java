@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -42,10 +43,24 @@ public class HeaderView {
     public void init(final View view, final Context context, String Mtype,List<SlideNews> slideNewses){
         this.view = view;
         this.mType = Mtype;
+        Log.e("---------------------",mType+"");
         if(slideNewses !=null && slideNewses.size()>0){
             slideList.addAll(slideNewses);
         }else{
-            slideList.add(new SlideNews("1", "http://default", "移动校园,老师学生的好帮手", "res://com.dk.edu.csyxy/" + R.mipmap.banner_def, null));
+            if (mType.equals("zjcy")){
+                slideList.add(new SlideNews("1", "http://default", "走进长医", "res://com.dk.edu.csyxy/" + R.mipmap.zjcy, null));
+            }else if (mType.equals("xw")){
+                slideList.add(new SlideNews("1", "http://default", "新闻", "res://com.dk.edu.csyxy/" + R.mipmap.xw, null));
+            } else if (mType.equals("gg")){
+                slideList.add(new SlideNews("1", "http://default", "公告", "res://com.dk.edu.csyxy/" + R.mipmap.gg, null));
+            } else if (mType.equals("rcyj")){
+                slideList.add(new SlideNews("1", "http://default", "人才引进", "res://com.dk.edu.csyxy/" + R.mipmap.rcyj, null));
+            } else if (mType.equals("ybxx")){
+                slideList.add(new SlideNews("1", "http://default", "邀标信息", "res://com.dk.edu.csyxy/" + R.mipmap.ybxx, null));
+            }else if (mType.equals("dzjs")){
+                slideList.add(new SlideNews("1", "http://default", "党政建设", "res://com.dk.edu.csyxy/" + R.mipmap.dzjs, null));
+            }
+
         }
         mLoopViewPager = (RollPagerView) view.findViewById(R.id.loop_view_pager);
         mLoopViewPager.setPlayDelay(3000);
@@ -82,8 +97,12 @@ public class HeaderView {
                 public void onClick(View v) {
                     Intent intent = new Intent(context,NewsDetailActivity.class);
                     News news = new News(1);
+                    if (slideList.get(position).getId().equals("1")){
+                        intent.putExtra("mType",mType);
+                    }
                     news.setImage(slideList.get(position).getImage());
                     news.setUrl(slideList.get(position).getUrl());
+                    news.setName(slideList.get(position).getName());
                     intent.putExtra("news", (Serializable)news);
                     ViewCompat.setTransitionName(v, "detail_element");
                     ActivityOptionsCompat options =
@@ -170,7 +189,19 @@ public class HeaderView {
         if(slideNewses!= null && slideNewses.size()>0){
             slideList.addAll(slideNewses);
         }else{
-            slideList.add(new SlideNews("1", "http://default", "移动校园,老师学生的好帮手", "res://com.dk.edu.csyxy/" + R.mipmap.banner_def, null));
+            if (mType.equals("zjcy")){
+                slideList.add(new SlideNews("1", "http://default", "走进长医", "res://com.dk.edu.csyxy/" + R.mipmap.zjcy, null));
+            }else if (mType.equals("xw")){
+                slideList.add(new SlideNews("1", "http://default", "新闻", "res://com.dk.edu.csyxy/" + R.mipmap.xw, null));
+            } else if (mType.equals("gg")){
+                slideList.add(new SlideNews("1", "http://default", "公告", "res://com.dk.edu.csyxy/" + R.mipmap.gg, null));
+            } else if (mType.equals("rcyj")){
+                slideList.add(new SlideNews("1", "http://default", "人才引进", "res://com.dk.edu.csyxy/" + R.mipmap.rcyj, null));
+            } else if (mType.equals("ybxx")){
+                slideList.add(new SlideNews("1", "http://default", "邀标信息", "res://com.dk.edu.csyxy/" + R.mipmap.ybxx, null));
+            }else if (mType.equals("dzjs")){
+                slideList.add(new SlideNews("1", "http://default", "党政建设", "res://com.dk.edu.csyxy/" + R.mipmap.dzjs, null));
+            }
         }
         mLoopAdapter.notifyDataSetChanged();
     }

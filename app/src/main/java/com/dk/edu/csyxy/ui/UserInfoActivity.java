@@ -13,7 +13,6 @@ import com.dk.edu.core.entity.JsonData;
 import com.dk.edu.core.entity.User;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
-import com.dk.edu.core.ui.LoginActivity;
 import com.dk.edu.core.ui.MyActivity;
 import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.core.util.CoreSharedPreferencesHelper;

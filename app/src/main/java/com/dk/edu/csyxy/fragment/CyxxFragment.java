@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.androidkun.xtablayout.XTabLayout;
 import com.dk.edu.core.ui.BaseFragment;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.adapter.MyFragmentPagerAdapter;
@@ -17,7 +18,7 @@ import java.util.List;
  * 作者：janabo on 2017/6/8 14:22
  */
 public class CyxxFragment extends BaseFragment{
-    TabLayout mTabLayout;
+    XTabLayout mTabLayout;
     ViewPager mViewPager;
     private List<BaseFragment> fragments;//定义要装fragment的列表
     private List<String> titles;

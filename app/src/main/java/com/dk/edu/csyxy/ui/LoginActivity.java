@@ -1,12 +1,14 @@
-package com.dk.edu.core.ui;
+package com.dk.edu.csyxy.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import com.dk.edu.core.R;
 import com.dk.edu.core.entity.JsonData;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
+import com.dk.edu.core.ui.MyActivity;
 import com.dk.edu.core.util.Base64Utils;
 import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.core.util.CoreSharedPreferencesHelper;
@@ -29,6 +32,7 @@ import com.dk.edu.core.view.DrawCrossMarkView;
 import com.dk.edu.core.view.DrawHookView;
 import com.dk.edu.core.view.ValidationCode;
 import com.dk.edu.core.view.edittext.CleanEditText;
+import com.dk.edu.csyxy.MainActivity;
 
 import org.json.JSONObject;
 
@@ -280,9 +284,29 @@ public class LoginActivity extends MyActivity implements View.OnClickListener{
      */
     public void back() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (getIntent().getStringExtra("ydoa")!=null && getIntent().getStringExtra("ydoa").equals("ydoa")){
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
             onBackPressed();
         }else{
+            if (getIntent().getStringExtra("ydoa")!=null && getIntent().getStringExtra("ydoa").equals("ydoa")){
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
             finish();
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            if (getIntent().getStringExtra("ydoa")!=null && getIntent().getStringExtra("ydoa").equals("ydoa")){
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+            finish();
+        }
+
+        return false;
+
+    }
+
 }

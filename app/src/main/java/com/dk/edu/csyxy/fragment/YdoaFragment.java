@@ -1,16 +1,18 @@
 package com.dk.edu.csyxy.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import com.android.volley.VolleyError;
 import com.dk.edu.core.dialog.MsgDialog;
+import com.dk.edu.csyxy.ui.LoginActivity;
+import com.dk.edu.core.view.MyGridView;
 import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.adapter.YdoaScheduleAdapter;
 import com.dk.edu.csyxy.entity.YdoaSchedule;
@@ -25,6 +27,7 @@ import com.dk.edu.csyxy.adapter.YdOaAdapter;
 import com.dk.edu.csyxy.entity.YdOaEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -41,7 +44,7 @@ public class YdoaFragment extends BaseFragment{
     private Context mContext;
     private ErrorLayout error;
 
-    private GridView oprition_recycler_view;//业务管理
+    private MyGridView oprition_recycler_view;//业务管理
     private LinearLayout oprition_layout;
     private YdOaAdapter oAdapter;
     List<YdOaEntity> oData = new ArrayList<YdOaEntity>();
@@ -77,15 +80,21 @@ public class YdoaFragment extends BaseFragment{
 
         initView();
 
-        if(DeviceUtil.checkNet()){
-            error.setErrorType(ErrorLayout.LOADDATA);
-            getSchedule();
-            getList();
-            getUserInfo();
-        }else{
-            setUserindo();
-            error.setErrorType(ErrorLayout.HIDE_LAYOUT);
-            MsgDialog.show(mContext, getString(R.string.net_no2));
+        if (helper.getLoginMsg() == null){
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            intent.putExtra("ydoa","ydoa");
+            startActivity(intent);
+        }else {
+            if(DeviceUtil.checkNet()){
+                error.setErrorType(ErrorLayout.LOADDATA);
+                getSchedule();
+                getList();
+                getUserInfo();
+            }else{
+                setUserindo();
+                error.setErrorType(ErrorLayout.HIDE_LAYOUT);
+                MsgDialog.show(mContext, getString(R.string.net_no2));
+            }
         }
 
     }
@@ -241,4 +250,5 @@ public class YdoaFragment extends BaseFragment{
             }
         });
     }
+
 }

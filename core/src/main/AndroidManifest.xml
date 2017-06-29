@@ -8,10 +8,7 @@
             android:theme="@style/Transparent">
         </activity>
 
-        <activity
-            android:name=".ui.LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Transparent"/>
+
     </application>
 
 </manifest>

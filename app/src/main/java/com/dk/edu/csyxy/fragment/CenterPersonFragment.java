@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.dk.edu.core.dialog.AlertDialog;
 import com.dk.edu.core.entity.User;
 import com.dk.edu.core.ui.BaseFragment;
-import com.dk.edu.core.ui.LoginActivity;
+import com.dk.edu.csyxy.ui.LoginActivity;
 import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.core.util.CoreSharedPreferencesHelper;
 import com.dk.edu.core.util.FileUtil;

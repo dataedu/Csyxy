@@ -16,7 +16,7 @@
         android:id="@+id/zwsj_icon"
         android:layout_width="70dp"
         android:layout_height="73dp"
-        android:src="@mipmap/nodata"
+        android:src="@mipmap/nodata_n"
         android:elevation="4dp"
         android:layout_marginTop="90dp"/>
 

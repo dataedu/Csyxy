@@ -3,14 +3,28 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <android.support.design.widget.TabLayout
+    <!--<android.support.design.widget.TabLayout
         android:id="@+id/tab_FindFragment_title"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#ffffff"
         app:tabIndicatorColor="@color/white"
         app:tabSelectedTextColor="#e60111"
-        app:tabTextColor="#212121"/>
+        app:tabTextColor="#212121"/>-->
+
+    <com.androidkun.xtablayout.XTabLayout
+        android:id="@+id/tab_FindFragment_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#ffffff"
+        app:xTabMode="scrollable"
+        app:xTabIndicatorColor="@color/white"
+        app:xTabIndicatorHeight="0dp"
+        app:xTabIndicatorWidth="0dp"
+        app:xTabSelectedTextColor="#e60111"
+        app:xTabTextColor="#212121"
+        app:xTabTextSize="14sp"
+        app:xTabSelectedTextSize="16sp"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_FindFragment_pager"

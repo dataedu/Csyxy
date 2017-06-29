@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -36,6 +37,8 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
     Toolbar mToolbar;
 //    private ErrorLayout mError;
 
+    String mType = "";
+
     @Override
     protected int getLayoutID() {
         return R.layout.app_news_detail;
@@ -55,10 +58,30 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 
     public void initData(){
         news = (News) getIntent().getSerializableExtra("news");
-        Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
+        mType = getIntent().getStringExtra("mType");
+//        Log.e("vvvvvvvvvvvvvvvvvv",mType+");
+        if (mType !=null){
+            if (mType.equals("zjcy")){
+                mImageViewTop.setImageResource(R.mipmap.zjcy);
+            }else if (mType.equals("xw")){
+                mImageViewTop.setImageResource(R.mipmap.xw);
+            }else if (mType.equals("gg")){
+                mImageViewTop.setImageResource(R.mipmap.gg);
+            }else if (mType.equals("rcyj")){
+                mImageViewTop.setImageResource(R.mipmap.rcyj);
+            }else if (mType.equals("ybxx")){
+                mImageViewTop.setImageResource(R.mipmap.ybxx);
+            }else if (mType.equals("dzjs")){
+                mImageViewTop.setImageResource(R.mipmap.dzjs);
+            }
+        } else {
+            Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
+
+        }
+//        Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
         setWebView ( );
         if ( mToolbar != null ) {
-            mToolbar.setTitle ( "学校新闻" );
+            mToolbar.setTitle (news.getName());
             setSupportActionBar ( mToolbar );
             getSupportActionBar ( ).setHomeButtonEnabled ( true );
             getSupportActionBar ( ).setDisplayHomeAsUpEnabled ( true );
