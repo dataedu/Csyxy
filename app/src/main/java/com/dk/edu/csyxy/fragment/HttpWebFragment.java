@@ -37,13 +37,13 @@ public class HttpWebFragment extends BaseFragment{
 
     @Override
     protected int getLayoutId() {
-        return R.layout.core_webview;
+        return R.layout.core_webview2;
     }
 
     @Override
     protected void initWidget(View root) {
         super.initWidget(root);
-        findView(R.id.layout_top).setVisibility(View.GONE);
+
         mUrl = getArguments().getString("MURL");
         mWebView = findView(R.id.webview);
         mError = findView(R.id.error_layout);
@@ -134,9 +134,9 @@ public class HttpWebFragment extends BaseFragment{
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mWebView.onPause();
-    }
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        mWebView.onPause();
+//    }
 }

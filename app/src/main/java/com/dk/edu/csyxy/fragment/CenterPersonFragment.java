@@ -165,7 +165,7 @@ public  class CenterPersonFragment extends BaseFragment implements View.OnClickL
             name.setVisibility(View.GONE);
             xsxx.setVisibility(View.VISIBLE);
             xm.setText(user.getUserName());
-            helper.setValue("userIdDes",user.getUserIdDes());
+//            helper.setValue("userIdDes",user.getUserIdDes());
             String departname = "null".equals(user.getDepartName())||user.getDepartName() == null ? "":user.getDepartName();
             if("1".equals(user.getRoles())){
                 bmhyx.setText("部门："+departname);

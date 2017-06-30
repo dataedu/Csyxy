@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.dk.edu.core.R;
 import com.dk.edu.core.entity.JsonData;
+import com.dk.edu.core.entity.User;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.MyActivity;
@@ -171,6 +172,8 @@ public class LoginActivity extends MyActivity implements View.OnClickListener{
                         preference.setInt("yzmcount",0);
                         preference.setLoginMsg(userId,Base64Utils.getBase64(pass.trim().toString()),pass.trim().toString());
                         preference.setUserInfo(result.getJSONObject("data").toString());
+
+                        preference.setValue("userIdDes",preference.getUser().getUserIdDes());
                         preference.setValue(TimeUtils.getToday()+userId,"false");
                         BroadcastUtil.sendBroadcast(mContext,"user");
 //                        new PushUtil(mContext).setTag();
