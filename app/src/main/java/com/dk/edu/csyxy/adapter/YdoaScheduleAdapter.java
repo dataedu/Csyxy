@@ -57,7 +57,8 @@ public class YdoaScheduleAdapter extends RecyclerView.Adapter<YdoaScheduleAdapte
         YdoaSchedule.ScheduleItemsBean bean = mData.get(position);
 
         if (bean.getDate() != null){
-            holder.ydoa_date.setText(bean.getDate());
+            String[] date = bean.getDate().split("-");
+            holder.ydoa_date.setText(date[1] + "-" + date[2]);
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {

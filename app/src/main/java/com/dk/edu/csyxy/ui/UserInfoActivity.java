@@ -108,6 +108,7 @@ public class UserInfoActivity extends MyActivity {
         });
         h.cleanUser();
         h.setValue("nick", null);
+        h.setValue("ydoaUserinfo",null);
         BroadcastUtil.sendBroadcast(context, "user");
 
         Intent intent = new Intent();

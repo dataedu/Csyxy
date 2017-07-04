@@ -1,5 +1,9 @@
 package com.dk.edu.csyxy.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -8,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.BaseFragment;
+import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.core.util.DeviceUtil;
 import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
@@ -48,10 +53,27 @@ public class XyfgFragment extends BaseFragment {
         }else{
            errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
         }
+
+        BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
     }
+
+    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
+        @SuppressLint("NewApi") @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("checknetwork_true")) {
+                initDatas();
+            }
+//            if(action.equals("checknetwork_false")){
+//                mError.setErrorType(ErrorLayout.NETWORK_ERROR);
+//            }
+
+        }
+    };
 
     private void initDatas(){
         errorLayout.setErrorType(ErrorLayout.LOADDATA);
+        scroll.removeAllViews();
 
         HttpUtil.getInstance().postJsonObjectRequest("apps/xyfg/getTypeList", null, new HttpListener<JSONObject>() {
             @Override
@@ -66,6 +88,7 @@ public class XyfgFragment extends BaseFragment {
                         if (list.size() > 0){
                             LinearLayout layout = SceneryItem.getViews(getActivity(), list);
                             scroll.addView(layout);
+
                         }else {
                             errorLayout.setErrorType(ErrorLayout.NODATA);
                         }

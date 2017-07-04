@@ -1,5 +1,6 @@
 package com.dk.edu.csyxy.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.android.volley.VolleyError;
 import com.dk.edu.core.dialog.MsgDialog;
+import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.csyxy.ui.LoginActivity;
 import com.dk.edu.core.view.MyGridView;
 import com.dk.edu.core.widget.ErrorLayout;
@@ -96,7 +98,6 @@ public class YdoaFragment extends BaseFragment{
                 MsgDialog.show(mContext, getString(R.string.net_no2));
             }
         }
-
     }
 
     private void initView(){

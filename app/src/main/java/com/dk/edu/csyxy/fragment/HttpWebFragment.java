@@ -1,5 +1,9 @@
 package com.dk.edu.csyxy.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +14,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.dk.edu.core.ui.BaseFragment;
+import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.core.util.DeviceUtil;
 import com.dk.edu.core.util.Logger;
 import com.dk.edu.core.widget.ErrorLayout;
@@ -49,12 +54,30 @@ public class HttpWebFragment extends BaseFragment{
         mError = findView(R.id.error_layout);
         mProgressBar = findView(R.id.progressbar);
         mError.setErrorType(ErrorLayout.LOADDATA);
+
         if(DeviceUtil.checkNet()){
             setMUrl(mUrl);
         }else{
             mError.setErrorType(ErrorLayout.NETWORK_ERROR);
         }
+
+        BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
     }
+
+    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
+        @SuppressLint("NewApi") @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("checknetwork_true")) {
+                setMUrl(mUrl);
+            }
+//            if(action.equals("checknetwork_false")){
+//                mError.setErrorType(ErrorLayout.NETWORK_ERROR);
+//            }
+
+        }
+    };
+
 
     public void setMUrl(String url){
         setWebView();
