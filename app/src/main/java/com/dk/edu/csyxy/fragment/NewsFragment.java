@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.android.volley.VolleyError;
 import com.dk.edu.core.entity.SlideNews;
@@ -60,9 +61,16 @@ public class NewsFragment extends BaseFragment{
         return fragment;
     }
 
+//    @Override
+//    public void onFirstUserVisible() {
+//        super.onFirstUserVisible();
+//        initMyData();
+//    }
+
+
     @Override
-    public void onFirstUserVisible() {
-        super.onFirstUserVisible();
+    protected void initWidget(View root) {
+        super.initWidget(root);
         initMyData();
     }
 
@@ -112,6 +120,8 @@ public class NewsFragment extends BaseFragment{
                         isLoading = true;
                         pageNo++;
 //                        loadMore();
+                        news.clear();
+                        news.add(new News(1));
                         getList();
                         Log.d("test", "load more completed");
                         isLoading = false;
