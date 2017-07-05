@@ -121,8 +121,8 @@ public class SearchActivity extends MyActivity {
     public void query(){
         mError.setErrorType(ErrorLayout.LOADDATA);
         Map<String, Object> map = new HashMap<>();
-        map.put("key", mKeywords.getText().toString());
-        HttpUtil.getInstance().postJsonObjectRequest("apps/txl/query", map, new HttpListener<JSONObject>() {
+//        map.put("key", mKeywords.getText().toString());
+        HttpUtil.getInstance().postJsonObjectRequest("apps/txl/query?key="+mKeywords.getText().toString(), map, new HttpListener<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result)  {
                 try {

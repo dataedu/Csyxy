@@ -1,9 +1,5 @@
 package com.dk.edu.csyxy.fragment;
 
-import android.annotation.SuppressLint;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -12,8 +8,8 @@ import com.android.volley.VolleyError;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.BaseFragment;
-import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.core.util.DeviceUtil;
+import com.dk.edu.core.util.SnackBarUtil;
 import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.ui.xyfg.entity.SceneryEntity;
@@ -35,6 +31,7 @@ public class XyfgFragment extends BaseFragment {
     private ScrollView scroll;
 
     private ErrorLayout errorLayout;
+    LinearLayout rootview;
 
     @Override
     protected int getLayoutId() {
@@ -44,7 +41,7 @@ public class XyfgFragment extends BaseFragment {
     @Override
     protected void initWidget(View root) {
         super.initWidget(root);
-
+        rootview = findView(R.id.rootview);
         scroll = findView(R.id.sceneryScrollView);
         errorLayout = findView(R.id.error_layout);
 
@@ -54,22 +51,22 @@ public class XyfgFragment extends BaseFragment {
            errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
         }
 
-        BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
+//        BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
     }
 
-    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
-        @SuppressLint("NewApi") @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals("checknetwork_true")) {
-                initDatas();
-            }
-//            if(action.equals("checknetwork_false")){
-//                mError.setErrorType(ErrorLayout.NETWORK_ERROR);
+//    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
+//        @SuppressLint("NewApi") @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String action = intent.getAction();
+//            if (action.equals("checknetwork_true")) {
+//                initDatas();
 //            }
-
-        }
-    };
+////            if(action.equals("checknetwork_false")){
+////                mError.setErrorType(ErrorLayout.NETWORK_ERROR);
+////            }
+//
+//        }
+//    };
 
     private void initDatas(){
         errorLayout.setErrorType(ErrorLayout.LOADDATA);
@@ -105,4 +102,17 @@ public class XyfgFragment extends BaseFragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(DeviceUtil.checkNet()){
+            initDatas();
+        }else{
+            if(list != null && list.size()>0){
+                SnackBarUtil.showShort(rootview,getResources().getString(R.string.net_no2));
+            }else {
+                errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
+            }
+        }
+    }
 }

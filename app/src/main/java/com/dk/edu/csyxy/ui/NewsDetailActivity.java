@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -35,6 +34,7 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
     WebView mWebView;
     News news;
     Toolbar mToolbar;
+    ErrorLayout layout;
 //    private ErrorLayout mError;
 
     String mType = "";
@@ -88,7 +88,7 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         }
 
         setNavigationClick ( );
-        ErrorLayout layout = (ErrorLayout)findViewById(R.id.errorlayout);
+        layout = (ErrorLayout)findViewById(R.id.errorlayout);
         if(DeviceUtil.checkNet()) {//检查网络
             if (StringUtils.isNotEmpty(news.getContent())) {
                 layout.setVisibility(View.GONE);
@@ -100,8 +100,8 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
                 layout.setErrorType(ErrorLayout.NODATA);
             }else{
                 String url = getUrl(news.getUrl());
-                layout.setVisibility(View.GONE);
-                mWebView.setVisibility(View.VISIBLE);
+                layout.setVisibility(View.VISIBLE);
+                mWebView.setVisibility(View.GONE);
                 mWebView.loadUrl(url);
             }
         }else{
@@ -129,12 +129,16 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         WebSettings settings = mWebView.getSettings ( );
         mWebView.setWebViewClient ( new MyWebViewClient ( mProgressBar ) );
         mWebView.setWebChromeClient ( new MyWebChromeClient ( mProgressBar ) );
+        settings.setJavaScriptEnabled ( true );    //启用JS脚本
         settings.setSupportZoom ( true );          //支持缩放
         settings.setBlockNetworkImage ( false );  //设置图片最后加载
         settings.setDatabaseEnabled ( true );
         settings.setCacheMode ( WebSettings.LOAD_CACHE_ELSE_NETWORK );
         settings.setAppCacheEnabled ( true );
-        settings.setJavaScriptEnabled ( true );    //启用JS脚本
+        settings.setUseWideViewPort(true);
+        //自适应屏幕
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setLoadWithOverviewMode(true);
     }
 
     @Override
@@ -161,6 +165,8 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
             super.onPageFinished ( webView, url );
             mProgressBar.setVisibility ( View.INVISIBLE );
 //            mError.setErrorType(ErrorLayout.HIDE_LAYOUT);
+            layout.setVisibility(View.GONE);
+            mWebView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -175,9 +181,10 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         public void onProgressChanged ( WebView view, int newProgress ) {
             mWebProgressBar.setProgress ( newProgress );
             Logger.info("##########newProgress="+newProgress);
-//            if(newProgress>=100){
-//                mError.setErrorType(ErrorLayout.HIDE_LAYOUT);
-//            }
+            if(newProgress>=100){
+                layout.setVisibility(View.GONE);
+                mWebView.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override

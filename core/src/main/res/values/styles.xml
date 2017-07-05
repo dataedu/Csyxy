@@ -35,6 +35,15 @@
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 
+    <style name="but_close">
+        <item name="android:paddingLeft">8dip</item>
+        <item name="android:text">关闭</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+
     <style name="login_back">
         <item name="android:paddingLeft">8dip</item>
         <item name="android:text"> 返回</item>

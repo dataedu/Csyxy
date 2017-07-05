@@ -25,7 +25,7 @@ public class HttpWebActivity extends MyActivity{
     WebView mWebView;
     private ErrorLayout mError;
     private ProgressBar mProgressBar;
-//    private TextView mClose;
+    private TextView mClose;
 
     @Override
     protected int getLayoutID() {
@@ -35,13 +35,13 @@ public class HttpWebActivity extends MyActivity{
     @Override
     protected void initView() {
         super.initView();
-//        mClose = (TextView) findViewById(R.id.close_web);
+        mClose = (TextView) findViewById(R.id.close_web);
         mWebView = (WebView) findViewById(R.id.webview);
         mError = (ErrorLayout) findViewById(R.id.error_layout);
         mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
         setTitle(getIntent().getStringExtra("title"));
         String url = getIntent().getStringExtra("url");
-//        int close_web = getIntent().getIntExtra("close_web",1);
+        int close_web = getIntent().getIntExtra("close_web",1);
         mError.setErrorType(ErrorLayout.LOADDATA);
         if(DeviceUtil.checkNet()){
             setMUrl(url);
@@ -62,15 +62,14 @@ public class HttpWebActivity extends MyActivity{
         } catch (Exception e) {
         }
 
-//        if(-1 == close_web){
-//            mClose.setVisibility(View.VISIBLE);
-//            findViewById(R.id.back).setVisibility(View.GONE);
-//            mClose.setOnClickListener(new View.OnClickListener() {
-//                public void onClick(View v) {
-//                    back();
-//                }
-//            });
-//        }
+        if(-1 == close_web){
+            mClose.setVisibility(View.VISIBLE);
+            mClose.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    back();
+                }
+            });
+        }
     }
 
     public void setMUrl(String url){
