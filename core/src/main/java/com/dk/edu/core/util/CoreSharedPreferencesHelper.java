@@ -183,6 +183,7 @@ public class CoreSharedPreferencesHelper {
      */
     public List<App> getAllAppList(){
         String str = getValue("user_info");
+        Logger.info("user_info-------------" + str.toString());
         List<App> list = new ArrayList<>();
         if (str != null) {//根据登录的信息获取用户的全部图标信息
             User user = gson.fromJson(str,User.class);

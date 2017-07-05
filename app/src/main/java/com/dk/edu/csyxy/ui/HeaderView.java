@@ -11,6 +11,7 @@ import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dk.edu.core.entity.SlideNews;
@@ -34,6 +35,9 @@ import java.util.List;
 public class HeaderView {
 
     private RollPagerView mLoopViewPager;
+    private ImageView defultImg;
+    private TextView defultTex;
+
     private TestLoopAdapter mLoopAdapter;
     private List<SlideNews> slideList = new ArrayList<>();
     private Context context;
@@ -43,31 +47,42 @@ public class HeaderView {
     public void init(final View view, final Context context, String Mtype,List<SlideNews> slideNewses){
         this.view = view;
         this.mType = Mtype;
+        this.context = context;
         Log.e("---------------------",mType+"");
+        mLoopViewPager = (RollPagerView) view.findViewById(R.id.loop_view_pager);
+        defultImg = (ImageView) view.findViewById(R.id.loop_defult_img);
+
         if(slideNewses !=null && slideNewses.size()>0){
             slideList.addAll(slideNewses);
-        }else{
-            if (mType.equals("zjcy")){
-                slideList.add(new SlideNews("1", "http://default", "走进长医", "res://com.dk.edu.csyxy/" + R.mipmap.zjcy, null));
-            }else if (mType.equals("xw")){
-                slideList.add(new SlideNews("1", "http://default", "新闻", "res://com.dk.edu.csyxy/" + R.mipmap.xw, null));
-            } else if (mType.equals("gg")){
-                slideList.add(new SlideNews("1", "http://default", "公告", "res://com.dk.edu.csyxy/" + R.mipmap.gg, null));
-            } else if (mType.equals("rcyj")){
-                slideList.add(new SlideNews("1", "http://default", "人才引进", "res://com.dk.edu.csyxy/" + R.mipmap.rcyj, null));
-            } else if (mType.equals("ybxx")){
-                slideList.add(new SlideNews("1", "http://default", "邀标信息", "res://com.dk.edu.csyxy/" + R.mipmap.ybxx, null));
-            }else if (mType.equals("dzjs")){
-                slideList.add(new SlideNews("1", "http://default", "党政建设", "res://com.dk.edu.csyxy/" + R.mipmap.dzjs, null));
-            }
 
+            mLoopViewPager.setVisibility(View.VISIBLE);
+            defultImg.setVisibility(View.GONE);
+
+            mLoopViewPager.setPlayDelay(3000);
+            mLoopAdapter = new TestLoopAdapter(mLoopViewPager);
+            mLoopViewPager.setAdapter(mLoopAdapter);
+            mLoopViewPager.setHintView(new newColorPointHintView(context, Color.GRAY, Color.WHITE));
+        }else{
+//            if (mType.equals("zjcy")){
+//                slideList.add(new SlideNews("1", "http://default", "走进长医", "res://com.dk.edu.csyxy/" + R.mipmap.zjcy, null));
+//            }else if (mType.equals("xw")){
+//                slideList.add(new SlideNews("1", "http://default", "新闻", "res://com.dk.edu.csyxy/" + R.mipmap.xw, null));
+//            } else if (mType.equals("gg")){
+//                slideList.add(new SlideNews("1", "http://default", "公告", "res://com.dk.edu.csyxy/" + R.mipmap.gg, null));
+//            } else if (mType.equals("rcyj")){
+//                slideList.add(new SlideNews("1", "http://default", "人才引进", "res://com.dk.edu.csyxy/" + R.mipmap.rcyj, null));
+//            } else if (mType.equals("ybxx")){
+//                slideList.add(new SlideNews("1", "http://default", "邀标信息", "res://com.dk.edu.csyxy/" + R.mipmap.ybxx, null));
+//            }else if (mType.equals("dzjs")){
+//                slideList.add(new SlideNews("1", "http://default", "党政建设", "res://com.dk.edu.csyxy/" + R.mipmap.dzjs, null));
+//            }
+
+            defultImg.setVisibility(View.VISIBLE);
+            mLoopViewPager.setVisibility(View.GONE);
+            defultTex = (TextView) view.findViewById(R.id.tip);
+            defult();
         }
-        mLoopViewPager = (RollPagerView) view.findViewById(R.id.loop_view_pager);
-        mLoopViewPager.setPlayDelay(3000);
-        mLoopAdapter = new TestLoopAdapter(mLoopViewPager);
-        mLoopViewPager.setAdapter(mLoopAdapter);
-        mLoopViewPager.setHintView(new newColorPointHintView(context, Color.GRAY, Color.WHITE));
-        this.context = context;
+
   //      getData();
         //注册网络状态监听
  //       BroadcastUtil.registerReceiver(context, mRefreshBroadcastReceiver, new String[]{"ref_headerview"});
@@ -82,6 +97,55 @@ public class HeaderView {
 //            }
 //        }
 //    };
+
+    private void defult(){
+        String text = "";
+        int Imgid = 0;
+
+        if (mType.equals("zjcy")){
+            text = "走进长医";
+            Imgid = R.mipmap.zjcy;
+        }else if (mType.equals("xw")){
+            text = "新闻";
+            Imgid = R.mipmap.xw;
+        } else if (mType.equals("gg")){
+            text = "公告";
+            Imgid = R.mipmap.gg;
+        } else if (mType.equals("rcyj")){
+            text = "人才引进";
+            Imgid = R.mipmap.rcyj;
+        } else if (mType.equals("ybxx")){
+            text = "邀标信息";
+            Imgid = R.mipmap.ybxx;
+        }else if (mType.equals("dzjs")){
+            text = "党政建设";
+            Imgid = R.mipmap.dzjs;
+        }
+
+        defultImg.setImageResource(Imgid);
+        defultTex.setText(text);
+        defultTex.getBackground().setAlpha(110);
+
+        final String finalText = text;
+        defultImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,NewsDetailActivity.class);
+                News news = new News(1);
+                intent.putExtra("mType",mType);
+                news.setImage(String.valueOf(defultImg));
+                news.setUrl(null);
+                news.setName(finalText);
+                intent.putExtra("news", (Serializable)news);
+                ViewCompat.setTransitionName(v, "detail_element");
+                ActivityOptionsCompat options =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,v,
+                                context.getString(R.string.transition__img));
+                ActivityCompat.startActivity((Activity) context,intent,options.toBundle());
+                ((Activity) context).overridePendingTransition(R.anim.slide_up, R.anim.scale_down);
+            }
+        });
+    }
 
     private class TestLoopAdapter extends LoopPagerAdapter {
         public TestLoopAdapter(RollPagerView viewPager) {
@@ -140,6 +204,7 @@ public class HeaderView {
             super.setCurrent(current);
             TextView textView = (TextView) view.findViewById(R.id.tip);
             textView.setText(slideList.get(current).getName());
+            textView.getBackground().setAlpha(110);
         }
     }
 
@@ -186,23 +251,32 @@ public class HeaderView {
      */
     public void updateData(List<SlideNews> slideNewses){
         slideList.clear();
-        if(slideNewses!= null && slideNewses.size()>0){
+//        if(slideNewses!= null && slideNewses.size()>0){
             slideList.addAll(slideNewses);
-        }else{
-            if (mType.equals("zjcy")){
-                slideList.add(new SlideNews("1", "http://default", "走进长医", "res://com.dk.edu.csyxy/" + R.mipmap.zjcy, null));
-            }else if (mType.equals("xw")){
-                slideList.add(new SlideNews("1", "http://default", "新闻", "res://com.dk.edu.csyxy/" + R.mipmap.xw, null));
-            } else if (mType.equals("gg")){
-                slideList.add(new SlideNews("1", "http://default", "公告", "res://com.dk.edu.csyxy/" + R.mipmap.gg, null));
-            } else if (mType.equals("rcyj")){
-                slideList.add(new SlideNews("1", "http://default", "人才引进", "res://com.dk.edu.csyxy/" + R.mipmap.rcyj, null));
-            } else if (mType.equals("ybxx")){
-                slideList.add(new SlideNews("1", "http://default", "邀标信息", "res://com.dk.edu.csyxy/" + R.mipmap.ybxx, null));
-            }else if (mType.equals("dzjs")){
-                slideList.add(new SlideNews("1", "http://default", "党政建设", "res://com.dk.edu.csyxy/" + R.mipmap.dzjs, null));
-            }
-        }
-        mLoopAdapter.notifyDataSetChanged();
+//        }else{
+//            if (mType.equals("zjcy")){
+//                slideList.add(new SlideNews("1", "http://default", "走进长医", "res://com.dk.edu.csyxy/" + R.mipmap.zjcy, null));
+//            }else if (mType.equals("xw")){
+//                slideList.add(new SlideNews("1", "http://default", "新闻", "res://com.dk.edu.csyxy/" + R.mipmap.xw, null));
+//            } else if (mType.equals("gg")){
+//                slideList.add(new SlideNews("1", "http://default", "公告", "res://com.dk.edu.csyxy/" + R.mipmap.gg, null));
+//            } else if (mType.equals("rcyj")){
+//                slideList.add(new SlideNews("1", "http://default", "人才引进", "res://com.dk.edu.csyxy/" + R.mipmap.rcyj, null));
+//            } else if (mType.equals("ybxx")){
+//                slideList.add(new SlideNews("1", "http://default", "邀标信息", "res://com.dk.edu.csyxy/" + R.mipmap.ybxx, null));
+//            }else if (mType.equals("dzjs")){
+//                slideList.add(new SlideNews("1", "http://default", "党政建设", "res://com.dk.edu.csyxy/" + R.mipmap.dzjs, null));
+//            }
+
+//        mLoopAdapter.notifyDataSetChanged();
+            mLoopViewPager.setVisibility(View.VISIBLE);
+            defultImg.setVisibility(View.GONE);
+
+            mLoopViewPager.setPlayDelay(3000);
+            mLoopAdapter = new TestLoopAdapter(mLoopViewPager);
+            mLoopViewPager.setAdapter(mLoopAdapter);
+            mLoopViewPager.setHintView(new newColorPointHintView(context, Color.GRAY, Color.WHITE));
+//        }
     }
+
 }

@@ -152,6 +152,7 @@ public class NewsFragment extends BaseFragment{
             Map<String, Object> map = new HashMap<>();
 //            map.put("type",mType);
 //            map.put("pageNo",pageNo);
+            Log.e("新闻列表----","apps/tabs/news?type="+mType+"&pageNo="+pageNo);
             HttpUtil.getInstance().postJsonObjectRequest("apps/tabs/news?type="+mType+"&pageNo="+pageNo, map, new HttpListener<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject result) {
