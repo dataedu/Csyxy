@@ -45,11 +45,11 @@ public class XyfgFragment extends BaseFragment {
         scroll = findView(R.id.sceneryScrollView);
         errorLayout = findView(R.id.error_layout);
 
-        if(DeviceUtil.checkNet()){
-            initDatas();
-        }else{
-           errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
-        }
+//        if(DeviceUtil.checkNet()){
+//            initDatas();
+//        }else{
+//           errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
+//        }
 
 //        BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
     }

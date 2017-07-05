@@ -75,7 +75,7 @@ public class AboutActivity extends MyActivity {
     protected void initialize() {
         super.initialize();
         version.setText("版本"+ DeviceUtil.getVersionName(mContext));
-        mTitle.setText(getReString(R.string.app_name)+"移动校园");
+        mTitle.setText(getReString(R.string.app_name2)+"移动校园");
         copyright_info_ch.setText(getReString(R.string.about_copyright_cn));
         copyright_info_zn.setText(getReString(R.string.about_copyright_zn));
     }
