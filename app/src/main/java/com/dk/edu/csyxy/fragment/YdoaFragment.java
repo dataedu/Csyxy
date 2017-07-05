@@ -1,6 +1,5 @@
 package com.dk.edu.csyxy.fragment;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,28 +8,26 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.dk.edu.core.dialog.MsgDialog;
-import com.dk.edu.core.util.BroadcastUtil;
-import com.dk.edu.csyxy.ui.LoginActivity;
-import com.dk.edu.core.view.MyGridView;
-import com.dk.edu.core.widget.ErrorLayout;
-import com.dk.edu.csyxy.adapter.YdoaScheduleAdapter;
-import com.dk.edu.csyxy.entity.YdoaSchedule;
-import com.dk.edu.csyxy.entity.YdoaUserinfo;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.BaseFragment;
 import com.dk.edu.core.util.CoreSharedPreferencesHelper;
 import com.dk.edu.core.util.DeviceUtil;
+import com.dk.edu.core.view.MyGridView;
+import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.adapter.YdOaAdapter;
+import com.dk.edu.csyxy.adapter.YdoaScheduleAdapter;
 import com.dk.edu.csyxy.entity.YdOaEntity;
+import com.dk.edu.csyxy.entity.YdoaSchedule;
+import com.dk.edu.csyxy.entity.YdoaUserinfo;
+import com.dk.edu.csyxy.ui.LoginActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import android.widget.TextView;
 
 import org.json.JSONObject;
 
@@ -110,7 +107,7 @@ public class YdoaFragment extends BaseFragment{
 
         oprition_recycler_view = findView(R.id.oprition_recycler_view);
         oprition_layout = findView(R.id.oprition_layout);
-        oAdapter = new YdOaAdapter(oData,mContext,userIdDes);
+        oAdapter = new YdOaAdapter(oData,mContext);
         oprition_recycler_view.setAdapter(oAdapter);
 
         bezhuIv = findView(R.id.bezhuIv);

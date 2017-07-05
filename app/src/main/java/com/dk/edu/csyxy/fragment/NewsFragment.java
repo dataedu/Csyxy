@@ -61,13 +61,6 @@ public class NewsFragment extends BaseFragment{
         return fragment;
     }
 
-//    @Override
-//    public void onFirstUserVisible() {
-//        super.onFirstUserVisible();
-//        initMyData();
-//    }
-
-
     @Override
     protected void initWidget(View root) {
         super.initWidget(root);
@@ -77,7 +70,6 @@ public class NewsFragment extends BaseFragment{
     protected void initMyData() {
         mRefresh = findView(R.id.swipe_refresh);
         mRecyclerView = findView(R.id.rv_listview);
-
         mType = getArguments().getString("mType");
         news.clear();
         news.add(new News(1));
@@ -109,11 +101,9 @@ public class NewsFragment extends BaseFragment{
                     Log.d("test", "loading executed");
                     isRefreshing = mRefresh.isRefreshing();
                     if (isRefreshing) {
-//                        nAdapter.notifyItemRemoved(nAdapter.getItemCount());
                         return;
                     }
                     if(totalPages<=pageNo){
-//                        nAdapter.notifyItemRemoved(nAdapter.getItemCount());
                         return;
                     }
                     if (!isLoading) {
@@ -129,29 +119,11 @@ public class NewsFragment extends BaseFragment{
                 }
             }
         });
-
-        //recycleview刷新时clear后加载新的item会报错
-//        mRecyclerView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (isRefreshing) {
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-//            }
-//        });
-
         mRefresh.setRefreshing(true);
-        getList();
-
     }
 
     public void getList(){
-        if (DeviceUtil.checkNet()){
             Map<String, Object> map = new HashMap<>();
-//            map.put("type",mType);
-//            map.put("pageNo",pageNo);
             HttpUtil.getInstance().postJsonObjectRequest("apps/tabs/news?type="+mType+"&pageNo="+pageNo, map, new HttpListener<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject result) {
@@ -175,29 +147,38 @@ public class NewsFragment extends BaseFragment{
                                 //RecyclerView滑动到第一个
 //                                mRecyclerView.scrollToPosition(0);
                             }else{
+                                news.clear();
+                                news.add(new News(1));
                                 mRefresh.setRefreshing(false);
                                 news.add(new News(2));
                                 nAdapter.notifyDataSetChanged();
                             }
                         }else{
-                            mRefresh.setRefreshing(false);
-                            news.add(new News(3));
-                            nAdapter.notifyDataSetChanged();
+                            error();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        mRefresh.setRefreshing(false);
-                        nAdapter.notifyDataSetChanged();
+                        error();
                     }
                 }
 
                 @Override
                 public void onError(VolleyError error) {
-                    news.add(new News(3));
-                    nAdapter.notifyDataSetChanged();
-                    mRefresh.setRefreshing(false);
+                    error();
                 }
             });
+
+    }
+
+
+    /**
+     * 获取数据
+     */
+    public void getData(){
+        news.clear();
+        news.add(new News(1));
+        if (DeviceUtil.checkNet()){
+            getList();
         }else {
             news.add(new News(4));
             nAdapter.notifyDataSetChanged();
@@ -205,4 +186,23 @@ public class NewsFragment extends BaseFragment{
         }
     }
 
+    /**
+     * 第一次进来加载
+     */
+    @Override
+    public void onFirstUserVisible() {
+        super.onFirstUserVisible();
+        getData();
+    }
+
+    /**
+     * 处理错误数据
+     */
+    public void error(){
+        news.clear();
+        news.add(new News(1));
+        news.add(new News(3));
+        nAdapter.notifyDataSetChanged();
+        mRefresh.setRefreshing(false);
+    }
 }

@@ -45,11 +45,11 @@ public class XyfgFragment extends BaseFragment {
         scroll = findView(R.id.sceneryScrollView);
         errorLayout = findView(R.id.error_layout);
 
-        if(DeviceUtil.checkNet()){
-            initDatas();
-        }else{
-           errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
-        }
+//        if(DeviceUtil.checkNet()){
+//            initDatas();
+//        }else{
+//           errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
+//        }
 
 //        BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
     }
@@ -92,19 +92,32 @@ public class XyfgFragment extends BaseFragment {
                     }
                 }catch (Exception e){
                     e.printStackTrace();
-                    errorLayout.setErrorType(ErrorLayout.DATAFAIL);
+                    error();
                 }
             }
             @Override
             public void onError(VolleyError error) {
-                errorLayout.setErrorType(ErrorLayout.DATAFAIL);
+                error();
             }
         });
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onFirstUserVisible() {
+        super.onFirstUserVisible();
+        getData();
+    }
+
+    @Override
+    public void onUserVisible() {
+        super.onUserVisible();
+        getData();
+    }
+
+    /**
+     * 获取数据
+     */
+    public void getData(){
         if(DeviceUtil.checkNet()){
             initDatas();
         }else{
@@ -115,4 +128,16 @@ public class XyfgFragment extends BaseFragment {
             }
         }
     }
+
+    /**
+     * 加载失败处理信息
+     */
+    public void error(){
+        if(list != null && list.size()>0){
+            SnackBarUtil.showShort(rootview,getResources().getString(R.string.data_fail));
+        }else {
+            errorLayout.setErrorType(ErrorLayout.DATAFAIL);
+        }
+    }
+
 }

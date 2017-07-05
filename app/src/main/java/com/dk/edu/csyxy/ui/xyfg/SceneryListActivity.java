@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.dk.edu.core.http.HttpUtil;
 import com.dk.edu.core.http.request.HttpListener;
 import com.dk.edu.core.ui.MyActivity;
+import com.dk.edu.core.util.DeviceUtil;
 import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.ui.xyfg.adapter.SceneryGridAdapter;
@@ -47,7 +48,11 @@ public class SceneryListActivity extends MyActivity implements OnItemClickListen
 
 		initViews();
 
-		initDatas();
+		if(DeviceUtil.checkNet()) {
+			initDatas();
+		}else{
+			errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
+		}
 	}
 
 	private void initViews(){

@@ -1,10 +1,7 @@
 package com.dk.edu.csyxy.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +11,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dk.edu.core.ui.HttpWebActivity;
+import com.dk.edu.core.util.CoreSharedPreferencesHelper;
 import com.dk.edu.core.util.StringUtils;
+import com.dk.edu.core.util.security.Signature;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.entity.YdOaEntity;
+
+import java.util.List;
 
 public class YdOaAdapter extends BaseAdapter{
 
 	private List<YdOaEntity> mData;
     private Context mContext;
     LayoutInflater inflater;
+    private CoreSharedPreferencesHelper helper;
     
-    private String userIdDes = ""; 
+//    private String userIdDes = "";
 
-	public YdOaAdapter(List<YdOaEntity> mData, Context mContext2, String userIdDes) {
+	public YdOaAdapter(List<YdOaEntity> mData, Context mContext2) {
 		super();
 		this.mData = mData;
 		this.mContext = mContext2;
 		inflater = LayoutInflater.from(mContext);
-		this.userIdDes = userIdDes;
+        helper = new CoreSharedPreferencesHelper(mContext);
+//		this.userIdDes = userIdDes;
 	}
 
 	@Override
@@ -79,8 +82,15 @@ public class YdOaAdapter extends BaseAdapter{
                      intent  = new Intent(mContext, HttpWebActivity.class);
                      intent.putExtra("title",entity.getLabel());
                      intent.putExtra("close_web",-1);
-                     intent.putExtra("url",entity.getUrl()+"&token="+userIdDes);
-                     Log.e("userIdDes", entity.getUrl()+"&token="+userIdDes);
+
+                     String uid ="";
+                     if(helper.getLoginMsg() != null){
+                         uid = helper.getLoginMsg().getUid();
+                         uid = Signature.encrypt(uid+"|"+Signature.encrypt("dake_oa_app_key")+"|"+System.currentTimeMillis());
+                     }
+                     intent.putExtra("url",entity.getUrl()+"&token="+uid);
+//                     intent.putExtra("url",entity.getUrl()+"&token="+userIdDes);
+//                     Log.e("userIdDes", entity.getUrl()+"&token="+userIdDes);
                  }else{
                      intent = new Intent();
                      intent.putExtra("title",entity.getLabel());
