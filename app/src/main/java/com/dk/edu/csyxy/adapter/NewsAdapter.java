@@ -59,6 +59,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
             v = mInflater.inflate(R.layout.core_headview,parent,false);
             headerView = new HeaderView();
             headerView.init(v,mContext,mType,slideNewses);
+
         }
 
         return new MyViewHolder(v);
@@ -100,7 +101,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
                 }
             });
         }else if(getItemViewType(position) == 1){
-            if(headerView != null){
+            if(headerView != null && slideNewses != null && slideNewses.size()>0){
                 headerView.updateData(slideNewses);
             }
         }
