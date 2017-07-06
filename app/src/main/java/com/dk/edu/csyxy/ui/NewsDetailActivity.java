@@ -22,6 +22,8 @@ import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.entity.News;
 
+import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
+
 
 /**
  * 学校新闻详情
@@ -81,7 +83,9 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 //        Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
         setWebView ( );
         if ( mToolbar != null ) {
-            mToolbar.setTitle (news.getName());
+//            mToolbar.setTitle (news.getName());
+            CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_new_detail);
+            collapsingToolbarLayout.setTitle(news.getName());
             setSupportActionBar ( mToolbar );
             getSupportActionBar ( ).setHomeButtonEnabled ( true );
             getSupportActionBar ( ).setDisplayHomeAsUpEnabled ( true );

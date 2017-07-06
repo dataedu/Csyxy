@@ -9,7 +9,8 @@
     </style>
 
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">5sp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:maxLines">2</item>
     </style>
 
     <!-- ToolBar菜单样式 -->
@@ -17,6 +18,13 @@
         <item name="actionMenuTextColor">@color/white</item> <!--  敲定颜色-->
         <item name="android:textSize">10sp</item> <!--  搞掂字体大小-->
         <item name="android:src">@mipmap/back_press</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="TextAppearance.ExpandedTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">26sp</item>
     </style>
 
 </resources>

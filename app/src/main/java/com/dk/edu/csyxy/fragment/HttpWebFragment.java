@@ -32,6 +32,8 @@ public class HttpWebFragment extends BaseFragment{
     private ProgressBar mProgressBar;
     private String mUrl;
 
+    private boolean istrue = false;
+
     public static HttpWebFragment newInstance(String mUrl) {
         Bundle args = new Bundle();
         args.putString("MURL",mUrl);
@@ -55,29 +57,31 @@ public class HttpWebFragment extends BaseFragment{
         mProgressBar = findView(R.id.progressbar);
         mError.setErrorType(ErrorLayout.LOADDATA);
 
-        if(DeviceUtil.checkNet()){
-            setMUrl(mUrl);
-        }else{
-            mError.setErrorType(ErrorLayout.NETWORK_ERROR);
-        }
-
-        BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
+//        if(DeviceUtil.checkNet()){
+//            setMUrl(mUrl);
+//        }else{
+//            mError.setErrorType(ErrorLayout.NETWORK_ERROR);
+//        }
     }
 
-    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
-        @SuppressLint("NewApi") @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals("checknetwork_true")) {
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(DeviceUtil.checkNet()){
+            if (!istrue){
                 setMUrl(mUrl);
             }
-//            if(action.equals("checknetwork_false")){
-//                mError.setErrorType(ErrorLayout.NETWORK_ERROR);
-//            }
+
+        }else{
+            if (istrue){
+                return;
+            }else {
+                mError.setErrorType(ErrorLayout.NETWORK_ERROR);
+            }
 
         }
-    };
-
+    }
 
     public void setMUrl(String url){
         setWebView();
@@ -111,6 +115,7 @@ public class HttpWebFragment extends BaseFragment{
         public void onPageStarted ( WebView view, String url, Bitmap favicon ) {
             super.onPageStarted ( view, url, favicon );
             mProgressBar.setVisibility ( View.VISIBLE );
+            istrue = false;
         }
 
         @Override
@@ -118,6 +123,8 @@ public class HttpWebFragment extends BaseFragment{
             super.onPageFinished ( webView, url );
             mProgressBar.setVisibility ( View.INVISIBLE );
             mError.setErrorType(ErrorLayout.HIDE_LAYOUT);
+
+            istrue = true;
         }
     }
 

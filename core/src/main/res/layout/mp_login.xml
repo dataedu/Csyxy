@@ -16,7 +16,7 @@
             android:id="@+id/top"
             android:layout_width="fill_parent"
             android:layout_height="48dip"
-            android:background="#ffffff"
+            android:background="@color/colorPrimary"
             android:orientation="vertical" >
             <Button
                 android:id="@+id/back"
@@ -32,7 +32,7 @@
                 android:layout_height="48dip"
                 android:text="登录"
                 android:layout_centerHorizontal="true"
-                android:textColor="#212121" />
+                android:textColor="#fff" />
         </RelativeLayout>
 
         <LinearLayout
