@@ -20,8 +20,10 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             android:theme="@style/AppTheme.AppBarOverlay"
+            app:expandedTitleMarginStart="10dp"
+            app:expandedTitleMarginEnd="10dp"
             app:expandedTitleTextAppearance="@style/TextAppearance.ExpandedTitle"
-            app:maxLines="2"
+            app:maxLines="5"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -42,8 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:navigationIcon="@mipmap/back_press"
-                android:navigationIcon="@mipmap/back_press"
                 app:layout_collapseMode="pin"/>
 
         </net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout>

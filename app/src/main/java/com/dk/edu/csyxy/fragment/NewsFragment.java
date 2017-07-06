@@ -164,7 +164,7 @@ public class NewsFragment extends BaseFragment{
             if (action.equals("checknetwork_true")) {
                 news.clear();
                 news.add(new News(1));
-                mRefresh.setRefreshing(true);
+
                 getList();
             }
             if(action.equals("checknetwork_false")){
