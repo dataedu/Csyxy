@@ -8,10 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">24sp</item>
-        <item name="android:maxLines">2</item>
-    </style>
+    <!--<style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">-->
+        <!--<item name="android:textSize">24sp</item>-->
+        <!--<item name="android:maxLines">2</item>-->
+    <!--</style>-->
 
     <!-- ToolBar菜单样式 -->
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
@@ -25,6 +25,10 @@
 
     <style name="TextAppearance.ExpandedTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:gravity">center_vertical</item>
     </style>
 
 </resources>

@@ -86,6 +86,7 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 //            mToolbar.setTitle (news.getName());
             CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_new_detail);
             collapsingToolbarLayout.setTitle(news.getName());
+//            collapsingToolbarLayout.setCollapsedTitleGravity(Gravity.CENTER);//设置收缩后标题的位置
             setSupportActionBar ( mToolbar );
             getSupportActionBar ( ).setHomeButtonEnabled ( true );
             getSupportActionBar ( ).setDisplayHomeAsUpEnabled ( true );

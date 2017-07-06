@@ -44,6 +44,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:navigationIcon="@mipmap/back_press_detail"
+                app:navigationIcon="@mipmap/back_press_detail"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin"/>
 
         </net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout>
