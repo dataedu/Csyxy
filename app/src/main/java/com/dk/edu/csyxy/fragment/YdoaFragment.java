@@ -55,6 +55,7 @@ public class YdoaFragment extends BaseFragment{
     private String userIdDes = "";
 
     private TextView userinfo_lastname, userinfo_name, userinfo_department;
+    private LinearLayout userInfoIv;
 
     private LinearLayout bezhuIv;
     private TextView beizhuTv;
@@ -95,7 +96,7 @@ public class YdoaFragment extends BaseFragment{
             }else{
                 setUserindo();
                 error.setErrorType(ErrorLayout.HIDE_LAYOUT);
-                MsgDialog.show(mContext, getString(R.string.net_no2));
+//                MsgDialog.show(mContext, getString(R.string.net_no2));
             }
         }
     }
@@ -107,6 +108,8 @@ public class YdoaFragment extends BaseFragment{
         userinfo_lastname = findView(R.id.userinfo_lastname);
         userinfo_name = findView(R.id.userinfo_name);
         userinfo_department = findView(R.id.userinfo_department);
+        userInfoIv = findView(R.id.userInfoIv);
+        userInfoIv.setVisibility(View.VISIBLE);
 
         oprition_recycler_view = findView(R.id.oprition_recycler_view);
         oprition_layout = findView(R.id.oprition_layout);
@@ -176,6 +179,8 @@ public class YdoaFragment extends BaseFragment{
             }
             userinfo_name.setText(ydoaUserinfo.getUserName());
             userinfo_department.setText(ydoaUserinfo.getRole());
+        }else {
+            userInfoIv.setVisibility(View.GONE);
         }
     }
 

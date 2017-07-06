@@ -45,28 +45,7 @@ public class XyfgFragment extends BaseFragment {
         scroll = findView(R.id.sceneryScrollView);
         errorLayout = findView(R.id.error_layout);
 
-//        if(DeviceUtil.checkNet()){
-//            initDatas();
-//        }else{
-//           errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
-//        }
-
-//        BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
     }
-
-//    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
-//        @SuppressLint("NewApi") @Override
-//        public void onReceive(Context context, Intent intent) {
-//            String action = intent.getAction();
-//            if (action.equals("checknetwork_true")) {
-//                initDatas();
-//            }
-////            if(action.equals("checknetwork_false")){
-////                mError.setErrorType(ErrorLayout.NETWORK_ERROR);
-////            }
-//
-//        }
-//    };
 
     private void initDatas(){
         errorLayout.setErrorType(ErrorLayout.LOADDATA);
@@ -109,7 +88,8 @@ public class XyfgFragment extends BaseFragment {
             initDatas();
         }else{
             if(list != null && list.size()>0){
-                SnackBarUtil.showShort(rootview,getResources().getString(R.string.net_no2));
+                return;
+//                SnackBarUtil.showShort(rootview,getResources().getString(R.string.net_no2));
             }else {
                 errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
             }
