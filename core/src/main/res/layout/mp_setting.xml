@@ -136,7 +136,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/ripple_bg_while"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
                         style="@style/setting_img"

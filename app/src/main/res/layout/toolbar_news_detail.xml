@@ -11,5 +11,30 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_collapseMode="pin"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ToolbarTheme"/>
+        app:theme="@style/ToolbarTheme"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:navigationIcon="@mipmap/back_press_detail">
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="@android:color/transparent">-->
+            <!--<Button-->
+                <!--android:id="@+id/back"-->
+                <!--style="@style/but_back"-->
+                <!--android:layout_width="60dip"-->
+                <!--android:layout_height="match_parent"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/title"-->
+                <!--style="@style/title_txt"-->
+                <!--android:paddingLeft="60dip"-->
+                <!--android:paddingRight="10dip"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:text="大王叫我来巡山咯大王叫我来巡山咯大王叫我来巡山咯大王叫我来巡山咯"/>-->
+        <!--</RelativeLayout>-->
+
+    </android.support.v7.widget.Toolbar>
 </merge>

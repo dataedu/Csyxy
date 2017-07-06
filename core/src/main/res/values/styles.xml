@@ -123,4 +123,17 @@
         <!-- 模糊 -->
     </style>
 
+    <style name="TextAppearance.ExpandedTitle"
+        parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:ellipsize">middle</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="Widget.AppCompat.Toolbar">
+        <!--注意，两个都得写，不然没效果-->
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetLeft">0dp</item>
+    </style>
+
 </resources>
