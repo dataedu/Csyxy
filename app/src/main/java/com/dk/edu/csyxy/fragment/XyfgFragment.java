@@ -122,9 +122,11 @@ public class XyfgFragment extends BaseFragment {
             initDatas();
         }else{
             if(list != null && list.size()>0){
-                SnackBarUtil.showShort(rootview,getResources().getString(R.string.net_no2));
+//                SnackBarUtil.showShort(rootview,getResources().getString(R.string.net_no2));
+                return;
             }else {
-                errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
+//                errorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
+                errorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
             }
         }
     }
@@ -134,7 +136,8 @@ public class XyfgFragment extends BaseFragment {
      */
     public void error(){
         if(list != null && list.size()>0){
-            SnackBarUtil.showShort(rootview,getResources().getString(R.string.data_fail));
+//            SnackBarUtil.showShort(rootview,getResources().getString(R.string.data_fail));
+            return;
         }else {
             errorLayout.setErrorType(ErrorLayout.DATAFAIL);
         }

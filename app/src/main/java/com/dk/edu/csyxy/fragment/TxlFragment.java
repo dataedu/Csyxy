@@ -192,7 +192,9 @@ public class TxlFragment extends BaseFragment implements EasyPermissions.Permiss
                 }
             }else {
                 if(par == 1) {
-                    error_layout.setErrorType(ErrorLayout.NETWORK_ERROR);
+//                    error_layout.setErrorType(ErrorLayout.NETWORK_ERROR);
+                    error_layout.setErrorType(ErrorLayout.HIDE_LAYOUT);
+                    return;
                 }else{
                     error_layout.setErrorType(ErrorLayout.DATAFAIL);
                 }

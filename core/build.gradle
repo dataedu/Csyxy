@@ -46,5 +46,4 @@ dependencies {
     compile files('libs/sun.misc.BASE64Decoder.jar')
     compile files('libs/commons-codec-1.10.jar')
     compile files('libs/commons-lang3-3.0.jar')
-    compile 'net.opacapp:multiline-collapsingtoolbar:1.4.0'
 }

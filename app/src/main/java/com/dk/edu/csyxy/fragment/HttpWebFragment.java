@@ -57,11 +57,6 @@ public class HttpWebFragment extends BaseFragment{
         mProgressBar = findView(R.id.progressbar);
         mError.setErrorType(ErrorLayout.LOADDATA);
 
-//        if(DeviceUtil.checkNet()){
-//            setMUrl(mUrl);
-//        }else{
-//            mError.setErrorType(ErrorLayout.NETWORK_ERROR);
-//        }
     }
 
     @Override
@@ -77,7 +72,8 @@ public class HttpWebFragment extends BaseFragment{
             if (istrue){
                 return;
             }else {
-                mError.setErrorType(ErrorLayout.NETWORK_ERROR);
+//                mError.setErrorType(ErrorLayout.NETWORK_ERROR);
+                mError.setErrorType(ErrorLayout.HIDE_LAYOUT);
             }
 
         }

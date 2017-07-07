@@ -80,8 +80,8 @@ public class NewsFragment extends BaseFragment{
         mRecyclerView = findView(R.id.rv_listview);
 
         mType = getArguments().getString("mType");
-        news.clear();
-        news.add(new News(1));
+//        news.clear();
+//        news.add(new News(1));
         nAdapter = new NewsAdapter(getContext(),news,mType,slideNewses);
 
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -94,8 +94,8 @@ public class NewsFragment extends BaseFragment{
             public void onRefresh() {
                 if (DeviceUtil.checkNet()){
                     pageNo = 1;
-                    news.clear();
-                    news.add(new News(1));
+//                    news.clear();
+//                    news.add(new News(1));
                     getList();
                 }else {
                     mRefresh.setRefreshing(false);
@@ -128,8 +128,8 @@ public class NewsFragment extends BaseFragment{
                         isLoading = true;
                         pageNo++;
 //                        loadMore();
-                        news.clear();
-                        news.add(new News(1));
+//                        news.clear();
+//                        news.add(new News(1));
                         getList();
                         Log.d("test", "load more completed");
                         isLoading = false;
@@ -162,24 +162,28 @@ public class NewsFragment extends BaseFragment{
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals("checknetwork_true")) {
-                news.clear();
-                news.add(new News(1));
+//                news.clear();
+//                news.add(new News(1));
 
                 getList();
             }
             if(action.equals("checknetwork_false")){
                 if (nodata){
                     news.clear();
-                    news.add(new News(1));
-                    news.add(new News(4));
+//                    news.add(new News(1));
+//                    news.add(new News(4));
                 }
             }
         }
     };
 
+
     public void getList(){
         nodata = false;
         isRefreshing = true;
+
+        news.clear();
+
         if (DeviceUtil.checkNet()){
             Map<String, Object> map = new HashMap<>();
             Log.e("新闻列表----","apps/tabs/news?type="+mType+"&pageNo="+pageNo);
@@ -190,6 +194,7 @@ public class NewsFragment extends BaseFragment{
                         if(result.getInt("code") == 200){
                             JSONObject jo = result.getJSONObject("data");
                             //轮播新闻
+                            news.add(new News(1));
                             List<SlideNews> slides = gson.fromJson(jo.getJSONArray("slide").toString(),new TypeToken<ArrayList<SlideNews>>(){}.getType());
                             slideNewses.clear();
                             if(slides!=null){
@@ -235,10 +240,9 @@ public class NewsFragment extends BaseFragment{
                 }
             });
         }else {
-            news.add(new News(4));
+//            news.add(new News(4));
             nAdapter.notifyDataSetChanged();
             mRefresh.setRefreshing(false);
         }
     }
-
 }
