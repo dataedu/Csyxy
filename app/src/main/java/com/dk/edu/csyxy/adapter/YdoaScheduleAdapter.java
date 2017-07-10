@@ -58,13 +58,24 @@ public class YdoaScheduleAdapter extends RecyclerView.Adapter<YdoaScheduleAdapte
 
         if (bean.getDate() != null){
             String[] date = bean.getDate().split("-");
-            holder.ydoa_date.setText(date[1] + "-" + date[2]);
+            if (date.length > 2){
+                String mo = date[1];
+                String da = date[2];
+                if (mo.startsWith("0")){
+                    mo = mo.replace("0", "");
+                }
+                if (da.startsWith("0")){
+                    da = da.replace("0", "");
+                }
+                holder.ydoa_date.setText(mo + "月" + da + "号");
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                holder.ydoa_week.setText(getWeekOfDate(sdf.parse(bean.getDate())));
-            } catch (ParseException e) {
-                e.printStackTrace();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    holder.ydoa_week.setText(getWeekOfDate(sdf.parse(bean.getDate())));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
 

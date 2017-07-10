@@ -135,6 +135,8 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         mWebView.setWebViewClient ( new MyWebViewClient ( mProgressBar ) );
         mWebView.setWebChromeClient ( new MyWebChromeClient ( mProgressBar ) );
         settings.setJavaScriptEnabled ( true );    //启用JS脚本
+        settings.setBuiltInZoomControls(true);
+        settings.setDisplayZoomControls(false);
         settings.setSupportZoom ( true );          //支持缩放
         settings.setBlockNetworkImage ( false );  //设置图片最后加载
         settings.setDatabaseEnabled ( true );
