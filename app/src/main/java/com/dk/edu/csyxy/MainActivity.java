@@ -32,8 +32,6 @@ public class MainActivity extends MyActivity implements NavFragment.OnNavigation
     private NavFragment mNavBar;
     private ImageView oa_search;
 
-    private LinearLayout warn_main;//是否有网络
-
     @Override
     protected int getLayoutID() {
         return R.layout.activity_main;
@@ -43,7 +41,6 @@ public class MainActivity extends MyActivity implements NavFragment.OnNavigation
     protected void initView() {
         super.initView();
         mMainUi = (FrameLayout) findViewById(R.id.activity_main_ui);
-        warn_main = (LinearLayout) findViewById(R.id.warn_main);
         FragmentManager manager = getSupportFragmentManager();
         mNavBar = (NavFragment)manager.findFragmentById(R.id.fag_nav);
         mNavBar.setup(this, manager, R.id.main_container, this);
@@ -56,23 +53,7 @@ public class MainActivity extends MyActivity implements NavFragment.OnNavigation
             }
         });
 
-        BroadcastUtil.registerReceiver(this, mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
-
     }
-
-    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
-        @SuppressLint("NewApi") @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals("checknetwork_true")) {
-                warn_main.setVisibility(View.GONE);
-                BroadcastUtil.sendBroadcast(context,"ref_headerview");
-            }
-            if(action.equals("checknetwork_false")){
-                warn_main.setVisibility(View.VISIBLE);
-            }
-        }
-    };
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -90,14 +71,5 @@ public class MainActivity extends MyActivity implements NavFragment.OnNavigation
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-        if(DeviceUtil.checkNet()){
-            warn_main.setVisibility(View.GONE);
-        }else{
-            warn_main.setVisibility(View.VISIBLE);
-        }
-    }
 }

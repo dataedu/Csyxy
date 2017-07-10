@@ -1,12 +1,21 @@
 package com.dk.edu.csyxy.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.androidkun.xtablayout.XTabLayout;
 import com.dk.edu.core.ui.BaseFragment;
+import com.dk.edu.core.util.BroadcastUtil;
+import com.dk.edu.core.util.DeviceUtil;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.adapter.MyFragmentPagerAdapter;
 
@@ -24,6 +33,8 @@ public class CyxxFragment extends BaseFragment{
     private List<String> titles;
     MyFragmentPagerAdapter myFragmentPagerAdapter;
 
+    private LinearLayout warn_main;//是否有网络
+
     @Override
     protected int getLayoutId() {
         return R.layout.mp_cyxx;
@@ -35,6 +46,7 @@ public class CyxxFragment extends BaseFragment{
         mTabLayout = findView(R.id.tab_FindFragment_title);
         mViewPager = findView(R.id.vp_FindFragment_pager);
         getData();
+
     }
 
     public void getData(){
@@ -75,5 +87,23 @@ public class CyxxFragment extends BaseFragment{
         myFragmentPagerAdapter = new MyFragmentPagerAdapter(manager,fragments,titles);
         mViewPager.setAdapter(myFragmentPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+
+        warn_main = findView(R.id.warn_main);
+        BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
     }
+
+    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
+        @SuppressLint("NewApi") @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("checknetwork_true")) {
+                warn_main.setVisibility(View.GONE);
+                BroadcastUtil.sendBroadcast(context,"ref_headerview");
+            }
+            if(action.equals("checknetwork_false")){
+                warn_main.setVisibility(View.VISIBLE);
+            }
+        }
+    };
+
 }
