@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -13,6 +16,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.androidkun.xtablayout.XTabLayout;
+import com.dk.edu.core.receiver.NetworkConnectChangedReceiver;
 import com.dk.edu.core.ui.BaseFragment;
 import com.dk.edu.core.util.BroadcastUtil;
 import com.dk.edu.core.util.DeviceUtil;
@@ -45,6 +49,7 @@ public class CyxxFragment extends BaseFragment{
         super.initWidget(root);
         mTabLayout = findView(R.id.tab_FindFragment_title);
         mViewPager = findView(R.id.vp_FindFragment_pager);
+        warn_main = findView(R.id.warn_main);
         getData();
 
     }
@@ -88,8 +93,12 @@ public class CyxxFragment extends BaseFragment{
         mViewPager.setAdapter(myFragmentPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
-        warn_main = findView(R.id.warn_main);
         BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        getActivity().registerReceiver(new NetworkConnectChangedReceiver(), filter);
     }
 
     private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
@@ -98,7 +107,6 @@ public class CyxxFragment extends BaseFragment{
             String action = intent.getAction();
             if (action.equals("checknetwork_true")) {
                 warn_main.setVisibility(View.GONE);
-                BroadcastUtil.sendBroadcast(context,"ref_headerview");
             }
             if(action.equals("checknetwork_false")){
                 warn_main.setVisibility(View.VISIBLE);

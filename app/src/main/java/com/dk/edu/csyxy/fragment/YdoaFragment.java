@@ -54,7 +54,7 @@ public class YdoaFragment extends BaseFragment{
     private TextView userinfo_lastname, userinfo_name, userinfo_department;
     private LinearLayout userInfoIv;
 
-    private LinearLayout bezhuIv;
+    private LinearLayout recentUse_layout, bezhuIv;
     private TextView beizhuTv;
 
     //主题内容
@@ -63,7 +63,6 @@ public class YdoaFragment extends BaseFragment{
     private RecyclerView mRecyclerView;
     private YdoaScheduleAdapter mAdapter;
     List<YdoaSchedule.ScheduleItemsBean> mData = new ArrayList<>();
-
 
     @Override
     protected int getLayoutId() {
@@ -91,8 +90,8 @@ public class YdoaFragment extends BaseFragment{
                 getList();
                 getUserInfo();
             }else{
-                setUserindo();
-                error.setErrorType(ErrorLayout.HIDE_LAYOUT);
+                setUserindo("NOnetwork");
+//                error.setErrorType(ErrorLayout.HIDE_LAYOUT);
 //                MsgDialog.show(mContext, getString(R.string.net_no2));
             }
         }
@@ -113,6 +112,7 @@ public class YdoaFragment extends BaseFragment{
         oAdapter = new YdOaAdapter(oData,mContext);
         oprition_recycler_view.setAdapter(oAdapter);
 
+        recentUse_layout = findView(R.id.recentUse_layout);
         bezhuIv = findView(R.id.bezhuIv);
         beizhuTv = findView(R.id.beizhuTv);
 
@@ -133,8 +133,8 @@ public class YdoaFragment extends BaseFragment{
             public void onSuccess(JSONObject result)  {
                 try {
                     if (result.getInt("code") != 200) {
-                        MsgDialog.show(mContext, getString(R.string.data_fail));
-                        setUserindo();
+//                        MsgDialog.show(mContext, getString(R.string.data_fail));
+                        setUserindo("NOserver");
                     }else{
                         YdoaUserinfo ydoaUserinfo = new Gson().fromJson(result.getJSONObject("data").toString(),YdoaUserinfo.class);
                         helper.setValue("ydoaUserinfo",result.getJSONObject("data").toString());
@@ -151,22 +151,22 @@ public class YdoaFragment extends BaseFragment{
                     }
                 }catch (Exception e){
                     e.printStackTrace();
-                    error.setErrorType(ErrorLayout.HIDE_LAYOUT);
-                    MsgDialog.show(mContext, getString(R.string.data_fail));
-                    setUserindo();
+//                    error.setErrorType(ErrorLayout.HIDE_LAYOUT);
+//                    MsgDialog.show(mContext, getString(R.string.data_fail));
+                    setUserindo("NOserver");
                 }
             }
             @Override
             public void onError(VolleyError error3) {
-                MsgDialog.show(mContext, getString(R.string.data_fail));
-                error.setErrorType(ErrorLayout.HIDE_LAYOUT);
-                setUserindo();
+//                MsgDialog.show(mContext, getString(R.string.data_fail));
+//                error.setErrorType(ErrorLayout.HIDE_LAYOUT);
+                setUserindo("NOserver");
             }
         });
 
     }
 
-    private void setUserindo(){
+    private void setUserindo(String erro){
         if (helper.getValue("ydoaUserinfo") != null){
             YdoaUserinfo ydoaUserinfo = new Gson().fromJson(helper.getValue("ydoaUserinfo"),YdoaUserinfo.class);
 
@@ -178,6 +178,16 @@ public class YdoaFragment extends BaseFragment{
             userinfo_department.setText(ydoaUserinfo.getRole());
         }else {
             userInfoIv.setVisibility(View.GONE);
+            oprition_layout.setVisibility(View.GONE);
+            recentUse_layout.setVisibility(View.GONE);
+
+            if (erro.equals("NOserver")){
+                error.setErrorType(ErrorLayout.NODATA);
+            }else if (erro.equals("NOnetwork")){
+                error.setErrorType(ErrorLayout.NETWORK_ERROR);
+            }else {
+                error.setErrorType(ErrorLayout.NODATA);
+            }
         }
     }
 
@@ -186,11 +196,13 @@ public class YdoaFragment extends BaseFragment{
             @Override
             public void onSuccess(JSONObject result)  {
                 try {
-                    if (result.getInt("code") != 200) {
-                        MsgDialog.show(mContext, getString(R.string.data_fail));
-                    }else{
+//                    if (result.getInt("code") != 200) {
+////                        MsgDialog.show(mContext, getString(R.string.data_fail));
+//                    }else{
+                    if (result.getInt("code") == 200){
                         String json =  result.getJSONObject("data").toString();
                         if (json != null){
+                            recentUse_layout.setVisibility(View.VISIBLE);
                             YdoaSchedule yd = new Gson().fromJson(json,YdoaSchedule.class);
 
                             if (yd.getComment() != null && !yd.getComment().equals("")){
@@ -214,12 +226,12 @@ public class YdoaFragment extends BaseFragment{
                     }
                 }catch (Exception e){
                     e.printStackTrace();
-                    MsgDialog.show(mContext, getString(R.string.data_fail));
+//                    MsgDialog.show(mContext, getString(R.string.data_fail));
                 }
             }
             @Override
             public void onError(VolleyError error) {
-                MsgDialog.show(mContext, getString(R.string.data_fail));
+//                MsgDialog.show(mContext, getString(R.string.data_fail));
             }
         });
 
@@ -230,9 +242,10 @@ public class YdoaFragment extends BaseFragment{
             @Override
             public void onSuccess(JSONObject result)  {
                 try {
-                    if (result.getInt("code") != 200) {
-                        MsgDialog.show(mContext, getString(R.string.data_fail));
-                    }else{
+//                    if (result.getInt("code") != 200) {
+//                        MsgDialog.show(mContext, getString(R.string.data_fail));
+//                    }else{
+                    if (result.getInt("code") == 200) {
                         String json =  result.getJSONArray("data").toString();
                         List<YdOaEntity> list1 = new Gson().fromJson(json,new TypeToken<List<YdOaEntity>>(){}.getType());
                        if (list1.size()>0){
@@ -244,12 +257,12 @@ public class YdoaFragment extends BaseFragment{
                     }
                 }catch (Exception e){
                     e.printStackTrace();
-                    MsgDialog.show(mContext, getString(R.string.data_fail));
+//                    MsgDialog.show(mContext, getString(R.string.data_fail));
                 }
             }
             @Override
             public void onError(VolleyError error) {
-                MsgDialog.show(mContext, getString(R.string.data_fail));
+//                MsgDialog.show(mContext, getString(R.string.data_fail));
             }
         });
     }
