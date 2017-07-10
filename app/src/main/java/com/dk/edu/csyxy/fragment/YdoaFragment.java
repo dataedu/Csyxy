@@ -176,6 +176,15 @@ public class YdoaFragment extends BaseFragment{
             }
             userinfo_name.setText(ydoaUserinfo.getUserName());
             userinfo_department.setText(ydoaUserinfo.getRole());
+
+            if (erro.equals("NOserver")){
+               MsgDialog.show(mContext,getString(R.string.data_fail));
+            }else if (erro.equals("NOnetwork")){
+                MsgDialog.show(mContext,getString(R.string.net_no2));
+            }else {
+                MsgDialog.show(mContext,getString(R.string.nodata));
+            }
+
         }else {
             userInfoIv.setVisibility(View.GONE);
             oprition_layout.setVisibility(View.GONE);

@@ -80,7 +80,7 @@ public class NewsFragment extends BaseFragment{
         mRecyclerView = findView(R.id.rv_listview);
 
         mType = getArguments().getString("mType");
-//        news.clear();
+        news.clear();
 //        news.add(new News(1));
         nAdapter = new NewsAdapter(getContext(),news,mType,slideNewses);
 

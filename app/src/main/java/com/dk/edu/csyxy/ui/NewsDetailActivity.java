@@ -2,27 +2,34 @@ package com.dk.edu.csyxy.ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dk.edu.core.ui.MyActivity;
 import com.dk.edu.core.util.DeviceUtil;
 import com.dk.edu.core.util.Logger;
 import com.dk.edu.core.util.StringUtils;
+import com.dk.edu.core.view.edittext.AutoAjustSizeTextView;
+import com.dk.edu.core.view.scroll.ObservableScrollView;
+import com.dk.edu.core.view.scroll.ScrollViewListener;
 import com.dk.edu.core.widget.ErrorLayout;
 import com.dk.edu.csyxy.R;
 import com.dk.edu.csyxy.entity.News;
-
-import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 
 
 /**
@@ -41,6 +48,11 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 
     String mType = "";
 
+    private ObservableScrollView scroll;
+    private LinearLayout top,top2;
+    private TextView top_title;
+    private AutoAjustSizeTextView bottom_title;
+
     @Override
     protected int getLayoutID() {
         return R.layout.app_news_detail;
@@ -53,8 +65,15 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         mProgressBar = (ProgressBar) findViewById(R.id.pb_new_detail);
         mWebView = (WebView) findViewById(R.id.webview_new_detail);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        scroll = (ObservableScrollView) findViewById(R.id.scroll);
+        top = (LinearLayout) findViewById(R.id.top);
+        top2 = (LinearLayout) findViewById(R.id.top2);
+        top_title = (TextView) findViewById(R.id.top_title);
+        bottom_title = (AutoAjustSizeTextView) findViewById(R.id.bottom_title);
+
 //        mError = (ErrorLayout) findViewById(R.id.error_layout);
-        ViewCompat.setTransitionName(mImageViewTop, "detail_element");
+//        ViewCompat.setTransitionName(mImageViewTop, "detail_element");
         initData();
     }
 
@@ -82,17 +101,10 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         }
 //        Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
         setWebView ( );
-        if ( mToolbar != null ) {
-//            mToolbar.setTitle (news.getName());
-            CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_new_detail);
-            collapsingToolbarLayout.setTitle(news.getName());
-//            collapsingToolbarLayout.setCollapsedTitleGravity(Gravity.CENTER);//设置收缩后标题的位置
-            setSupportActionBar ( mToolbar );
-            getSupportActionBar ( ).setHomeButtonEnabled ( true );
-            getSupportActionBar ( ).setDisplayHomeAsUpEnabled ( true );
-        }
 
-        setNavigationClick ( );
+        //标题显示
+        intTitle();
+
         layout = (ErrorLayout)findViewById(R.id.errorlayout);
         if(DeviceUtil.checkNet()) {//检查网络
             if (StringUtils.isNotEmpty(news.getContent())) {
@@ -113,6 +125,41 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
             layout.setVisibility(View.VISIBLE);
             mWebView.setVisibility(View.GONE);
             layout.setErrorType(ErrorLayout.NETWORK_ERROR);
+        }
+    }
+
+    private void intTitle() {
+
+        top_title.setText(news.getName());
+        bottom_title.setText(news.getName());
+
+        scroll.setScrollViewListener(new ScrollViewListener() {
+            @Override
+            public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
+
+                if (y<96){
+                    top2.setVisibility(View.VISIBLE);
+                    top.setVisibility(View.GONE);
+                }else {
+                    top.setVisibility(View.VISIBLE);
+                    top2.setVisibility(View.GONE);
+                }
+
+                if (y<520){
+                    top_title.setVisibility(View.GONE);
+                }else {
+                    top_title.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+    }
+
+    public void titleback(View v){
+        if (mWebView.canGoBack()) {
+            mWebView.goBack();
+        } else {
+            onBackPressed ( );
         }
     }
 
