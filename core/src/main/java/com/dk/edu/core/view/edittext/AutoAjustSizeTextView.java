@@ -3,7 +3,8 @@ package com.dk.edu.core.view.edittext;
 import android.content.Context;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.widget.TextView;
+
+import com.dk.edu.core.util.DeviceUtil;
 
 /**
  * Created by cobb on 2017/7/10.
@@ -12,6 +13,7 @@ import android.widget.TextView;
 public class AutoAjustSizeTextView extends android.support.v7.widget.AppCompatTextView {
     private static float DEFAULT_MIN_TEXT_SIZE = 12;
     private static float DEFAULT_MAX_TEXT_SIZE = 20;
+    private Context mContext;
 
     // Attributes
     private Paint testPaint;
@@ -20,7 +22,7 @@ public class AutoAjustSizeTextView extends android.support.v7.widget.AppCompatTe
     public AutoAjustSizeTextView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-
+        this.mContext = context;
         initialise();
     }
 
@@ -49,8 +51,8 @@ public class AutoAjustSizeTextView extends android.support.v7.widget.AppCompatTe
         if (textWidth > 0)
         {
             int availableWidth = textWidth - this.getPaddingLeft() - this.getPaddingRight();
-            float trySize = maxTextSize;
-            testPaint.setTextSize(trySize);
+            float trySize =maxTextSize;
+            testPaint.setTextSize(DeviceUtil.dip2px(mContext,trySize));
             while ((trySize > minTextSize) && (testPaint.measureText(text) > availableWidth))
             {
                 trySize -= 1;
@@ -59,7 +61,7 @@ public class AutoAjustSizeTextView extends android.support.v7.widget.AppCompatTe
                     trySize = minTextSize;
                     break;
                 }
-                testPaint.setTextSize(trySize);
+                testPaint.setTextSize(DeviceUtil.dip2px(mContext,trySize));
             }
             this.setTextSize(trySize);
         }
