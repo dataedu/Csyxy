@@ -12,6 +12,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -49,7 +50,8 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
     String mType = "";
 
     private ObservableScrollView scroll;
-    private LinearLayout top,top2;
+    private RelativeLayout top;
+    private LinearLayout top2;
     private TextView top_title;
     private AutoAjustSizeTextView bottom_title;
 
@@ -67,7 +69,7 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         scroll = (ObservableScrollView) findViewById(R.id.scroll);
-        top = (LinearLayout) findViewById(R.id.top);
+        top = (RelativeLayout) findViewById(R.id.top);
         top2 = (LinearLayout) findViewById(R.id.top2);
         top_title = (TextView) findViewById(R.id.top_title);
         bottom_title = (AutoAjustSizeTextView) findViewById(R.id.bottom_title);
@@ -145,7 +147,7 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
                     top2.setVisibility(View.GONE);
                 }
 
-                if (y<520){
+                if (y<460){
                     top_title.setVisibility(View.GONE);
                 }else {
                     top_title.setVisibility(View.VISIBLE);

@@ -149,6 +149,7 @@ public class AboutActivity extends MyActivity {
                 }
             });
         }else{
+            mError.setErrorType(ErrorLayout.HIDE_LAYOUT);
             showErrorMsg(mrootview,getReString(R.string.net_no2));
         }
     }

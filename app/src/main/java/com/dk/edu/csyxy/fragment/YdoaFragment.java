@@ -167,6 +167,7 @@ public class YdoaFragment extends BaseFragment{
     }
 
     private void setUserindo(String erro){
+        error.setErrorType(ErrorLayout.HIDE_LAYOUT);
         if (helper.getValue("ydoaUserinfo") != null){
             YdoaUserinfo ydoaUserinfo = new Gson().fromJson(helper.getValue("ydoaUserinfo"),YdoaUserinfo.class);
 
