@@ -110,6 +110,7 @@ public class AboutActivity extends MyActivity {
             Map<String,Object> map = new HashMap<>();
             map.put("versionId", DeviceUtil.getVersionCode(mContext));
             map.put("platform","android");
+            map.put("packAge",DeviceUtil.getPackage(mContext));
             HttpUtil.getInstance().postJsonObjectRequest("version", map, new HttpListener<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject result) {
