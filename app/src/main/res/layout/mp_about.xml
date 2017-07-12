@@ -52,12 +52,12 @@
                 android:layout_marginTop="17dp"/>
             </LinearLayout>
         </FrameLayout>
-        <com.dk.edu.core.widget.ErrorLayout
+        <com.dk.mp.core.widget.ErrorLayout
             android:id="@+id/error_layout"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:gravity="center">
-        </com.dk.edu.core.widget.ErrorLayout>
+        </com.dk.mp.core.widget.ErrorLayout>
 
     <RelativeLayout
         android:id="@+id/update_layout"

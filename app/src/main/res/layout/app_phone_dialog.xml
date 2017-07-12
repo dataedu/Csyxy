@@ -94,26 +94,26 @@
                     android:layout_width="16dp"
                     android:src="@drawable/exp_selector"/>
 
-                <com.dk.edu.core.view.DrawHookView
+                <com.dk.mp.core.view.DrawHookView
                     android:id="@+id/progress"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:visibility="gone">
-                </com.dk.edu.core.view.DrawHookView>
+                </com.dk.mp.core.view.DrawHookView>
 
-                <com.dk.edu.core.view.DrawCheckMarkView
+                <com.dk.mp.core.view.DrawCheckMarkView
                     android:id="@+id/progress_check"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:visibility="gone">
-                </com.dk.edu.core.view.DrawCheckMarkView>
+                </com.dk.mp.core.view.DrawCheckMarkView>
 
-                <com.dk.edu.core.view.DrawCrossMarkView
+                <com.dk.mp.core.view.DrawCrossMarkView
                     android:id="@+id/progress_cross"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:visibility="gone">
-                </com.dk.edu.core.view.DrawCrossMarkView>
+                </com.dk.mp.core.view.DrawCrossMarkView>
 
                 <TextView
                     android:id="@+id/expro_txt"

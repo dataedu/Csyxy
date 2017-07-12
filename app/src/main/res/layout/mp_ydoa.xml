@@ -6,7 +6,7 @@
     android:background="#ededed"
     android:orientation="vertical">
 
-    <com.dk.edu.core.widget.ErrorLayout
+    <com.dk.mp.core.widget.ErrorLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:id="@+id/error_layout"
@@ -167,13 +167,13 @@
                 <include
                     layout="@layout/core_line_padding"/>
 
-                <com.dk.edu.core.view.MyGridView
+                <com.dk.mp.core.view.MyGridView
                     android:id="@+id/oprition_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#ffffff"
                     android:numColumns="4" >
-                </com.dk.edu.core.view.MyGridView>
+                </com.dk.mp.core.view.MyGridView>
 
                 <include
                     layout="@layout/core_line"/>

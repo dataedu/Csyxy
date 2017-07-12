@@ -59,7 +59,7 @@
                     android:layout_height="16dp"
                     android:layout_width="10dp"
                     android:src="@mipmap/uid"/>
-                <com.dk.edu.core.view.edittext.CleanEditText
+                <com.dk.mp.core.view.edittext.CleanEditText
                     android:id="@+id/uid"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -92,7 +92,7 @@
                     android:layout_height="16dp"
                     android:layout_width="8dp"
                     android:src="@mipmap/pwd"/>
-                <com.dk.edu.core.view.edittext.CleanEditText
+                <com.dk.mp.core.view.edittext.CleanEditText
                     android:id="@+id/psw"
                     android:layout_width="match_parent"
                     android:singleLine="true"
@@ -139,7 +139,7 @@
                     android:layout_height="16dp"
                     android:layout_width="8dp"
                     android:src="@mipmap/pwd"/>
-                <com.dk.edu.core.view.edittext.CleanEditText
+                <com.dk.mp.core.view.edittext.CleanEditText
                     android:id="@+id/yzm"
                     android:layout_width="match_parent"
                     android:singleLine="true"
@@ -158,13 +158,13 @@
                     android:layout_height="22dp"
                     android:layout_width="71dp"
                     android:background="#ffebd0">
-                    <com.dk.edu.core.view.ValidationCode
+                    <com.dk.mp.core.view.ValidationCode
                         android:id="@+id/valicode"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         lt:textSize="13sp"
                         lt:text="">
-                    </com.dk.edu.core.view.ValidationCode>
+                    </com.dk.mp.core.view.ValidationCode>
                 </LinearLayout>
             </LinearLayout>
 
@@ -195,26 +195,26 @@
                 android:textColor="@color/white"
                 android:textSize="14sp"/>
 
-            <com.dk.edu.core.view.DrawHookView
+            <com.dk.mp.core.view.DrawHookView
                 android:id="@+id/progress"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:visibility="gone">
-            </com.dk.edu.core.view.DrawHookView>
+            </com.dk.mp.core.view.DrawHookView>
 
-            <com.dk.edu.core.view.DrawCheckMarkView
+            <com.dk.mp.core.view.DrawCheckMarkView
                 android:id="@+id/progress_check"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:visibility="gone">
-            </com.dk.edu.core.view.DrawCheckMarkView>
+            </com.dk.mp.core.view.DrawCheckMarkView>
 
-            <com.dk.edu.core.view.DrawCrossMarkView
+            <com.dk.mp.core.view.DrawCrossMarkView
                 android:id="@+id/progress_cross"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:visibility="gone">
-            </com.dk.edu.core.view.DrawCrossMarkView>
+            </com.dk.mp.core.view.DrawCrossMarkView>
 
         </LinearLayout>
 

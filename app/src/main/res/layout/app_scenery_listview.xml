@@ -7,7 +7,7 @@
     
 	<include layout="@layout/core_title_back"/>
 
-	<com.dk.edu.core.widget.ErrorLayout
+	<com.dk.mp.core.widget.ErrorLayout
 		android:layout_height="match_parent"
 		android:layout_width="match_parent"
 		android:id="@+id/error_layout"

@@ -6,7 +6,7 @@
     android:background="#ededed"
     android:id="@+id/mdialog">
 
-    <com.dk.edu.core.widget.ErrorLayout
+    <com.dk.mp.core.widget.ErrorLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:id="@+id/error_layout"

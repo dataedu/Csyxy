@@ -6,7 +6,7 @@
     android:background="#ededed"
     android:orientation="vertical" >
 
-    <com.dk.edu.core.widget.ErrorLayout
+    <com.dk.mp.core.widget.ErrorLayout
         android:id="@+id/main_error"
         android:layout_height="match_parent"
         android:layout_width="match_parent"

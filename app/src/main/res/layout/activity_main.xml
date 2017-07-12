@@ -7,7 +7,7 @@
     android:background="@color/colorPrimary"
     android:fitsSystemWindows="false"
     android:orientation="vertical"
-    tools:context="com.dk.edu.csyxy.MainActivity">
+    tools:context="com.dk.edu.csyxy.com.dk.mp.csyxy.MainActivity">
 
     <include layout="@layout/core_title"/>
 
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/fag_nav"
-        android:name="com.dk.edu.csyxy.fragment.NavFragment"
+        android:name="com.dk.mp.csyxy.fragment.NavFragment"
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_gravity="bottom" />

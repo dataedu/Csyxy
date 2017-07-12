@@ -95,7 +95,7 @@
 
     </RelativeLayout>
 
-    <com.dk.edu.core.view.scroll.ObservableScrollView
+    <com.dk.mp.core.view.scroll.ObservableScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -142,7 +142,7 @@
                     <!--android:layout_margin="10dp"-->
                     <!--android:textColor="@color/white"/>-->
 
-                <com.dk.edu.core.view.edittext.AutoAjustSizeTextView
+                <com.dk.mp.core.view.edittext.AutoAjustSizeTextView
                     android:id="@+id/bottom_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -171,16 +171,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-            <com.dk.edu.core.widget.ErrorLayout
+            <com.dk.mp.core.widget.ErrorLayout
                 android:id="@+id/errorlayout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:visibility="gone"
                 android:layout_gravity="center">
-            </com.dk.edu.core.widget.ErrorLayout>
+            </com.dk.mp.core.widget.ErrorLayout>
 
         </LinearLayout>
-    </com.dk.edu.core.view.scroll.ObservableScrollView>
+    </com.dk.mp.core.view.scroll.ObservableScrollView>
 
 </LinearLayout>
 <!--</android.support.design.widget.CoordinatorLayout>-->
