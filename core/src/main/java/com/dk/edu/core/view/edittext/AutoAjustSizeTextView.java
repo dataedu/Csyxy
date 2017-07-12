@@ -11,26 +11,23 @@ import com.dk.edu.core.util.DeviceUtil;
  */
 
 public class AutoAjustSizeTextView extends android.support.v7.widget.AppCompatTextView {
-    private static float DEFAULT_MIN_TEXT_SIZE = 12;
-    private static float DEFAULT_MAX_TEXT_SIZE = 20;
+    private static float DEFAULT_MIN_TEXT_SIZE = 11;
+    private static float DEFAULT_MAX_TEXT_SIZE = 22;
     private Context mContext;
 
     // Attributes
     private Paint testPaint;
     private float minTextSize, maxTextSize;
 
-    public AutoAjustSizeTextView(Context context, AttributeSet attrs)
-    {
+    public AutoAjustSizeTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
         initialise();
     }
 
-    private void initialise()
-    {
+    private void initialise() {
         testPaint = new Paint();
         testPaint.set(this.getPaint());
-
 
         maxTextSize = this.getTextSize();
 

@@ -144,8 +144,10 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 
                 if (y<460){
                     top_title.setVisibility(View.GONE);
+                    bottom_title.setVisibility(View.VISIBLE);
                 }else {
                     top_title.setVisibility(View.VISIBLE);
+                    bottom_title.setVisibility(View.GONE);
                 }
 
             }
