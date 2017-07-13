@@ -27,6 +27,10 @@ import com.dk.mp.core.widget.ErrorLayout;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.entity.News;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
 
 /**
  * 学校新闻详情
@@ -128,19 +132,23 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
     private void intTitle() {
 
         top_title.setText(news.getName());
-        bottom_title.setText(news.getName());
+
+        String btt = StringFilter(news.getName()).trim();
+        bottom_title.setText(btt);
+//        bottom_title.setText(news.getName());
 
         scroll.setScrollViewListener(new ScrollViewListener() {
             @Override
             public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
 
-                if (y<96){
+                if (y<20){
                     top2.setVisibility(View.VISIBLE);
                     top.setVisibility(View.GONE);
                 }else {
                     top.setVisibility(View.VISIBLE);
                     top2.setVisibility(View.GONE);
                 }
+
 
                 if (y<460){
                     top_title.setVisibility(View.GONE);
@@ -152,6 +160,18 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 
             }
         });
+    }
+
+    // 替换、过滤特殊字符
+    public static String StringFilter(String str) throws PatternSyntaxException{
+        str=str.replaceAll("【","[").replaceAll("】","]").replaceAll("！","!")
+                .replaceAll("——","--").replaceAll("“","\"").replaceAll("”","\"")
+                .replaceAll("（","(").replaceAll("）",")").replaceAll("、",",")
+                .replaceAll("--","--").replaceAll("，",",").replaceAll("？","?");//替换中文标号
+        String regEx="[『』]"; // 清除掉特殊字符
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        return m.replaceAll("").trim();
     }
 
     public void titleback(View v){

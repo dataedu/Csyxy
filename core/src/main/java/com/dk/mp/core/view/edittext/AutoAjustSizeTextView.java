@@ -6,12 +6,13 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
+import android.widget.TextView;
 
 /**
  * Created by cobb on 2017/7/10.
  */
 
-public class AutoAjustSizeTextView extends android.support.v7.widget.AppCompatTextView {
+public class AutoAjustSizeTextView extends TextView {
     private static float DEFAULT_MIN_TEXT_SIZE = 1;
     private static float DEFAULT_MAX_TEXT_SIZE = 22;
     // Attributes
