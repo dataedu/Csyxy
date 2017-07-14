@@ -161,12 +161,12 @@ public class NewsFragment extends BaseFragment{
         @SuppressLint("NewApi") @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals("checknetwork_true")) {
-//                news.clear();
-//                news.add(new News(1));
-
-                getList();
-            }
+//            if (action.equals("checknetwork_true")) {
+////                news.clear();
+////                news.add(new News(1));
+//
+//                getList();
+//            }
             if(action.equals("checknetwork_false")){
                 if (nodata){
                     news.clear();

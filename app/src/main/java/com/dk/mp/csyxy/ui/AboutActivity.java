@@ -108,10 +108,10 @@ public class AboutActivity extends MyActivity {
     public void getData(){
         if(DeviceUtil.checkNet()){
             Map<String,Object> map = new HashMap<>();
-            map.put("versionId", DeviceUtil.getVersionCode(mContext));
-            map.put("platform","android");
-            map.put("packAge",DeviceUtil.getPackage(mContext));
-            HttpUtil.getInstance().postJsonObjectRequest("version", map, new HttpListener<JSONObject>() {
+//            map.put("versionId", DeviceUtil.getVersionCode(mContext));
+//            map.put("platform","android");
+//            map.put("packAge",DeviceUtil.getPackage(mContext));
+            HttpUtil.getInstance().postJsonObjectRequest("version"+"?versionId="+DeviceUtil.getVersionCode(mContext) + "&platform=android"+"&packAge="+DeviceUtil.getPackage(mContext), map, new HttpListener<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject result) {
                     try {

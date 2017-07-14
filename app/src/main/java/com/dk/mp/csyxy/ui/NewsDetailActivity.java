@@ -3,6 +3,7 @@ package com.dk.mp.csyxy.ui;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -108,19 +109,20 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 
         layout = (ErrorLayout)findViewById(R.id.errorlayout);
         if(DeviceUtil.checkNet()) {//检查网络
-            if (StringUtils.isNotEmpty(news.getContent())) {
-                layout.setVisibility(View.GONE);
-                mWebView.setVisibility(View.VISIBLE);
-                mWebView.loadDataWithBaseURL(null, news.getContent(), "text/html", "utf-8", null);
-            }else if(news.getUrl() == null){
-                layout.setVisibility(View.VISIBLE);
-                mWebView.setVisibility(View.GONE);
-                layout.setErrorType(ErrorLayout.NODATA);
-            }else{
+            if (StringUtils.isNotEmpty(news.getUrl())) {
                 String url = getUrl(news.getUrl());
                 layout.setVisibility(View.VISIBLE);
                 mWebView.setVisibility(View.GONE);
                 mWebView.loadUrl(url);
+
+            }else if(news.getContent() == null){
+                layout.setVisibility(View.VISIBLE);
+                mWebView.setVisibility(View.GONE);
+                layout.setErrorType(ErrorLayout.NODATA);
+            }else{
+                layout.setVisibility(View.GONE);
+                mWebView.setVisibility(View.VISIBLE);
+                mWebView.loadDataWithBaseURL(null, news.getContent(), "text/html", "utf-8", null);
             }
         }else{
             layout.setVisibility(View.VISIBLE);
@@ -149,14 +151,16 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
                     top2.setVisibility(View.GONE);
                 }
 
-
-                if (y<460){
-                    top_title.setVisibility(View.GONE);
-                    bottom_title.setVisibility(View.VISIBLE);
-                }else {
+                //260-48=212=424
+                if (y>300){
                     top_title.setVisibility(View.VISIBLE);
                     bottom_title.setVisibility(View.GONE);
+                }else {
+                    top_title.setVisibility(View.GONE);
+                    bottom_title.setVisibility(View.VISIBLE);
                 }
+
+//                Log.e("y------------------",y+"");
 
             }
         });
