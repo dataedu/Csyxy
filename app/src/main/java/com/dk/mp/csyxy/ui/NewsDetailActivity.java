@@ -48,6 +48,7 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 //    private ErrorLayout mError;
 
     String mType = "";
+    String dType = "";
 
     private ObservableScrollView scroll;
     private RelativeLayout top;
@@ -82,6 +83,7 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
     public void initData(){
         news = (News) getIntent().getSerializableExtra("news");
         mType = getIntent().getStringExtra("mType");
+        dType = getIntent().getStringExtra("dType");
 //        Log.e("vvvvvvvvvvvvvvvvvv",mType+");
         if (mType !=null){
             if (mType.equals("zjcy")){
@@ -97,7 +99,20 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
             }else if (mType.equals("dzjs")){
                 mImageViewTop.setImageResource(R.mipmap.dzjs);
             }
-        } else {
+        } else if(dType != null && dType.equals("zjcy")){
+            String name = news.getName();
+            if (name != null){
+                if (name.equals("学校领导")){
+                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxld);
+                }else if (name.equals("长医概况")){
+                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxgk);
+                }else if (name.equals("校长寄语")){
+                    mImageViewTop.setImageResource(R.mipmap.zjcy_xzjy);
+                }else if (name.equals("学校章程")){
+                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxzc);
+                }
+            }
+        }else {
             Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
 
         }

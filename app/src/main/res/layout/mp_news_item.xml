@@ -10,6 +10,7 @@
         android:id="@+id/news_img"
         android:layout_width="80dip"
         android:layout_height="60dp"
+        android:scaleType="fitXY"
         android:background="#EEEEEE">
     </ImageView>
 

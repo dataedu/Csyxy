@@ -75,6 +75,23 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
                 holder.time2.setVisibility(View.VISIBLE);
                 holder.time.setVisibility(View.GONE);
                 holder.time2.setText(news.getPublishTime());
+            }else if (mType.equals("zjcy")){
+
+                holder.time.setText(news.getPublishTime());
+                if (news.getName() != null){
+                    holder.title.setText(news.getName());
+                    holder.image.setVisibility(View.VISIBLE);
+                    if (news.getName().equals("学校领导")){
+                        holder.image.setImageResource(R.mipmap.zjcy_xxld);
+                    }else if (news.getName().equals("长医概况")){
+                        holder.image.setImageResource(R.mipmap.zjcy_xxgk);
+                    }else if (news.getName().equals("校长寄语")){
+                        holder.image.setImageResource(R.mipmap.zjcy_xzjy);
+                    }else if (news.getName().equals("学校章程")){
+                        holder.image.setImageResource(R.mipmap.zjcy_xxzc);
+                    }
+                }
+
             }else {
                 holder.title.setText(news.getName());
                 holder.time.setText(news.getPublishTime());
@@ -86,6 +103,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
                 }
             }
 
+
+
             holder.newsdetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,6 +112,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
 
                     Intent intent = new Intent(mContext, NewsDetailActivity.class);
                     intent.putExtra("news", (Serializable) news);
+                    intent.putExtra("dType",mType);
                     ActivityOptionsCompat options =
                             ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mContext,v,
                                     mContext.getString(R.string.transition__img));

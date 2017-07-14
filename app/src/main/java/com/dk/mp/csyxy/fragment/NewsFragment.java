@@ -55,6 +55,7 @@ public class NewsFragment extends BaseFragment{
     Gson gson = new Gson();
 
     private boolean nodata = false;
+    private int sli = 0;
 
     @Override
     protected int getLayoutId() {
@@ -94,7 +95,8 @@ public class NewsFragment extends BaseFragment{
             public void onRefresh() {
                 if (DeviceUtil.checkNet()){
                     pageNo = 1;
-//                    news.clear();
+                    news.clear();
+                    sli = 0;
 //                    news.add(new News(1));
                     getList();
                 }else {
@@ -115,25 +117,29 @@ public class NewsFragment extends BaseFragment{
                 int lastVisibleItemPosition = manager.findLastVisibleItemPosition();
                 if (lastVisibleItemPosition + 1 == nAdapter.getItemCount()) {
                     Log.d("test", "loading executed");
-                    isRefreshing = mRefresh.isRefreshing();
-                    if (isRefreshing) {
+                    if (isRefreshing == false){
+                        isRefreshing = mRefresh.isRefreshing();
+                        if (isRefreshing) {
 //                        nAdapter.notifyItemRemoved(nAdapter.getItemCount());
-                        return;
-                    }
-                    if(totalPages<=pageNo){
+                            return;
+                        }
+                        if(totalPages<=pageNo){
 //                        nAdapter.notifyItemRemoved(nAdapter.getItemCount());
-                        return;
-                    }
-                    if (!isLoading && DeviceUtil.checkNet()) {
-                        isLoading = true;
-                        pageNo++;
+                            return;
+                        }
+                        if (!isLoading && DeviceUtil.checkNet()) {
+                            isLoading = true;
+                            pageNo++;
 //                        loadMore();
 //                        news.clear();
 //                        news.add(new News(1));
-                        getList();
-                        Log.d("test", "load more completed");
-                        isLoading = false;
+                            sli = 1;
+                            getList();
+                            Log.d("test", "load more completed");
+                            isLoading = false;
+                        }
                     }
+
                 }
             }
         });
@@ -182,7 +188,7 @@ public class NewsFragment extends BaseFragment{
         nodata = false;
         isRefreshing = true;
 
-        news.clear();
+//        news.clear();
 
         if (DeviceUtil.checkNet()){
             Map<String, Object> map = new HashMap<>();
@@ -193,16 +199,20 @@ public class NewsFragment extends BaseFragment{
                     try {
                         if(result.getInt("code") == 200){
                             JSONObject jo = result.getJSONObject("data");
-                            //轮播新闻
-                            news.add(new News(1));
-                            List<SlideNews> slides = gson.fromJson(jo.getJSONArray("slide").toString(),new TypeToken<ArrayList<SlideNews>>(){}.getType());
-                            slideNewses.clear();
-                            if(slides!=null){
-                                slideNewses.addAll(slides);
+                            if (sli == 0){
+                                //轮播新闻
+                                news.add(new News(1));
+                                List<SlideNews> slides = gson.fromJson(jo.getJSONArray("slide").toString(),new TypeToken<ArrayList<SlideNews>>(){}.getType());
+                                slideNewses.clear();
+                                if(slides!=null){
+                                    slideNewses.addAll(slides);
+                                }
                             }
+
                             //列表新闻
                             PageMsg<News> pageMsg = gson.fromJson(jo.getJSONObject("news").toString(),new TypeToken<PageMsg<News>>(){}.getType());
                             totalPages = pageMsg.getTotalPages();
+
                             if(pageMsg.getList() != null && pageMsg.getList().size()>0) {
                                 news.addAll(pageMsg.getList());
                                 nAdapter.notifyDataSetChanged();
