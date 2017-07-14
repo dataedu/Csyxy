@@ -142,11 +142,22 @@
                     <!--android:layout_margin="10dp"-->
                     <!--android:textColor="@color/white"/>-->
 
-                <com.dk.mp.core.view.edittext.AutoAjustSizeTextView
+                <!--<com.dk.mp.core.view.edittext.AutoAjustSizeTextView-->
+                    <!--android:id="@+id/bottom_title"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:maxLines="2"-->
+                    <!--android:layout_gravity="bottom"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:text=""-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginBottom="20dp"-->
+                    <!--android:textSize="22sp" />-->
+
+                <TextView
                     android:id="@+id/bottom_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
                     android:layout_gravity="bottom"
                     android:textColor="@color/white"
                     android:text=""

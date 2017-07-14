@@ -3,6 +3,7 @@ package com.dk.mp.csyxy.ui;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -54,7 +55,7 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
     private RelativeLayout top;
     private LinearLayout top2;
     private TextView top_title;
-    private AutoAjustSizeTextView bottom_title;
+    private TextView bottom_title;
 
     @Override
     protected int getLayoutID() {
@@ -73,7 +74,7 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         top = (RelativeLayout) findViewById(R.id.top);
         top2 = (LinearLayout) findViewById(R.id.top2);
         top_title = (TextView) findViewById(R.id.top_title);
-        bottom_title = (AutoAjustSizeTextView) findViewById(R.id.bottom_title);
+        bottom_title = (TextView) findViewById(R.id.bottom_title);
 
 //        mError = (ErrorLayout) findViewById(R.id.error_layout);
 //        ViewCompat.setTransitionName(mImageViewTop, "detail_element");
@@ -150,9 +151,18 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 
         top_title.setText(news.getName());
 
-        String btt = StringFilter(news.getName()).trim();
-        bottom_title.setText(btt);
-//        bottom_title.setText(news.getName());
+        bottom_title.setText(news.getName());
+
+        //自动调整字体大小
+//        Log.e("大小-----------",bottom_title.getTextSize()+"");
+        bottom_title.post(new Runnable() {
+            @Override
+            public void run() {
+//                Log.e("行数-----------",bottom_title.getLineCount()+"");
+                sizt();
+
+            }
+        });
 
         scroll.setScrollViewListener(new ScrollViewListener() {
             @Override
@@ -181,16 +191,27 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         });
     }
 
-    // 替换、过滤特殊字符
-    public static String StringFilter(String str) throws PatternSyntaxException{
-        str=str.replaceAll("【","[").replaceAll("】","]").replaceAll("！","!")
-                .replaceAll("——","--").replaceAll("“","\"").replaceAll("”","\"")
-                .replaceAll("（","(").replaceAll("）",")").replaceAll("、",",")
-                .replaceAll("--","--").replaceAll("，",",").replaceAll("？","?");//替换中文标号
-        String regEx="[『』]"; // 清除掉特殊字符
-        Pattern p = Pattern.compile(regEx);
-        Matcher m = p.matcher(str);
-        return m.replaceAll("").trim();
+    private void sizt(){
+        while (bottom_title.getLineCount()>2){
+            int size = (int) bottom_title.getTextSize()/2;
+            size = size -1;
+            bottom_title.setTextSize(size);
+//            Log.e("大小后-----------",bottom_title.getTextSize()+"");
+
+            bottom_title.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (bottom_title.getTextSize()>8){
+                        sizt();
+                    }else {
+                        bottom_title.setTextSize(8);
+                        bottom_title.setMaxLines(2);
+                        bottom_title.setEllipsize(TextUtils.TruncateAt.END);
+                        return;
+                    }
+                }
+            });
+        }
     }
 
     public void titleback(View v){
@@ -284,7 +305,6 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
             super.onReceivedTitle ( view, title );
         }
     }
-
 
     /**
      * 处理url
