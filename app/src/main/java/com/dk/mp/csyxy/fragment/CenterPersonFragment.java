@@ -38,7 +38,6 @@ public  class CenterPersonFragment extends BaseFragment implements View.OnClickL
     SwitchCompat checkbox_settting;
     private ScrollView setting_scro;
     private ImageView pesonphoto;
-    private TextView font_txt;
 
     @Override
     protected int getLayoutId() {
@@ -51,7 +50,7 @@ public  class CenterPersonFragment extends BaseFragment implements View.OnClickL
         helper = getSharedPreferences();
         login = (LinearLayout) root.findViewById(R.id.login);
         feedback = (LinearLayout) root.findViewById(R.id.feedback);
-        version = (LinearLayout) root.findViewById(R.id.version);
+        version = (LinearLayout) root.findViewById(R.id.version_lin);
         cleanCache = (LinearLayout) root.findViewById(R.id.cleanCache);
         about = (LinearLayout) root.findViewById(R.id.about);
 

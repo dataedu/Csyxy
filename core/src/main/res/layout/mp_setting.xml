@@ -131,7 +131,7 @@
                     android:background="@color/linecolor" />
 
                 <LinearLayout
-                    android:id="@+id/version"
+                    android:id="@+id/version_lin"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ripple_bg_while"
