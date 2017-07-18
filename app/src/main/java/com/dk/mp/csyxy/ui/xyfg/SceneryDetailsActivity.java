@@ -1,5 +1,6 @@
 package com.dk.mp.csyxy.ui.xyfg;
 
+import android.net.Uri;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,8 @@ import com.dk.mp.core.ui.MyActivity;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.ui.xyfg.entity.SceneryEntity;
 import com.dk.mp.csyxy.ui.xyfg.view.ZoomImageView;
+import com.dk.mp.csyxy.ui.xyfg.view.ZoomableDraweeView;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -87,20 +90,33 @@ public class SceneryDetailsActivity extends MyActivity implements OnClickListene
 		@Override
 		public Object instantiateItem(View arg0, int arg1) {
 			View view = LayoutInflater.from(SceneryDetailsActivity.this).inflate(R.layout.app_scenery_detail,null);
-			ZoomImageView sd = (ZoomImageView) view.findViewById(R.id.scenerydetailgridimage);
-			Glide.with(getApplicationContext()).load(list.get(arg1).getImage()).placeholder(R.mipmap.image_defualt).into(sd);
-			sd.setOnClickListener(new OnClickListener() {
-				
+			ZoomableDraweeView sd = (ZoomableDraweeView) view.findViewById(R.id.scenerydetailgridimage);
+//			Glide.with(getApplicationContext()).load(list.get(arg1).getImage()).placeholder(R.mipmap.image_defualt).into(sd);
+			Uri uri = Uri.parse(list.get(arg1).getImage());
+			sd.setImageURI(uri);
+//			sd.setOnClickListener(new OnClickListener() {
+//
+//				@Override
+//				public void onClick(View v) {
+//					if(layout.isShown()){
+//						layout.setVisibility(View.INVISIBLE);
+//					}else{
+//						layout.setVisibility(View.VISIBLE);
+//					}
+//
+//				}
+//			});
+			sd.setOnClickListener(new ZoomableDraweeView.OnClickListener() {
 				@Override
-				public void onClick(View v) {
+				public void onClick() {
 					if(layout.isShown()){
 						layout.setVisibility(View.INVISIBLE);
 					}else{
 						layout.setVisibility(View.VISIBLE);
 					}
-					
 				}
 			});
+
 	        ViewPager pViewPager = ((ViewPager) arg0);
 			pViewPager.addView(view);
 			return view;
