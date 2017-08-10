@@ -8,6 +8,7 @@
     <string name="login_fail">登录失败</string>
     <string name="searchnodata">没有搜索到哦</string>
     <string name="search_fail">搜索失败</string>
+    <string name="dialog_tips">温馨提示</string>
 
     <string name="transition__img">转场动画</string>
 

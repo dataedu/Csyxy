@@ -2,6 +2,7 @@ package com.dk.mp.csyxy.http;
 
 
 import com.dk.mp.core.entity.Jbxx;
+import com.dk.mp.core.entity.Ks;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,5 +83,66 @@ public class Manager {
         return departments;
     }
 
+
+    /**
+     * 黄页
+     * @param result json对象
+     * @param bmid 部门id
+     * @param bmname 部门姓名
+     * @return
+     * @throws JSONException
+     */
+    public static List<Ks> getHy(JSONObject result, String bmid, String bmname) throws JSONException {
+        List<Ks> departments = new ArrayList<>();
+        JSONArray ja = result.getJSONArray("data");
+        if(ja != null){
+            for (int i = 0; i < ja.length(); i++) {
+                JSONObject object2 = ja.getJSONObject(i);
+                Ks p = new Ks();
+                String pid = object2.optString("id");
+                p.setId(pid);
+                p.setName(object2.getString("name"));
+                p.setDepartmentid(bmid);
+                p.setDepartmentname(bmname);
+                String hm="";
+                JSONArray values = object2.getJSONArray("values");
+                for (int index = 0; index < values.length(); index++) {
+                    if(index==0){
+                        hm=	values.getString(index);
+                    }else{
+                        hm+="/"+values.getString(index);
+                    }
+                }
+                p.setTels(hm);
+                departments.add(p);
+            }
+        }
+        return departments;
+    }
+
+    public static List<Ks> getHySerach(JSONObject result) throws JSONException {
+        List<Ks> departments = new ArrayList<>();
+        JSONArray ja = result.getJSONArray("data");
+        if(ja != null){
+            for (int i = 0; i < ja.length(); i++) {
+                JSONObject object2 = ja.getJSONObject(i);
+                Ks p = new Ks();
+                p.setId(object2.getString("id"));
+                p.setName(object2.getString("name"));
+                String hm="";
+                JSONArray values = object2.getJSONArray("values");
+                for (int index = 0; index < values.length(); index++) {
+                    if(index==0){
+                        hm=	values.getString(index);
+                    }else{
+                        hm+="/"+values.getString(index);
+                    }
+                }
+                p.setTels(hm);
+                departments.add(p);
+            }
+        }
+        return departments;
+    }
 
 }

@@ -94,18 +94,6 @@ public class SceneryDetailsActivity extends MyActivity implements OnClickListene
 //			Glide.with(getApplicationContext()).load(list.get(arg1).getImage()).placeholder(R.mipmap.image_defualt).into(sd);
 			Uri uri = Uri.parse(list.get(arg1).getImage());
 			sd.setImageURI(uri);
-//			sd.setOnClickListener(new OnClickListener() {
-//
-//				@Override
-//				public void onClick(View v) {
-//					if(layout.isShown()){
-//						layout.setVisibility(View.INVISIBLE);
-//					}else{
-//						layout.setVisibility(View.VISIBLE);
-//					}
-//
-//				}
-//			});
 			sd.setOnClickListener(new ZoomableDraweeView.OnClickListener() {
 				@Override
 				public void onClick() {

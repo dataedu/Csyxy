@@ -76,11 +76,27 @@ public class HeaderView {
 //            }else if (mType.equals("dzjs")){
 //                slideList.add(new SlideNews("1", "http://default", "党政建设", "res://com.dk.edu.csyxy/" + R.mipmap.dzjs, null));
 //            }
+            if (mType.equals("zjcy")){
+                slideList.add(new SlideNews("a", "http://default", "走进长医", "res://com.dk.edu.csyxy/" + R.mipmap.zjcy_a, null));
+                slideList.add(new SlideNews("b", "http://default", "走进长医", "res://com.dk.edu.csyxy/" + R.mipmap.zjcy_b, null));
+                slideList.add(new SlideNews("c", "http://default", "走进长医", "res://com.dk.edu.csyxy/" + R.mipmap.zjcy_c, null));
+                slideList.add(new SlideNews("d", "http://default", "走进长医", "res://com.dk.edu.csyxy/" + R.mipmap.zjcy_d, null));
 
-            defultImg.setVisibility(View.VISIBLE);
-            mLoopViewPager.setVisibility(View.GONE);
-            defultTex = (TextView) view.findViewById(R.id.tip);
-            defult();
+                mLoopViewPager.setVisibility(View.VISIBLE);
+                defultImg.setVisibility(View.GONE);
+
+                mLoopViewPager.setPlayDelay(3000);
+                mLoopAdapter = new TestLoopAdapter(mLoopViewPager);
+                mLoopViewPager.setAdapter(mLoopAdapter);
+                mLoopViewPager.setHintView(new newColorPointHintView(context, Color.GRAY, Color.WHITE));
+
+            }else {
+                defultImg.setVisibility(View.VISIBLE);
+                mLoopViewPager.setVisibility(View.GONE);
+                defultTex = (TextView) view.findViewById(R.id.tip);
+                defult();
+            }
+
         }
 
   //      getData();
@@ -102,10 +118,11 @@ public class HeaderView {
         String text = "";
         int Imgid = 0;
 
-        if (mType.equals("zjcy")){
+     /*   if (mType.equals("zjcy")){
             text = "走进长医";
             Imgid = R.mipmap.zjcy;
-        }else if (mType.equals("xw")){
+        }else */
+            if (mType.equals("xw")){
             text = "新闻";
             Imgid = R.mipmap.xw;
         } else if (mType.equals("gg")){
@@ -167,6 +184,7 @@ public class HeaderView {
                     news.setImage(slideList.get(position).getImage());
                     news.setUrl(slideList.get(position).getUrl());
                     news.setName(slideList.get(position).getName());
+                    news.setId(slideList.get(position).getId());
                     intent.putExtra("news", (Serializable)news);
                     ViewCompat.setTransitionName(v, "detail_element");
                     ActivityOptionsCompat options =

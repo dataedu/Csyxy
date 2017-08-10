@@ -13,4 +13,8 @@
     <color name="list_divider_color">#DADADA</color>
     <color name="rcap_gray">#c9c9c9</color>
     <color name="bg">#ededed</color>
+
+    <drawable name="touming">#00000000</drawable>
+    <color name="press_more">#d5d1d1</color>
+    <color name="black">#000000</color>
 </resources>

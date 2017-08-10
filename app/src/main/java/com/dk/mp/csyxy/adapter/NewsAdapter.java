@@ -69,7 +69,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if(getItemViewType(position) == 0){
             final News news = mData.get(position);
-            if (mType.equals("gg")){
+            if (mType.equals("gg") || mType.equals("rcyj")){
                 holder.title.setText(news.getName());
                 holder.image.setVisibility(View.GONE);
                 holder.time2.setVisibility(View.VISIBLE);
@@ -102,8 +102,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
                     Glide.with(mContext).load(news.getImage()).fitCenter().into(holder.image);
                 }
             }
-
-
 
             holder.newsdetail.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -80,6 +80,16 @@
             android:theme="@style/Transparent"/>
 
         <activity
+            android:name="com.dk.mp.csyxy.ui.hy.HyKsActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name="com.dk.mp.csyxy.ui.hy.HySearchActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
             android:name="com.dk.mp.csyxy.ui.NewsDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent"/>
@@ -103,6 +113,14 @@
             android:name="com.dk.mp.csyxy.ui.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent"/>
+
+        <receiver android:name="com.dk.mp.core.receiver.NetworkConnectChangedReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

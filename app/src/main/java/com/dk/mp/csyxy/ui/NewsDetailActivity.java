@@ -2,6 +2,7 @@ package com.dk.mp.csyxy.ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -29,6 +30,7 @@ import com.dk.mp.core.widget.ErrorLayout;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.entity.News;
 
+import java.io.InputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -87,9 +89,10 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         dType = getIntent().getStringExtra("dType");
 //        Log.e("vvvvvvvvvvvvvvvvvv",mType+");
         if (mType !=null){
-            if (mType.equals("zjcy")){
+           /* if (mType.equals("zjcy")){
                 mImageViewTop.setImageResource(R.mipmap.zjcy);
-            }else if (mType.equals("xw")){
+            }else */
+                if (mType.equals("xw")){
                 mImageViewTop.setImageResource(R.mipmap.xw);
             }else if (mType.equals("gg")){
                 mImageViewTop.setImageResource(R.mipmap.gg);
@@ -114,10 +117,23 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
                 }
             }
         }else {
-            Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
-
+            Log.e("333333333333333333",news.getImage()+"  @@  "+news.getId());
+            if (news.getId() != null && news.getId().equals("a")){
+//                mImageViewTop.setImageResource(R.mipmap.zjcy_a);
+                mImageViewTop.setImageBitmap(readBitMap(mContext,R.mipmap.zjcy_a));
+            }else if (news.getId() != null && news.getId().equals("b")){
+//                mImageViewTop.setImageResource(R.mipmap.zjcy_b);
+                mImageViewTop.setImageBitmap(readBitMap(mContext,R.mipmap.zjcy_b));
+            }else  if (news.getId() != null && news.getId().equals("c")){
+//                mImageViewTop.setImageResource(R.mipmap.zjcy_c);
+                mImageViewTop.setImageBitmap(readBitMap(mContext,R.mipmap.zjcy_c));
+            }else  if (news.getId() != null && news.getId().equals("d")){
+//                mImageViewTop.setImageResource(R.mipmap.zjcy_d);
+                mImageViewTop.setImageBitmap(readBitMap(mContext,R.mipmap.zjcy_d));
+            }else {
+                Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
+            }
         }
-//        Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
         setWebView ( );
 
         //标题显示
@@ -145,6 +161,16 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
             mWebView.setVisibility(View.GONE);
             layout.setErrorType(ErrorLayout.NETWORK_ERROR);
         }
+    }
+
+    public static Bitmap readBitMap(Context context, int resId){
+        BitmapFactory.Options opt = new BitmapFactory.Options();
+        opt.inPreferredConfig = Bitmap.Config.RGB_565;
+        opt.inPurgeable = true;
+        opt.inInputShareable = true;
+        //获取资源图片
+        InputStream is = context.getResources().openRawResource(resId);
+        return BitmapFactory.decodeStream(is,null,opt);
     }
 
     private void intTitle() {

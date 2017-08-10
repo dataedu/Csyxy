@@ -19,6 +19,7 @@ import com.dk.mp.core.ui.BaseFragment;
 import com.dk.mp.core.util.BroadcastUtil;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.adapter.MyFragmentPagerAdapter;
+import com.dk.mp.csyxy.ui.hy.HyFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class CyxxFragment extends BaseFragment{
         fragments.add(NewsFragment.newInstance("xw"));
         fragments.add(NewsFragment.newInstance("gg"));
         fragments.add(HttpWebFragment.newInstance("http://www.csmu.edu.cn/mobilerecruit/default.aspx"));
-        fragments.add(new TxlFragment());
+        fragments.add(new HyFragment());
         fragments.add(NewsFragment.newInstance("rcyj"));
         fragments.add(NewsFragment.newInstance("ybxx"));
         fragments.add(HttpWebFragment.newInstance("http://www.csmu.edu.cn/Mobile/index.aspx"));

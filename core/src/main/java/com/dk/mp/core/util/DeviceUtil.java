@@ -1,14 +1,17 @@
 package com.dk.mp.core.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.view.WindowManager;
 
 import com.dk.mp.core.application.MyApplication;
+import com.dk.mp.core.dialog.MsgDialog;
 
 /**
  * 作者：janabo on 2016/12/14 16:28
@@ -140,5 +143,22 @@ public class DeviceUtil {
         return model;
     }
 
+    /**
+     * 拨打电话.
+     *
+     * @param context
+     *            Context
+     * @param tel
+     *            电话号码
+     */
+    public static void call(Context context, String tel) {
+        if (StringUtils.isNotEmpty(tel)) {
+            Uri uri = Uri.parse("tel:" + tel);
+            Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+            context.startActivity(intent);
+        } else {
+            MsgDialog.show(context, "空号码");
+        }
+    }
 
 }
