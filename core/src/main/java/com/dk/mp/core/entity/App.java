@@ -14,6 +14,17 @@ public class App {
     private String action;
     private String nameCat;
 
+    public App(String url, String idCat, String nameCat, String name, String id, String packageName, String icon, String action){
+        this.url = url;
+        this.idCat=idCat;
+        this.nameCat=nameCat;
+        this.name=name;
+        this.id=id;
+        this.packageName=packageName;
+        this.icon=icon;
+        this.action=action;
+    }
+
     public String getOpen() {
         return open;
     }

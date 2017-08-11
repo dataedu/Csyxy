@@ -69,13 +69,22 @@
         <activity android:name="com.dk.mp.csyxy.ui.UserInfoActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity android:name="com.dk.mp.csyxy.ui.txl.TxlMainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="txl" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
-            android:name="com.dk.mp.csyxy.ui.TxlPersonsActivity"
+            android:name="com.dk.mp.csyxy.ui.txl.TxlPersonsActivity"
             android:screenOrientation="portrait">
         </activity>
 
         <activity
-            android:name="com.dk.mp.csyxy.ui.SearchActivity"
+            android:name="com.dk.mp.csyxy.ui.txl.SearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent"/>
 

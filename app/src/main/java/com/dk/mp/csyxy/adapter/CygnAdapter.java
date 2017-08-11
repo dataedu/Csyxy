@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dk.mp.core.entity.App;
+import com.dk.mp.core.util.AppUtil;
 import com.dk.mp.core.util.ImageUtil;
 import com.dk.mp.core.util.SnackBarUtil;
 import com.dk.mp.csyxy.R;
@@ -65,7 +66,29 @@ public class CygnAdapter extends RecyclerView.Adapter<CygnAdapter.MyViewHolder>{
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SnackBarUtil.showShort(layout_bg,"建设中");
+//                    SnackBarUtil.showShort(layout_bg,"建设中");
+                    if (mData.get(getLayoutPosition()).getAction().equals("txl")){
+                        new android.os.Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                new AppUtil(mContext).checkApp(
+                                        new App(
+                                                "",
+                                                "",
+                                                "",
+                                                mData.get(getLayoutPosition()).getName(),
+                                                mData.get(getLayoutPosition()).getId(),
+                                                mData.get(getLayoutPosition()).getPackageName(),
+                                                mData.get(getLayoutPosition()).getIcon(),
+                                                mData.get(getLayoutPosition()).getAction()
+                                        )
+                                );
+                            }
+                        },100);
+                    }else {
+                        SnackBarUtil.showShort(layout_bg,"建设中");
+                    }
+
                 }
             });
         }

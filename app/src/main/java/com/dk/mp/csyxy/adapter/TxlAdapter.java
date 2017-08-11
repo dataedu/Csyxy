@@ -13,7 +13,7 @@ import com.dk.mp.core.entity.Department;
 import com.dk.mp.core.entity.Jbxx;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.dialog.PhonesDialog;
-import com.dk.mp.csyxy.ui.TxlPersonsActivity;
+import com.dk.mp.csyxy.ui.txl.TxlPersonsActivity;
 
 import java.util.List;
 

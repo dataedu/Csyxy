@@ -1,4 +1,4 @@
-package com.dk.mp.csyxy.fragment;
+package com.dk.mp.csyxy.ui.txl;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -21,6 +21,7 @@ import com.dk.mp.core.entity.XbPersons;
 import com.dk.mp.core.http.HttpUtil;
 import com.dk.mp.core.http.request.HttpListener;
 import com.dk.mp.core.ui.BaseFragment;
+import com.dk.mp.core.ui.MyActivity;
 import com.dk.mp.core.util.BroadcastUtil;
 import com.dk.mp.core.util.CoreSharedPreferencesHelper;
 import com.dk.mp.core.util.DeviceUtil;
@@ -30,7 +31,6 @@ import com.dk.mp.core.widget.ErrorLayout;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.adapter.TxlAdapter;
 import com.dk.mp.csyxy.db.RealmHelper;
-import com.dk.mp.csyxy.ui.txl.SearchActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -45,7 +45,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * 通讯录
  * 作者：janabo on 2017/3/16 09:59
  */
-public class TxlFragment extends BaseFragment implements EasyPermissions.PermissionCallbacks{
+public class TxlMainActivity extends MyActivity implements EasyPermissions.PermissionCallbacks{
     FloatingActionButton fab;
     RelativeLayout mdialog;//提示框
     ErrorLayout error_layout;//加载
@@ -64,15 +64,16 @@ public class TxlFragment extends BaseFragment implements EasyPermissions.Permiss
     private CoreSharedPreferencesHelper preference;
 
     @Override
-    protected int getLayoutId() {
+    protected int getLayoutID() {
         return R.layout.app_yellowpage;
     }
 
     @Override
-    protected void initWidget(final View view) {
+    protected void initialize() {
+        super.initialize();
+
         startExprotPhonesByPermissions();
-        mRealmHelper = new RealmHelper(getContext());
-        initView(view);
+        mRealmHelper = new RealmHelper(mContext);
         error_layout.setErrorType(ErrorLayout.LOADDATA);
         LoginMsg loginMsg = getSharedPreferences().getLoginMsg();
         if(loginMsg!=null){
@@ -86,24 +87,29 @@ public class TxlFragment extends BaseFragment implements EasyPermissions.Permiss
         }
     }
 
-    public void initView(View view){
-        fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        mdialog = (RelativeLayout)view.findViewById(R.id.mdialog);
-        error_layout = (ErrorLayout) view.findViewById(R.id.error_layout);
-        xbts_lin = (LinearLayout) view.findViewById(R.id.xbts_lin);
-        bm_lin = (LinearLayout) view.findViewById(R.id.bm_lin);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.xbts_recycle);
+    @Override
+    protected void initView() {
+        super.initView();
+
+        setTitle(getIntent().getStringExtra("title"));
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        mdialog = (RelativeLayout)findViewById(R.id.mdialog);
+        error_layout = (ErrorLayout) findViewById(R.id.error_layout);
+        xbts_lin = (LinearLayout) findViewById(R.id.xbts_lin);
+        bm_lin = (LinearLayout) findViewById(R.id.bm_lin);
+        mRecyclerView = (RecyclerView) findViewById(R.id.xbts_recycle);
         mRecyclerView.setHasFixedSize ( true );
         mRecyclerView.setLayoutManager ( new LinearLayoutManager( mContext ) );
-        mAdapter = new TxlAdapter ( getContext(), getActivity(),mList,1);
+        mAdapter = new TxlAdapter ( mContext, TxlMainActivity.this,mList,1);
         mRecyclerView.setAdapter ( mAdapter );
         mRecyclerView.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, DeviceUtil.dip2px(mContext,0.8f), Color.rgb(229, 229, 229)));
         mRecyclerView.setNestedScrollingEnabled(false);
 
-        mBmRecyclerView = (RecyclerView) view.findViewById(R.id.bm_recycle);
+        mBmRecyclerView = (RecyclerView) findViewById(R.id.bm_recycle);
         mBmRecyclerView.setHasFixedSize ( true );
         mBmRecyclerView.setLayoutManager ( new LinearLayoutManager( mContext ) );
-        bAdapter = new TxlAdapter ( getContext(), getActivity(), mData,2);
+        bAdapter = new TxlAdapter ( mContext, TxlMainActivity.this, mData,2);
         mBmRecyclerView.setAdapter ( bAdapter );
         mBmRecyclerView.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, DeviceUtil.dip2px(mContext,0.8f),Color.rgb(229, 229, 229)));
         mBmRecyclerView.setNestedScrollingEnabled(false);
@@ -111,12 +117,12 @@ public class TxlFragment extends BaseFragment implements EasyPermissions.Permiss
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),SearchActivity.class);
+                Intent intent = new Intent(mContext,SearchActivity.class);
                 startActivity(intent);
             }
         });
 
-        BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"txl_persons"});
+        BroadcastUtil.registerReceiver(mContext, mRefreshBroadcastReceiver, new String[]{"txl_persons"});
     }
 
     private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
@@ -257,7 +263,7 @@ public class TxlFragment extends BaseFragment implements EasyPermissions.Permiss
 
     public CoreSharedPreferencesHelper getSharedPreferences() {
         if (preference == null){
-            preference = new CoreSharedPreferencesHelper(this.getContext());
+            preference = new CoreSharedPreferencesHelper(mContext);
         }
         return preference;
     }

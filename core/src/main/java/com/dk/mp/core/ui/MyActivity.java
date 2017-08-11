@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.dk.mp.core.R;
@@ -67,6 +68,13 @@ public abstract class MyActivity extends AppCompatActivity{
     public void setTitle(String title) {
         TextView textView = (TextView) findViewById(R.id.title);
         textView.setText(title);
+
+        Button back = (Button) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                back();
+            }
+        });
     }
 
     /**

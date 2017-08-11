@@ -1,4 +1,4 @@
-package com.dk.mp.csyxy.ui;
+package com.dk.mp.csyxy.ui.txl;
 
 import android.content.Intent;
 import android.graphics.Color;
