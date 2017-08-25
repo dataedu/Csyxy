@@ -82,13 +82,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
                     holder.title.setText(news.getName());
                     holder.image.setVisibility(View.VISIBLE);
                     if (news.getName().equals("学校领导")){
-                        holder.image.setImageResource(R.mipmap.zjcy_xxld);
+                        Glide.with(mContext).load(R.mipmap.zjcy_xxld).into(holder.image);
                     }else if (news.getName().equals("长医概况")){
-                        holder.image.setImageResource(R.mipmap.zjcy_xxgk);
+                        Glide.with(mContext).load(R.mipmap.zjcy_xxgk).into(holder.image);
                     }else if (news.getName().equals("校长寄语")){
-                        holder.image.setImageResource(R.mipmap.zjcy_xzjy);
+                        Glide.with(mContext).load(R.mipmap.zjcy_xzjy).into(holder.image);
                     }else if (news.getName().equals("学校章程")){
-                        holder.image.setImageResource(R.mipmap.zjcy_xxzc);
+                        Glide.with(mContext).load(R.mipmap.zjcy_xxzc).into(holder.image);
                     }
                 }
 

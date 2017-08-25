@@ -27,6 +27,6 @@
 	    android:id="@+id/scenerygridimage"
 	    android:layout_width="match_parent"
 	    android:layout_centerHorizontal="true"
-	    android:layout_height="100dp"
+	    android:layout_height="70dp"
 		android:scaleType="fitXY"/>
 </RelativeLayout>

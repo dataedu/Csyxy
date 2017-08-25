@@ -87,52 +87,63 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         news = (News) getIntent().getSerializableExtra("news");
         mType = getIntent().getStringExtra("mType");
         dType = getIntent().getStringExtra("dType");
-//        Log.e("vvvvvvvvvvvvvvvvvv",mType+");
         if (mType !=null){
-           /* if (mType.equals("zjcy")){
-                mImageViewTop.setImageResource(R.mipmap.zjcy);
-            }else */
-                if (mType.equals("xw")){
-                mImageViewTop.setImageResource(R.mipmap.xw);
+            int img = 0;
+            if (mType.equals("xw")){
+//                mImageViewTop.setImageResource(R.mipmap.zjcy_a);
+                img = R.mipmap.zjcy_a;
             }else if (mType.equals("gg")){
-                mImageViewTop.setImageResource(R.mipmap.gg);
+//                mImageViewTop.setImageResource(R.mipmap.gg);
+                img = R.mipmap.gg;
             }else if (mType.equals("rcyj")){
-                mImageViewTop.setImageResource(R.mipmap.rcyj);
+//                mImageViewTop.setImageResource(R.mipmap.rcyj);
+                img = R.mipmap.rcyj;
             }else if (mType.equals("ybxx")){
-                mImageViewTop.setImageResource(R.mipmap.ybxx);
+//                mImageViewTop.setImageResource(R.mipmap.ybxx);
+                img = R.mipmap.ybxx;
             }else if (mType.equals("dzjs")){
-                mImageViewTop.setImageResource(R.mipmap.dzjs);
+//                mImageViewTop.setImageResource(R.mipmap.dzjs);
+                img = R.mipmap.dzjs;
             }
+            Glide.with(mContext).load(img).into(mImageViewTop);
+
         } else if(dType != null && dType.equals("zjcy")){
             String name = news.getName();
             if (name != null){
+                int img = 0;
                 if (name.equals("学校领导")){
-                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxld);
+//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxld);
+                    img = R.mipmap.zjcy_xxld;
                 }else if (name.equals("长医概况")){
-                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxgk);
+//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxgk);
+                    img = R.mipmap.zjcy_xxgk;
                 }else if (name.equals("校长寄语")){
-                    mImageViewTop.setImageResource(R.mipmap.zjcy_xzjy);
+//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xzjy);
+                    img = R.mipmap.zjcy_xzjy;
                 }else if (name.equals("学校章程")){
-                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxzc);
+//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxzc);
+                    img = R.mipmap.zjcy_xxzc;
                 }
+                Glide.with(mContext).load(img).into(mImageViewTop);
             }
         }else {
-            Log.e("333333333333333333",news.getImage()+"  @@  "+news.getId());
+            int img = 0;
             if (news.getId() != null && news.getId().equals("a")){
 //                mImageViewTop.setImageResource(R.mipmap.zjcy_a);
-                mImageViewTop.setImageBitmap(readBitMap(mContext,R.mipmap.zjcy_a));
+                img = R.mipmap.zjcy_a;
             }else if (news.getId() != null && news.getId().equals("b")){
 //                mImageViewTop.setImageResource(R.mipmap.zjcy_b);
-                mImageViewTop.setImageBitmap(readBitMap(mContext,R.mipmap.zjcy_b));
+                img = R.mipmap.zjcy_b;
             }else  if (news.getId() != null && news.getId().equals("c")){
 //                mImageViewTop.setImageResource(R.mipmap.zjcy_c);
-                mImageViewTop.setImageBitmap(readBitMap(mContext,R.mipmap.zjcy_c));
+                img = R.mipmap.zjcy_c;
             }else  if (news.getId() != null && news.getId().equals("d")){
 //                mImageViewTop.setImageResource(R.mipmap.zjcy_d);
-                mImageViewTop.setImageBitmap(readBitMap(mContext,R.mipmap.zjcy_d));
+                img = R.mipmap.zjcy_d;
             }else {
                 Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
             }
+            Glide.with(mContext).load(img).into(mImageViewTop);
         }
         setWebView ( );
 

@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/Csyxy.iml" filepath="$PROJECT_DIR$/Csyxy.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/multiline-collapsingtoolbar/multiline-collapsingtoolbar.iml" filepath="$PROJECT_DIR$/multiline-collapsingtoolbar/multiline-collapsingtoolbar.iml" />
     </modules>
   </component>
 </project>

@@ -20,6 +20,7 @@ import com.dk.mp.core.util.BroadcastUtil;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.adapter.MyFragmentPagerAdapter;
 import com.dk.mp.csyxy.ui.hy.HyFragment;
+import com.dk.mp.csyxy.ui.xxxw.XxxwMainFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,8 @@ public class CyxxFragment extends BaseFragment{
         //将fragment装进列表中
         fragments = new ArrayList<>();
         fragments.add(NewsFragment.newInstance("zjcy"));
-        fragments.add(NewsFragment.newInstance("xw"));
+//        fragments.add(NewsFragment.newInstance("xw"));
+        fragments.add(new XxxwMainFragment());
         fragments.add(NewsFragment.newInstance("gg"));
         fragments.add(HttpWebFragment.newInstance("http://www.csmu.edu.cn/mobilerecruit/default.aspx"));
         fragments.add(new HyFragment());

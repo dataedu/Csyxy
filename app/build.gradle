@@ -28,5 +28,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':core')
     compile 'com.androidkun:XTabLayout:1.1.1'
-    compile project(':multiline-collapsingtoolbar')
 }

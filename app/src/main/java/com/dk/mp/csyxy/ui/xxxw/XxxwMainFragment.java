@@ -1,11 +1,10 @@
-package com.dk.mp.csyxy.fragment;
+package com.dk.mp.csyxy.ui.xxxw;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +21,7 @@ import com.dk.mp.core.ui.BaseFragment;
 import com.dk.mp.core.util.BroadcastUtil;
 import com.dk.mp.core.util.DeviceUtil;
 import com.dk.mp.core.view.RecycleViewDivider;
+import com.dk.mp.core.widget.ErrorLayout;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.adapter.NewsAdapter;
 import com.dk.mp.csyxy.entity.News;
@@ -38,52 +38,40 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 新闻模块
- * 作者：janabo on 2017/6/13 16:39
+ * Created by cobb on 2017/8/24.
  */
-public class NewsFragment extends BaseFragment{
+
+public class XxxwMainFragment extends BaseFragment{
+
+    private ErrorLayout errorLayout;
+
     SwipeRefreshLayout mRefresh;
     RecyclerView mRecyclerView;
-    NewsAdapter nAdapter;
+    XxxxAdapter nAdapter;
     List<News> news = new ArrayList<>();
-    List<SlideNews> slideNewses = new ArrayList<>();
+
     boolean isLoading;
     int pageNo = 1;
     int totalPages = 1;
-    private String mType;
     boolean isRefreshing = false;
     Gson gson = new Gson();
 
     private boolean nodata = false;
-    private int sli = 0;
 
     @Override
     protected int getLayoutId() {
         return R.layout.mp_news;
     }
 
-    public static NewsFragment newInstance(String type) {
-        Bundle args = new Bundle();
-        args.putString("mType",type);
-        NewsFragment fragment = new NewsFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     protected void initWidget(View root) {
         super.initWidget(root);
-        initMyData();
-    }
 
-    protected void initMyData() {
+        errorLayout = findView(R.id.error_layout);
         mRefresh = findView(R.id.swipe_refresh);
         mRecyclerView = findView(R.id.rv_listview);
 
-        mType = getArguments().getString("mType");
-        news.clear();
-        nAdapter = new NewsAdapter(getContext(),news,mType,slideNewses);
-
+        nAdapter = new XxxxAdapter(getContext(),news);
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration(new RecycleViewDivider(getContext(), GridLayoutManager.HORIZONTAL, 1, Color.rgb(201, 201, 201)));//添加分割线
@@ -95,16 +83,14 @@ public class NewsFragment extends BaseFragment{
                 if (DeviceUtil.checkNet()){
                     pageNo = 1;
                     news.clear();
-                    sli = 0;
-//                    news.add(new News(1));
                     getList();
                 }else {
                     mRefresh.setRefreshing(false);
                     return;
                 }
-
             }
         });
+
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -119,22 +105,15 @@ public class NewsFragment extends BaseFragment{
                     if (isRefreshing == false){
                         isRefreshing = mRefresh.isRefreshing();
                         if (isRefreshing) {
-//                        nAdapter.notifyItemRemoved(nAdapter.getItemCount());
                             return;
                         }
                         if(totalPages<=pageNo){
-//                        nAdapter.notifyItemRemoved(nAdapter.getItemCount());
                             return;
                         }
                         if (!isLoading && DeviceUtil.checkNet()) {
                             isLoading = true;
                             pageNo++;
-//                        loadMore();
-//                        news.clear();
-//                        news.add(new News(1));
-                            sli = 1;
                             getList();
-                            Log.d("test", "load more completed");
                             isLoading = false;
                         }
                     }
@@ -148,15 +127,15 @@ public class NewsFragment extends BaseFragment{
 
 //        mRecyclerView clean后刷新bug
         mRecyclerView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if (isRefreshing) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
-                }
+                                             @Override
+                                             public boolean onTouch(View v, MotionEvent event) {
+                                                 if (isRefreshing) {
+                                                     return true;
+                                                 } else {
+                                                     return false;
+                                                 }
+                                             }
+                                         }
         );
 
         BroadcastUtil.registerReceiver(getContext(), mRefreshBroadcastReceiver, new String[]{"checknetwork_true","checknetwork_false"});
@@ -166,75 +145,56 @@ public class NewsFragment extends BaseFragment{
         @SuppressLint("NewApi") @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-//            if (action.equals("checknetwork_true")) {
-////                news.clear();
-////                news.add(new News(1));
-//
-//                getList();
-//            }
             if(action.equals("checknetwork_false")){
                 if (nodata){
                     news.clear();
-//                    news.add(new News(1));
-//                    news.add(new News(4));
                 }
             }
         }
     };
 
-
     public void getList(){
         nodata = false;
         isRefreshing = true;
-
-//        news.clear();
+        errorLayout.setErrorType(ErrorLayout.LOADDATA);
 
         if (DeviceUtil.checkNet()){
             Map<String, Object> map = new HashMap<>();
-            Log.e("新闻列表----","apps/tabs/news?type="+mType+"&pageNo="+pageNo);
-            HttpUtil.getInstance().postJsonObjectRequest("apps/tabs/news?type="+mType+"&pageNo="+pageNo, map, new HttpListener<JSONObject>() {
+            HttpUtil.getInstance().postJsonObjectRequest("apps/tabs/news?type=xw&pageNo="+pageNo, map, new HttpListener<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject result) {
                     try {
                         if(result.getInt("code") == 200){
                             JSONObject jo = result.getJSONObject("data");
-                            if (sli == 0){
-                                //轮播新闻
-                                news.add(new News(1));
-                                List<SlideNews> slides = gson.fromJson(jo.getJSONArray("slide").toString(),new TypeToken<ArrayList<SlideNews>>(){}.getType());
-                                slideNewses.clear();
-                                if(slides!=null){
-                                    slideNewses.addAll(slides);
-                                }
-                            }
 
                             //列表新闻
                             PageMsg<News> pageMsg = gson.fromJson(jo.getJSONObject("news").toString(),new TypeToken<PageMsg<News>>(){}.getType());
                             totalPages = pageMsg.getTotalPages();
 
                             if(pageMsg.getList() != null && pageMsg.getList().size()>0) {
+
+                                errorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
                                 news.addAll(pageMsg.getList());
                                 nAdapter.notifyDataSetChanged();
                                 //停止刷新
                                 mRefresh.setRefreshing(false);
                                 isRefreshing = false;
-                                //RecyclerView滑动到第一个
-//                                mRecyclerView.scrollToPosition(0);
                             }else{
+                                errorLayout.setErrorType(ErrorLayout.NODATA);
                                 mRefresh.setRefreshing(false);
                                 isRefreshing = false;
-                                news.add(new News(2));
                                 nAdapter.notifyDataSetChanged();
                                 nodata = true;
                             }
                         }else{
+                            errorLayout.setErrorType(ErrorLayout.DATAFAIL);
                             mRefresh.setRefreshing(false);
                             isRefreshing = false;
-                            news.add(new News(3));
                             nAdapter.notifyDataSetChanged();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        errorLayout.setErrorType(ErrorLayout.DATAFAIL);
                         mRefresh.setRefreshing(false);
                         isRefreshing = false;
                         nAdapter.notifyDataSetChanged();
@@ -243,15 +203,16 @@ public class NewsFragment extends BaseFragment{
 
                 @Override
                 public void onError(VolleyError error) {
-                    news.add(new News(3));
+                    errorLayout.setErrorType(ErrorLayout.DATAFAIL);
                     nAdapter.notifyDataSetChanged();
                     mRefresh.setRefreshing(false);
                 }
             });
         }else {
-//            news.add(new News(4));
+            errorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
             nAdapter.notifyDataSetChanged();
             mRefresh.setRefreshing(false);
         }
     }
 }
+
