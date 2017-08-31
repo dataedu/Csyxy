@@ -1,6 +1,7 @@
 package com.dk.mp.csyxy.ui.xyfg;
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -31,6 +32,7 @@ public class SceneryDetailsActivity extends MyActivity implements OnClickListene
 	private RelativeLayout layout;
 
 	private Gson gson = new Gson();
+	Bundle bundle;
 
 	@Override
 	protected int getLayoutID() {
@@ -41,7 +43,9 @@ public class SceneryDetailsActivity extends MyActivity implements OnClickListene
 	protected void initView() {
 		super.initView();
 
-		setTitle(getIntent().getStringExtra("title"));
+		bundle = getIntent().getExtras();
+
+		setTitle(bundle.getString("title"));
 
 		findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -56,9 +60,10 @@ public class SceneryDetailsActivity extends MyActivity implements OnClickListene
 	@SuppressWarnings("deprecation")
 	private void initViews(){
 		scenerydetails = (ViewPager) findViewById(R.id.scenerydetails);
-		list = gson.fromJson(getIntent().getStringExtra("list"), new TypeToken<ArrayList<SceneryEntity>>() {}.getType());
+//		list = gson.fromJson(getIntent().getStringExtra("list"), new TypeToken<ArrayList<SceneryEntity>>() {}.getType());
+		list = (List<SceneryEntity>) bundle.getSerializable("list");
 		scenerydetails.setAdapter(new MyPagerAdapter());
-		scenerydetails.setCurrentItem(getIntent().getIntExtra("index", 0));
+		scenerydetails.setCurrentItem(bundle.getInt("index", 0));
 		scenerydetails.setOnPageChangeListener (new OnPageChangeListener() {
             @Override
             public void onPageSelected(int select) {

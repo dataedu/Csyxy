@@ -166,7 +166,7 @@ public  class CenterPersonFragment extends BaseFragment implements View.OnClickL
             xm.setText(user.getUserName());
 //            helper.setValue("userIdDes",user.getUserIdDes());
             String departname = "null".equals(user.getDepartName())||user.getDepartName() == null ? "":user.getDepartName();
-            if("1".equals(user.getRoles())){
+            if("teacher".equals(user.getRole()) || "1".equals(user.getRole())){
                 bmhyx.setText("部门："+departname);
             }else{
                 bmhyx.setText("院系："+departname);

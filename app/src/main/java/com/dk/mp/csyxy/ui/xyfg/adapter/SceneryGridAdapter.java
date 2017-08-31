@@ -1,21 +1,34 @@
 package com.dk.mp.csyxy.ui.xyfg.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dk.mp.csyxy.R;
+import com.dk.mp.csyxy.ui.xyfg.SceneryDetailsActivity;
 import com.dk.mp.csyxy.ui.xyfg.entity.SceneryEntity;
+import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SceneryGridAdapter extends BaseAdapter{
-	private Context context;
+import static android.R.id.input;
+import static android.R.id.list;
+import static android.R.id.primary;
+
+public class SceneryGridAdapter extends RecyclerView.Adapter<SceneryGridAdapter.OneViewHolder>{
+/*	private Context context;
 	private List<SceneryEntity> list=new ArrayList<SceneryEntity>();
 	private LayoutInflater lif;
 	
@@ -69,7 +82,57 @@ public class SceneryGridAdapter extends BaseAdapter{
 		Glide.with(context).load(list.get(position).getThumb()).placeholder(R.color.transparent).into(mv.image);
 		
 		return convertView;
+	}*/
+
+	private List<SceneryEntity> dataList;
+	private Context context;
+
+	public SceneryGridAdapter(Context context, List<SceneryEntity> list) {
+		this.context = context;
+		this.dataList = list;
 	}
 
+	@Override
+	public OneViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		return new OneViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.app_scenery_listview_item, parent, false));
+	}
+	@Override
+	public void onBindViewHolder(final OneViewHolder holder, int position) {
+		SceneryEntity sceneryEntity = dataList.get(position);
+		Glide.with(context).load(sceneryEntity.getThumb()).placeholder(R.color.transparent).crossFade().into(holder.ivImage);
 
+	}
+	@Override
+	public int getItemCount() {
+		return dataList.size();
+	}
+
+	public class OneViewHolder extends RecyclerView.ViewHolder {
+		private ImageView ivImage;
+		public OneViewHolder(View view) {
+			super(view);
+			ivImage = (ImageView) view.findViewById(R.id.scenerygridimage);
+			int width = ((Activity) ivImage.getContext()).getWindowManager().getDefaultDisplay().getWidth();
+			ViewGroup.LayoutParams params = ivImage.getLayoutParams();
+			//设置图片的相对于屏幕的宽高比
+			params.width = width/2;
+			params.height =  (int) (100 + Math.random() * 200) ;
+			ivImage.setLayoutParams(params);
+
+			itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(context,SceneryDetailsActivity.class);
+//					intent.putExtra("list", new Gson.toJson(dataList));
+					Bundle bundle = new Bundle();
+					bundle.putSerializable("list", (Serializable) dataList);
+					bundle.putString("title", (getLayoutPosition()+1)+"/"+dataList.size());
+					bundle.putInt("index", getLayoutPosition());
+					intent.putExtras(bundle);
+					context.startActivity(intent);
+				}
+			});
+		}
+	}
 }
+

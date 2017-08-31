@@ -1,6 +1,8 @@
 package com.dk.mp.csyxy.ui.xyfg.entity;
 
-public class SceneryEntity {
+import java.io.Serializable;
+
+public class SceneryEntity implements Serializable{
 
 
 	private String name;

@@ -1,16 +1,17 @@
 package com.dk.mp.csyxy.ui.xyfg;
 
-import android.content.Intent;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
 
 import com.android.volley.VolleyError;
 import com.dk.mp.core.http.HttpUtil;
 import com.dk.mp.core.http.request.HttpListener;
 import com.dk.mp.core.ui.MyActivity;
 import com.dk.mp.core.util.DeviceUtil;
+import com.dk.mp.core.view.RecycleViewDivider;
 import com.dk.mp.core.widget.ErrorLayout;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.ui.xyfg.adapter.SceneryGridAdapter;
@@ -25,10 +26,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SceneryListActivity extends MyActivity implements OnItemClickListener{
+public class SceneryListActivity extends MyActivity{
 	
 	private List<SceneryEntity> list = new ArrayList<SceneryEntity>();
-	private GridView scenerygridview;
+	private RecyclerView scenerygridview;
 	private SceneryGridAdapter adapter;
 
 	private Gson gson = new Gson();
@@ -56,11 +57,15 @@ public class SceneryListActivity extends MyActivity implements OnItemClickListen
 	}
 
 	private void initViews(){
-		scenerygridview = (GridView) findViewById(R.id.scenerygridview);
+		scenerygridview = (RecyclerView) findViewById(R.id.scenerygridview);
 		errorLayout = (ErrorLayout) findViewById(R.id.error_layout);
 		adapter = new SceneryGridAdapter(this, list);
+//		scenerygridview.setAdapter(adapter);
+//		scenerygridview.setOnItemClickListener(this);
+		scenerygridview.setHasFixedSize(true);
+		scenerygridview.setLayoutManager(new StaggeredGridLayoutManager(2,  StaggeredGridLayoutManager.VERTICAL));
 		scenerygridview.setAdapter(adapter);
-		scenerygridview.setOnItemClickListener(this);
+//		scenerygridview.addItemDecoration(new RecycleViewDivider(mContext, GridLayoutManager.HORIZONTAL, 10,  ContextCompat.getColor(mContext, R.color.white)));
 
 		findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -105,12 +110,12 @@ public class SceneryListActivity extends MyActivity implements OnItemClickListen
 		});
 	}
 
-	@Override
+	/*@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		Intent intent = new Intent(this,SceneryDetailsActivity.class);
 		intent.putExtra("list", gson.toJson(list));
 		intent.putExtra("title", (position+1)+"/"+list.size());
 		intent.putExtra("index", position);
 		startActivity(intent);
-	}
+	}*/
 }
