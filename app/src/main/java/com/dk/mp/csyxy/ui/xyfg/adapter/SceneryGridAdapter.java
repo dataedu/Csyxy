@@ -1,31 +1,22 @@
 package com.dk.mp.csyxy.ui.xyfg.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dk.mp.csyxy.R;
+import com.dk.mp.csyxy.ui.xyfg.ImageUtil;
 import com.dk.mp.csyxy.ui.xyfg.SceneryDetailsActivity;
 import com.dk.mp.csyxy.ui.xyfg.entity.SceneryEntity;
-import com.google.gson.Gson;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import static android.R.id.input;
-import static android.R.id.list;
-import static android.R.id.primary;
 
 public class SceneryGridAdapter extends RecyclerView.Adapter<SceneryGridAdapter.OneViewHolder>{
 /*	private Context context;
@@ -99,8 +90,9 @@ public class SceneryGridAdapter extends RecyclerView.Adapter<SceneryGridAdapter.
 	@Override
 	public void onBindViewHolder(final OneViewHolder holder, int position) {
 		SceneryEntity sceneryEntity = dataList.get(position);
-		Glide.with(context).load(sceneryEntity.getThumb()).placeholder(R.color.transparent).crossFade().into(holder.ivImage);
 
+//		Glide.with(context).load(sceneryEntity.getThumb()).placeholder(R.color.transparent).crossFade().into(holder.ivImage);
+		ImageUtil.loadIntoUseFitWidth(context, sceneryEntity.getThumb(), R.color.transparent, holder.ivImage);
 	}
 	@Override
 	public int getItemCount() {
@@ -112,12 +104,6 @@ public class SceneryGridAdapter extends RecyclerView.Adapter<SceneryGridAdapter.
 		public OneViewHolder(View view) {
 			super(view);
 			ivImage = (ImageView) view.findViewById(R.id.scenerygridimage);
-			int width = ((Activity) ivImage.getContext()).getWindowManager().getDefaultDisplay().getWidth();
-			ViewGroup.LayoutParams params = ivImage.getLayoutParams();
-			//设置图片的相对于屏幕的宽高比
-			params.width = width/2;
-			params.height =  (int) (100 + Math.random() * 200) ;
-			ivImage.setLayoutParams(params);
 
 			itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -134,5 +120,6 @@ public class SceneryGridAdapter extends RecyclerView.Adapter<SceneryGridAdapter.
 			});
 		}
 	}
+
 }
 

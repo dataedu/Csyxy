@@ -60,12 +60,9 @@ public class SceneryListActivity extends MyActivity{
 		scenerygridview = (RecyclerView) findViewById(R.id.scenerygridview);
 		errorLayout = (ErrorLayout) findViewById(R.id.error_layout);
 		adapter = new SceneryGridAdapter(this, list);
-//		scenerygridview.setAdapter(adapter);
-//		scenerygridview.setOnItemClickListener(this);
 		scenerygridview.setHasFixedSize(true);
 		scenerygridview.setLayoutManager(new StaggeredGridLayoutManager(2,  StaggeredGridLayoutManager.VERTICAL));
 		scenerygridview.setAdapter(adapter);
-//		scenerygridview.addItemDecoration(new RecycleViewDivider(mContext, GridLayoutManager.HORIZONTAL, 10,  ContextCompat.getColor(mContext, R.color.white)));
 
 		findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
 			@Override
