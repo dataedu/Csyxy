@@ -50,6 +50,8 @@ dependencies {
     //noinspection GradleCompatible
     compile 'com.android.support:recyclerview-v7:24.0.0-alpha1'
 
+    compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
+
     compile ('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.10.3@aar'){
         transitive=true
     }

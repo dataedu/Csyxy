@@ -60,8 +60,8 @@ public class SceneryDetailsActivity extends MyActivity implements OnClickListene
 	@SuppressWarnings("deprecation")
 	private void initViews(){
 		scenerydetails = (ViewPager) findViewById(R.id.scenerydetails);
-//		list = gson.fromJson(getIntent().getStringExtra("list"), new TypeToken<ArrayList<SceneryEntity>>() {}.getType());
-		list = (List<SceneryEntity>) bundle.getSerializable("list");
+		list = gson.fromJson(getIntent().getStringExtra("list"), new TypeToken<ArrayList<SceneryEntity>>() {}.getType());
+//		list = (List<SceneryEntity>) bundle.getSerializable("list");
 		scenerydetails.setAdapter(new MyPagerAdapter());
 		scenerydetails.setCurrentItem(bundle.getInt("index", 0));
 		scenerydetails.setOnPageChangeListener (new OnPageChangeListener() {

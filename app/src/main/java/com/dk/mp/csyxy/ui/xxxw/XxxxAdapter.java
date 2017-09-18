@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.dk.mp.core.util.StringUtils;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.entity.News;
 import com.dk.mp.csyxy.ui.NewsDetailActivity;
@@ -66,8 +67,12 @@ public class XxxxAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolder>{
         viewHolder.time.setText(news.getPublishTime());
 
         if ((position+1)%4 == 1){
-//           viewHolder.image.setImageResource(R.mipmap.zjcy_a);
-            Glide.with(mContext).load(R.mipmap.zjcy_a).into(viewHolder.image);
+            if (StringUtils.isNotEmpty(news.getImage())){
+                Glide.with(mContext).load(news.getImage()).fitCenter().into(viewHolder.image);
+            }else {
+                Glide.with(mContext).load(R.mipmap.zjcy_a).into(viewHolder.image);
+            }
+
         }else {
             Glide.with(mContext).load(news.getImage()).fitCenter().into(viewHolder.image);
         }
@@ -79,7 +84,9 @@ public class XxxxAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 intent.putExtra("news", (Serializable) news);
 
                 if ((position+1)%4 == 1){
-                    intent.putExtra("mType","xw");
+                    if (!StringUtils.isNotEmpty(news.getImage())){
+                        intent.putExtra("mType","xw");
+                    }
                 }
 
                 ActivityOptionsCompat options =

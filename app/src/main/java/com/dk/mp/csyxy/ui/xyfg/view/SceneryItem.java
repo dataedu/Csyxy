@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.ui.xyfg.SceneryListActivity;
+import com.dk.mp.csyxy.ui.xyfg.SceneryListActivity2;
 import com.dk.mp.csyxy.ui.xyfg.entity.SceneryEntity;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public static LinearLayout getViews(final Context context, List<SceneryEntity> l
 			view.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(context,SceneryListActivity.class);
+					Intent intent = new Intent(context,SceneryListActivity2.class);
 					intent.putExtra("type", entity.getId());
 					intent.putExtra("title", entity.getName());
 					context.startActivity(intent);

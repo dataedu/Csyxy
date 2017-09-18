@@ -109,6 +109,11 @@
         </activity>
 
         <activity
+            android:name="com.dk.mp.csyxy.ui.xyfg.SceneryListActivity2"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
             android:name="com.dk.mp.csyxy.ui.xyfg.SceneryDetailsActivity"
             android:screenOrientation="portrait">
         </activity>

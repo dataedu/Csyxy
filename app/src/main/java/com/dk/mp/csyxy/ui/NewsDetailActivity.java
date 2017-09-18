@@ -127,23 +127,22 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
                 Glide.with(mContext).load(img).into(mImageViewTop);
             }
         }else {
-            int img = 0;
             if (news.getId() != null && news.getId().equals("a")){
-//                mImageViewTop.setImageResource(R.mipmap.zjcy_a);
-                img = R.mipmap.zjcy_a;
+//                img = R.mipmap.zjcy_a;
+                Glide.with(mContext).load(R.mipmap.zjcy_a).into(mImageViewTop);
             }else if (news.getId() != null && news.getId().equals("b")){
-//                mImageViewTop.setImageResource(R.mipmap.zjcy_b);
-                img = R.mipmap.zjcy_b;
+//                img = R.mipmap.zjcy_b;
+                Glide.with(mContext).load(R.mipmap.zjcy_b).into(mImageViewTop);
             }else  if (news.getId() != null && news.getId().equals("c")){
-//                mImageViewTop.setImageResource(R.mipmap.zjcy_c);
-                img = R.mipmap.zjcy_c;
+//                img = R.mipmap.zjcy_c;
+                Glide.with(mContext).load(R.mipmap.zjcy_c).into(mImageViewTop);
             }else  if (news.getId() != null && news.getId().equals("d")){
-//                mImageViewTop.setImageResource(R.mipmap.zjcy_d);
-                img = R.mipmap.zjcy_d;
+//                img = R.mipmap.zjcy_d;
+                Glide.with(mContext).load(R.mipmap.zjcy_d).into(mImageViewTop);
             }else {
                 Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
             }
-            Glide.with(mContext).load(img).into(mImageViewTop);
+
         }
         setWebView ( );
 
@@ -172,16 +171,6 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
             mWebView.setVisibility(View.GONE);
             layout.setErrorType(ErrorLayout.NETWORK_ERROR);
         }
-    }
-
-    public static Bitmap readBitMap(Context context, int resId){
-        BitmapFactory.Options opt = new BitmapFactory.Options();
-        opt.inPreferredConfig = Bitmap.Config.RGB_565;
-        opt.inPurgeable = true;
-        opt.inInputShareable = true;
-        //获取资源图片
-        InputStream is = context.getResources().openRawResource(resId);
-        return BitmapFactory.decodeStream(is,null,opt);
     }
 
     private void intTitle() {
