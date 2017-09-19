@@ -121,7 +121,7 @@ public class SceneryListActivity2 extends MyActivity implements AdapterView.OnIt
                     mImageLoader.loadImage(url.getThumb(), mImageLoadingListener);
                 }
             }, time);
-            time += 1000L;
+            time += 1500L;
         }
     }
 

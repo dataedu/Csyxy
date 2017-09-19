@@ -4,7 +4,7 @@
     <!--<string name="rootUrl">http://wap.cztljx.org/</string>-->
 
     <!--付-->
-    <string name="rootUrl">  http://192.168.3.110:8086/mp-csyxy/</string>
+    <!--<string name="rootUrl">  http://192.168.3.110:8086/mp-csyxy/</string>-->
 
    <!-- <string name="rootUrl">http://yd.cjjs.cn/yd/</string>-->
 
@@ -12,7 +12,7 @@
     <!--<string name="rootUrl">  http://192.168.1.155:9091/mp-csyxy/</string>-->
 
     <!--现场-->
-   <!-- <string name="rootUrl">  http://mobile.csmu.edu.cn:85/mobile/</string>-->
+    <string name="rootUrl">  http://mobile.csmu.edu.cn:85/mobile/</string>
 
 
     <string name="main_tab_name_grzx">个人中心</string>

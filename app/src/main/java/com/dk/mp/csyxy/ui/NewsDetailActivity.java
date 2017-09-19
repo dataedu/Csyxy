@@ -2,10 +2,10 @@ package com.dk.mp.csyxy.ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -23,18 +23,11 @@ import com.dk.mp.core.ui.MyActivity;
 import com.dk.mp.core.util.DeviceUtil;
 import com.dk.mp.core.util.Logger;
 import com.dk.mp.core.util.StringUtils;
-import com.dk.mp.core.view.edittext.AutoAjustSizeTextView;
 import com.dk.mp.core.view.scroll.ObservableScrollView;
 import com.dk.mp.core.view.scroll.ScrollViewListener;
 import com.dk.mp.core.widget.ErrorLayout;
 import com.dk.mp.csyxy.R;
 import com.dk.mp.csyxy.entity.News;
-
-import java.io.InputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
-
 
 /**
  * 学校新闻详情
@@ -140,7 +133,7 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 //                img = R.mipmap.zjcy_d;
                 Glide.with(mContext).load(R.mipmap.zjcy_d).into(mImageViewTop);
             }else {
-                Glide.with(mContext).load(news.getImage()).fitCenter().into(mImageViewTop);
+                Glide.with(mContext).load(news.getImage()).fitCenter().placeholder(R.mipmap.detail_defult).into(mImageViewTop);
             }
 
         }
@@ -180,7 +173,7 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         bottom_title.setText(news.getName());
 
         //自动调整字体大小
-//        Log.e("大小-----------",bottom_title.getTextSize()+"");
+        Log.e("大小-----------",bottom_title.getTextSize()+"");
         bottom_title.post(new Runnable() {
             @Override
             public void run() {
@@ -219,9 +212,9 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
 
     private void sizt(){
         while (bottom_title.getLineCount()>2){
-            int size = (int) bottom_title.getTextSize()/2;
+            int size = (int) bottom_title.getTextSize();
             size = size -1;
-            bottom_title.setTextSize(size);
+            bottom_title.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 //            Log.e("大小后-----------",bottom_title.getTextSize()+"");
 
             bottom_title.post(new Runnable() {

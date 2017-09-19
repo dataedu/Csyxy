@@ -101,6 +101,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -116,7 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                    android:src="@android:drawable/ic_menu_upload"/>
+                    android:src="@android:drawable/ic_menu_upload" />
 
                 <LinearLayout
                     android:id="@+id/top2"
@@ -125,45 +126,45 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:onClick="titleback"
                         style="@style/but_back"
                         android:layout_width="60dip"
                         android:layout_height="48dip"
-                        android:layout_alignParentTop="true"
                         android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true" />
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:onClick="titleback" />
 
                 </LinearLayout>
 
                 <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="bottom"-->
-                    <!--android:text=""-->
-                    <!--android:layout_margin="10dp"-->
-                    <!--android:textColor="@color/white"/>-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:text=""-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:textColor="@color/white"/>-->
 
                 <!--<com.dk.mp.core.view.edittext.AutoAjustSizeTextView-->
-                    <!--android:id="@+id/bottom_title"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:maxLines="2"-->
-                    <!--android:layout_gravity="bottom"-->
-                    <!--android:textColor="@color/white"-->
-                    <!--android:text=""-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_marginBottom="20dp"-->
-                    <!--android:textSize="22sp" />-->
+                <!--android:id="@+id/bottom_title"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:maxLines="2"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:text=""-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:textSize="22sp" />-->
 
                 <TextView
                     android:id="@+id/bottom_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:textColor="@color/white"
-                    android:text=""
-                    android:layout_marginLeft="10dp"
                     android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:text=""
+                    android:textColor="@color/white"
                     android:textSize="22sp" />
 
             </FrameLayout>
@@ -176,22 +177,21 @@
                 android:background="#ffcccccc"
                 android:max="100"
                 android:progressDrawable="@drawable/selector_progressbar_web_view"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
 
             <WebView
                 android:id="@+id/webview_new_detail"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_height="match_parent"/>
+                android:layout_marginRight="5dp" />
 
             <com.dk.mp.core.widget.ErrorLayout
                 android:id="@+id/errorlayout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:visibility="gone"
-                android:layout_gravity="center">
-            </com.dk.mp.core.widget.ErrorLayout>
+                android:layout_gravity="center"
+                android:visibility="gone"></com.dk.mp.core.widget.ErrorLayout>
 
         </LinearLayout>
     </com.dk.mp.core.view.scroll.ObservableScrollView>
