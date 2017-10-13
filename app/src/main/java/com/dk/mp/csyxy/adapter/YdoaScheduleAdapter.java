@@ -86,6 +86,7 @@ public class YdoaScheduleAdapter extends RecyclerView.Adapter<YdoaScheduleAdapte
         holder.ydoa_organization.setText(bean.getOrganization());
         holder.ydoa_location.setText(bean.getLocation());
         holder.ydoa_content.setText(bean.getContent());
+        holder.ydoa_sj.setText(bean.getTime());
 
     }
 
@@ -96,7 +97,7 @@ public class YdoaScheduleAdapter extends RecyclerView.Adapter<YdoaScheduleAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView ydoa_week, ydoa_date, ydoa_host, ydoa_organization, ydoa_location, ydoa_content;
+        TextView ydoa_week, ydoa_date, ydoa_host, ydoa_organization, ydoa_location, ydoa_content,ydoa_sj;
         View line;
 
         public MyViewHolder(View itemView) {
@@ -108,6 +109,7 @@ public class YdoaScheduleAdapter extends RecyclerView.Adapter<YdoaScheduleAdapte
             ydoa_organization = (TextView) itemView.findViewById(R.id.ydoa_organization);
             ydoa_location = (TextView) itemView.findViewById(R.id.ydoa_location);
             ydoa_content = (TextView) itemView.findViewById(R.id.ydoa_content);
+            ydoa_sj = (TextView) itemView.findViewById(R.id.ydoa_sj);
 
             line = itemView.findViewById(R.id.line);
 
