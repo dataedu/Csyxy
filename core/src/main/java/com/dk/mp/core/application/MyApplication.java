@@ -3,6 +3,7 @@ package com.dk.mp.core.application;
 import android.app.Application;
 import android.content.Context;
 
+import com.dk.mp.core.util.CrashHandler;
 import com.dk.mp.core.util.ImagePipelineConfigFactory;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -26,5 +27,7 @@ public class MyApplication extends Application {
         Realm.init(this);
         //初始化图片加载框架
         Fresco.initialize(this, ImagePipelineConfigFactory.getImagePipelineConfig(this));
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(getApplicationContext());
     }
 }

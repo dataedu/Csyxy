@@ -186,7 +186,7 @@ public class FileUtil {
         Context context = MyApplication.getContext();
         Uri uri = null;
         if (Build.VERSION.SDK_INT >= 24) {
-            uri = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+            uri = FileProvider.getUriForFile(context, "com.dk.mp.csyxy.fileprovider", new File(param));
         } else {
             uri = Uri.fromFile(new File(param));
         }
@@ -204,7 +204,7 @@ public class FileUtil {
         Context context = MyApplication.getContext();
         Uri uri = null;
         if (Build.VERSION.SDK_INT >= 24) {
-            uri = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+            uri = FileProvider.getUriForFile(context, "com.dk.mp.csyxy.fileprovider", new File(param));
         } else {
             uri = Uri.fromFile(new File(param));
         }
@@ -222,7 +222,7 @@ public class FileUtil {
         Context context = MyApplication.getContext();
         Uri uri = null;
         if (Build.VERSION.SDK_INT >= 24) {
-            uri = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+            uri = FileProvider.getUriForFile(context, "com.dk.mp.csyxy.fileprovider", new File(param));
         } else {
             uri = Uri.fromFile(new File(param));
         }
@@ -242,11 +242,12 @@ public class FileUtil {
         Context context = MyApplication.getContext();
         Uri uri = null;
         if (Build.VERSION.SDK_INT >= 24) {
-            uri = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+            uri = FileProvider.getUriForFile(context, "com.dk.mp.csyxy.fileprovider", new File(param));
         } else {
             uri = Uri.fromFile(new File(param));
         }
-        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
         intent.setDataAndType(uri, "application/msword");
         return intent;
     }
@@ -275,7 +276,7 @@ public class FileUtil {
             Context context = MyApplication.getContext();
             Uri uri2 = null;
             if (Build.VERSION.SDK_INT >= 24) {
-                uri2 = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+                uri2 = FileProvider.getUriForFile(context, "com.dk.mp.csyxy.fileprovider", new File(param));
             } else {
                 uri2 = Uri.fromFile(new File(param));
             }
@@ -294,7 +295,7 @@ public class FileUtil {
         Context context = MyApplication.getContext();
         Uri uri = null;
         if (Build.VERSION.SDK_INT >= 24) {
-            uri = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+            uri = FileProvider.getUriForFile(context, "com.dk.mp.csyxy.fileprovider", new File(param));
         } else {
             uri = Uri.fromFile(new File(param));
         }
