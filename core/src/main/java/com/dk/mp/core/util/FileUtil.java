@@ -190,7 +190,8 @@ public class FileUtil {
         } else {
             uri = Uri.fromFile(new File(param));
         }
-        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+//        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setDataAndType(uri, "image/*");
         return intent;
     }
@@ -208,7 +209,9 @@ public class FileUtil {
         } else {
             uri = Uri.fromFile(new File(param));
         }
-        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+//        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
         intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
         return intent;
     }
@@ -226,7 +229,8 @@ public class FileUtil {
         } else {
             uri = Uri.fromFile(new File(param));
         }
-        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+//        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setDataAndType(uri, "application/vnd.ms-excel");
         return intent;
     }
@@ -246,7 +250,8 @@ public class FileUtil {
         } else {
             uri = Uri.fromFile(new File(param));
         }
-        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+//        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setDataAndType(uri, "application/msword");
         return intent;
     }
@@ -279,7 +284,8 @@ public class FileUtil {
             } else {
                 uri2 = Uri.fromFile(new File(param));
             }
-            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+//            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setDataAndType(uri2, "text/plain");
         }
         return intent;
@@ -298,7 +304,8 @@ public class FileUtil {
         } else {
             uri = Uri.fromFile(new File(param));
         }
-        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+//        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setDataAndType(uri, "application/pdf");
         return intent;
     }

@@ -134,12 +134,20 @@
                     </TextView>
                     <include
                         layout="@layout/core_line_padding"/>
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_view"
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:background="#ffffff">
-                    </android.support.v7.widget.RecyclerView>
+                        android:descendantFocusability="blocksDescendants">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:background="#ffffff">
+                        </android.support.v7.widget.RecyclerView>
+
+                    </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout

@@ -89,6 +89,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
                         Glide.with(mContext).load(R.mipmap.zjcy_xzjy).into(holder.image);
                     } else if (news.getName().equals("学校章程")) {
                         Glide.with(mContext).load(R.mipmap.zjcy_xxzc).into(holder.image);
+                    } else if (news.getName().equals("长医十三五规划")){
+                        Glide.with(mContext).load(R.mipmap.zjcy_a).into(holder.image);
                     }
                 }
          /*   }else  if(mType.equals("ybxx")){
