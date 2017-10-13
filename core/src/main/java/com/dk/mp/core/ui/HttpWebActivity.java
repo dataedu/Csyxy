@@ -51,7 +51,7 @@ public class HttpWebActivity extends MyActivity{
     private ProgressBar mProgressBar;
     private TextView mClose;
     private String  filename;
-    private String mFilepath = Environment.getExternalStorageDirectory() + "/mobileschool/cache/";
+    private String mFilepath = Environment.getExternalStorageDirectory() + "/";
 
     @Override
     protected int getLayoutID() {
