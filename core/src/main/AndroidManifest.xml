@@ -18,7 +18,7 @@
         <!--</receiver>-->
 
         <provider
-            android:authorities="com.dk.mp.core.fileprovider"
+            android:authorities="com.dk.mp.csyxy.fileprovider"
             android:name="android.support.v4.content.FileProvider"
             android:grantUriPermissions="true"
             android:exported="false">
