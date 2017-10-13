@@ -73,10 +73,45 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/oprition_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:visibility="gone">
+                <include
+                    layout="@layout/core_line"/>
+                <TextView
+                    android:layout_height="31dp"
+                    android:layout_width="match_parent"
+                    android:text="业务管理"
+                    android:textColor="#A6A6A6"
+                    android:textSize="12sp"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp">
+                </TextView>
+                <include
+                    layout="@layout/core_line_padding"/>
+
+                <com.dk.mp.core.view.MyGridView
+                    android:id="@+id/oprition_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:numColumns="4" >
+                </com.dk.mp.core.view.MyGridView>
+
+                <include
+                    layout="@layout/core_line"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/recentUse_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:background="@color/white">
                 <LinearLayout
@@ -144,40 +179,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/oprition_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:background="@color/white"
-                android:layout_marginBottom="20dp"
-                android:visibility="gone">
-                <include
-                    layout="@layout/core_line"/>
-                <TextView
-                    android:layout_height="31dp"
-                    android:layout_width="match_parent"
-                    android:text="业务管理"
-                    android:textColor="#A6A6A6"
-                    android:textSize="12sp"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="10dp">
-                </TextView>
-                <include
-                    layout="@layout/core_line_padding"/>
-
-                <com.dk.mp.core.view.MyGridView
-                    android:id="@+id/oprition_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#ffffff"
-                    android:numColumns="4" >
-                </com.dk.mp.core.view.MyGridView>
-
-                <include
-                    layout="@layout/core_line"/>
-            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>

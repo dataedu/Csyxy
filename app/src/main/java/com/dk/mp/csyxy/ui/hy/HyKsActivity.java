@@ -172,8 +172,8 @@ public class HyKsActivity extends MyActivity {
 		if (DeviceUtil.checkNet()) {
 			errorLayout.setErrorType(ErrorLayout.LOADDATA);
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("id", bmid);
-			HttpUtil.getInstance().postJsonObjectRequest("apps/yellowpage/getKsList", map, new HttpListener<JSONObject>() {
+//			map.put("id", bmid);
+			HttpUtil.getInstance().postJsonObjectRequest("apps/yellowpage/getKsList?id="+bmid, map, new HttpListener<JSONObject>() {
 				@Override
 				public void onSuccess(JSONObject result) {
 					try {

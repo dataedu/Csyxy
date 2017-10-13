@@ -6,12 +6,14 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -49,8 +51,10 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
     private ObservableScrollView scroll;
     private RelativeLayout top;
     private LinearLayout top2;
-    private TextView top_title;
+    private TextView top_title,top_title2;
     private TextView bottom_title;
+
+    private FrameLayout isimg;
 
     @Override
     protected int getLayoutID() {
@@ -69,7 +73,10 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         top = (RelativeLayout) findViewById(R.id.top);
         top2 = (LinearLayout) findViewById(R.id.top2);
         top_title = (TextView) findViewById(R.id.top_title);
+        top_title2 = (TextView) findViewById(R.id.top_title2);
         bottom_title = (TextView) findViewById(R.id.bottom_title);
+
+        isimg = (FrameLayout) findViewById(R.id.isImg);
 
 //        mError = (ErrorLayout) findViewById(R.id.error_layout);
 //        ViewCompat.setTransitionName(mImageViewTop, "detail_element");
@@ -80,67 +87,86 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         news = (News) getIntent().getSerializableExtra("news");
         mType = getIntent().getStringExtra("mType");
         dType = getIntent().getStringExtra("dType");
-        if (mType !=null){
-            int img = 0;
-            if (mType.equals("xw")){
-//                mImageViewTop.setImageResource(R.mipmap.zjcy_a);
-                img = R.mipmap.zjcy_a;
-            }else if (mType.equals("gg")){
-//                mImageViewTop.setImageResource(R.mipmap.gg);
-                img = R.mipmap.gg;
-            }else if (mType.equals("rcyj")){
-//                mImageViewTop.setImageResource(R.mipmap.rcyj);
-                img = R.mipmap.rcyj;
-            }else if (mType.equals("ybxx")){
-//                mImageViewTop.setImageResource(R.mipmap.ybxx);
-                img = R.mipmap.ybxx;
-            }else if (mType.equals("dzjs")){
-//                mImageViewTop.setImageResource(R.mipmap.dzjs);
-                img = R.mipmap.dzjs;
-            }
-            Glide.with(mContext).load(img).into(mImageViewTop);
 
-        } else if(dType != null && dType.equals("zjcy")){
-            String name = news.getName();
-            if (name != null){
+        String isImg = getIntent().getStringExtra("topimg");
+        if(isImg != null && isImg.equals("gone")){
+            isimg.setVisibility(View.GONE);
+            top.setVisibility(View.VISIBLE);
+            top_title.setVisibility(View.GONE);
+            top_title2.setVisibility(View.VISIBLE);
+            top_title2.setText(news.getName());
+            top_title2.post(new Runnable() {
+                @Override
+                public void run() {
+                    sizt2();
+
+                }
+            });
+        }else {
+            if (mType !=null){
                 int img = 0;
-                if (name.equals("学校领导")){
-//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxld);
-                    img = R.mipmap.zjcy_xxld;
-                }else if (name.equals("长医概况")){
-//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxgk);
-                    img = R.mipmap.zjcy_xxgk;
-                }else if (name.equals("校长寄语")){
-//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xzjy);
-                    img = R.mipmap.zjcy_xzjy;
-                }else if (name.equals("学校章程")){
-//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxzc);
-                    img = R.mipmap.zjcy_xxzc;
+                if (mType.equals("xw")){
+//                mImageViewTop.setImageResource(R.mipmap.zjcy_a);
+                    img = R.mipmap.zjcy_a;
+                }else if (mType.equals("gg")){
+//                mImageViewTop.setImageResource(R.mipmap.gg);
+                    img = R.mipmap.gg;
+                }else if (mType.equals("rcyj")){
+//                mImageViewTop.setImageResource(R.mipmap.rcyj);
+                    img = R.mipmap.rcyj;
+                }else if (mType.equals("ybxx")){
+//                mImageViewTop.setImageResource(R.mipmap.ybxx);
+                    img = R.mipmap.ybxx;
+                }else if (mType.equals("dzjs")){
+//                mImageViewTop.setImageResource(R.mipmap.dzjs);
+                    img = R.mipmap.dzjs;
                 }
                 Glide.with(mContext).load(img).into(mImageViewTop);
-            }
-        }else {
-            if (news.getId() != null && news.getId().equals("a")){
-//                img = R.mipmap.zjcy_a;
-                Glide.with(mContext).load(R.mipmap.zjcy_a).into(mImageViewTop);
-            }else if (news.getId() != null && news.getId().equals("b")){
-//                img = R.mipmap.zjcy_b;
-                Glide.with(mContext).load(R.mipmap.zjcy_b).into(mImageViewTop);
-            }else  if (news.getId() != null && news.getId().equals("c")){
-//                img = R.mipmap.zjcy_c;
-                Glide.with(mContext).load(R.mipmap.zjcy_c).into(mImageViewTop);
-            }else  if (news.getId() != null && news.getId().equals("d")){
-//                img = R.mipmap.zjcy_d;
-                Glide.with(mContext).load(R.mipmap.zjcy_d).into(mImageViewTop);
+
+            } else if(dType != null && dType.equals("zjcy")){
+                String name = news.getName();
+                if (name != null){
+                    int img = 0;
+                    if (name.equals("学校领导")){
+//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxld);
+                        img = R.mipmap.zjcy_xxld;
+                    }else if (name.equals("长医概况")){
+//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxgk);
+                        img = R.mipmap.zjcy_xxgk;
+                    }else if (name.equals("校长寄语")){
+//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xzjy);
+                        img = R.mipmap.zjcy_xzjy;
+                    }else if (name.equals("学校章程")){
+//                    mImageViewTop.setImageResource(R.mipmap.zjcy_xxzc);
+                        img = R.mipmap.zjcy_xxzc;
+                    }
+                    Glide.with(mContext).load(img).into(mImageViewTop);
+                }
             }else {
-                Glide.with(mContext).load(news.getImage()).fitCenter().placeholder(R.mipmap.detail_defult).into(mImageViewTop);
+                if (news.getId() != null && news.getId().equals("a")){
+//                img = R.mipmap.zjcy_a;
+                    Glide.with(mContext).load(R.mipmap.zjcy_a).into(mImageViewTop);
+                }else if (news.getId() != null && news.getId().equals("b")){
+//                img = R.mipmap.zjcy_b;
+                    Glide.with(mContext).load(R.mipmap.zjcy_b).into(mImageViewTop);
+                }else  if (news.getId() != null && news.getId().equals("c")){
+//                img = R.mipmap.zjcy_c;
+                    Glide.with(mContext).load(R.mipmap.zjcy_c).into(mImageViewTop);
+                }else  if (news.getId() != null && news.getId().equals("d")){
+//                img = R.mipmap.zjcy_d;
+                    Glide.with(mContext).load(R.mipmap.zjcy_d).into(mImageViewTop);
+                }else {
+                    Glide.with(mContext).load(news.getImage()).fitCenter().placeholder(R.mipmap.detail_defult).into(mImageViewTop);
+                }
+
             }
+
+            //标题显示
+            intTitle();
 
         }
-        setWebView ( );
 
-        //标题显示
-        intTitle();
+        setWebView ( );
 
         layout = (ErrorLayout)findViewById(R.id.errorlayout);
         if(DeviceUtil.checkNet()) {//检查网络
@@ -226,6 +252,29 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
                         bottom_title.setTextSize(8);
                         bottom_title.setMaxLines(2);
                         bottom_title.setEllipsize(TextUtils.TruncateAt.END);
+                        return;
+                    }
+                }
+            });
+        }
+    }
+
+    private void sizt2(){
+        while (top_title2.getLineCount()>2){
+            int size = (int) top_title2.getTextSize();
+            size = size -1;
+            top_title2.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
+//            Log.e("大小后-----------",bottom_title.getTextSize()+"");
+
+            top_title2.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (top_title2.getTextSize()>8){
+                        sizt2();
+                    }else {
+                        top_title2.setTextSize(8);
+                        top_title2.setMaxLines(2);
+                        top_title2.setEllipsize(TextUtils.TruncateAt.END);
                         return;
                     }
                 }

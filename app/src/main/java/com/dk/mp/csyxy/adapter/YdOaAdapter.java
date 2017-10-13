@@ -25,7 +25,7 @@ public class YdOaAdapter extends BaseAdapter{
     private Context mContext;
     LayoutInflater inflater;
     private CoreSharedPreferencesHelper helper;
-    
+
 //    private String userIdDes = "";
 
 	public YdOaAdapter(List<YdOaEntity> mData, Context mContext2) {
@@ -62,7 +62,8 @@ public class YdOaAdapter extends BaseAdapter{
 			holder.imageView = (ImageView) convertView.findViewById(R.id.item_image);
 			holder.mTextView = (TextView) convertView.findViewById(R.id.item_text);
 			holder.container = (FrameLayout) convertView.findViewById(R.id.container);
-			convertView.setTag(holder);
+            holder.wdxx = (TextView) convertView.findViewById(R.id.wdxx);
+            convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
@@ -111,8 +112,9 @@ public class YdOaAdapter extends BaseAdapter{
 	 */
 	private static class ViewHolder {
         public ImageView imageView;
-        public TextView mTextView;
+        public TextView mTextView,wdxx;
         public FrameLayout container;
+
 	}
 	
 	public void setAppIcon(ViewHolder holder,String appname){
@@ -143,6 +145,16 @@ public class YdOaAdapter extends BaseAdapter{
                 break;
             case "wddb"://我的待办
                 holder.imageView.setImageResource(R.drawable.app_wddb);
+                if (helper.getValue("num") != null){
+                    holder.wdxx.setVisibility(View.VISIBLE);
+                    if (helper.getValue("num").length()<3){
+                        holder.wdxx.setText(helper.getValue("num"));
+                    }else {
+                       holder.wdxx.setText("99");
+                    }
+                }else {
+                    holder.wdxx.setVisibility(View.GONE);
+                }
                 break;
             case "dwsq"://我的申请
                 holder.imageView.setImageResource(R.drawable.app_wdsq);

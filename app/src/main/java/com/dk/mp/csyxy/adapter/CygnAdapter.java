@@ -1,6 +1,7 @@
 package com.dk.mp.csyxy.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dk.mp.core.entity.App;
+import com.dk.mp.core.ui.HttpWebActivity;
 import com.dk.mp.core.util.AppUtil;
 import com.dk.mp.core.util.ImageUtil;
 import com.dk.mp.core.util.SnackBarUtil;
+import com.dk.mp.core.util.StringUtils;
+import com.dk.mp.core.util.security.Signature;
 import com.dk.mp.csyxy.R;
 
 import java.util.List;
@@ -67,7 +71,7 @@ public class CygnAdapter extends RecyclerView.Adapter<CygnAdapter.MyViewHolder>{
                 @Override
                 public void onClick(View view) {
 //                    SnackBarUtil.showShort(layout_bg,"建设中");
-                    if (mData.get(getLayoutPosition()).getAction().equals("txl")){
+                    /*if (mData.get(getLayoutPosition()).getAction().equals("txl")){
                         new android.os.Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -87,8 +91,17 @@ public class CygnAdapter extends RecyclerView.Adapter<CygnAdapter.MyViewHolder>{
                         },100);
                     }else {
                         SnackBarUtil.showShort(layout_bg,"建设中");
-                    }
+                    }*/
 
+                    if (StringUtils.isNotEmpty(mData.get(getLayoutPosition()).getUrl())){
+                        Intent intent  = new Intent(mContext, HttpWebActivity.class);
+                        intent.putExtra("title",mData.get(getLayoutPosition()).getName());
+                        intent.putExtra("close_web",-1);
+                        intent.putExtra("url",mData.get(getLayoutPosition()).getUrl());
+                        mContext.startActivity(intent);
+                    }else {
+                        SnackBarUtil.showShort(layout_bg,"建设中");
+                    }
                 }
             });
         }

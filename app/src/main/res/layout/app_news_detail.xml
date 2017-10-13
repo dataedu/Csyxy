@@ -83,14 +83,29 @@
 
         <TextView
             android:id="@+id/top_title"
-            style="@style/title_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:paddingLeft="60dip"
-            android:paddingRight="60dip"
+            android:paddingRight="60dp"
             android:background="@null"
             android:visibility="visible"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/top_title2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingLeft="60dip"
+            android:paddingRight="10dp"
+            android:background="@null"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             android:text=""/>
 
     </RelativeLayout>
@@ -108,8 +123,10 @@
             android:orientation="vertical">
 
             <FrameLayout
+                android:id="@+id/isImg"
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
+                android:visibility="visible"
                 android:background="?attr/colorPrimary">
 
                 <ImageView

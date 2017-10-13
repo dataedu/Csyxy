@@ -69,29 +69,32 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if(getItemViewType(position) == 0){
             final News news = mData.get(position);
-            if (mType.equals("gg") || mType.equals("rcyj")){
+            if (mType.equals("gg") || mType.equals("rcyj") || mType.equals("ybxx")){
                 holder.title.setText(news.getName());
                 holder.image.setVisibility(View.GONE);
                 holder.time2.setVisibility(View.VISIBLE);
                 holder.time.setVisibility(View.GONE);
                 holder.time2.setText(news.getPublishTime());
-            }else if (mType.equals("zjcy")){
+            }else if (mType.equals("zjcy")) {
 
                 holder.time.setText(news.getPublishTime());
-                if (news.getName() != null){
+                if (news.getName() != null) {
                     holder.title.setText(news.getName());
                     holder.image.setVisibility(View.VISIBLE);
-                    if (news.getName().equals("学校领导")){
+                    if (news.getName().equals("学校领导")) {
                         Glide.with(mContext).load(R.mipmap.zjcy_xxld).into(holder.image);
-                    }else if (news.getName().equals("长医概况")){
+                    } else if (news.getName().equals("长医概况")) {
                         Glide.with(mContext).load(R.mipmap.zjcy_xxgk).into(holder.image);
-                    }else if (news.getName().equals("校长寄语")){
+                    } else if (news.getName().equals("校长寄语")) {
                         Glide.with(mContext).load(R.mipmap.zjcy_xzjy).into(holder.image);
-                    }else if (news.getName().equals("学校章程")){
+                    } else if (news.getName().equals("学校章程")) {
                         Glide.with(mContext).load(R.mipmap.zjcy_xxzc).into(holder.image);
                     }
                 }
-
+         /*   }else  if(mType.equals("ybxx")){
+                holder.image.setVisibility(View.GONE);
+                holder.title.setText(news.getName());
+                holder.time.setText(news.getPublishTime());*/
             }else {
                 holder.title.setText(news.getName());
                 holder.time.setText(news.getPublishTime());
@@ -111,6 +114,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
                     Intent intent = new Intent(mContext, NewsDetailActivity.class);
                     intent.putExtra("news", (Serializable) news);
                     intent.putExtra("dType",mType);
+                    intent.putExtra("topimg","gone");
                     ActivityOptionsCompat options =
                             ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mContext,v,
                                     mContext.getString(R.string.transition__img));

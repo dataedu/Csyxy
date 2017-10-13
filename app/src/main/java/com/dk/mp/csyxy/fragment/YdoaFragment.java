@@ -17,6 +17,7 @@ import com.dk.mp.core.http.request.HttpListener;
 import com.dk.mp.core.ui.BaseFragment;
 import com.dk.mp.core.util.CoreSharedPreferencesHelper;
 import com.dk.mp.core.util.DeviceUtil;
+import com.dk.mp.core.util.StringUtils;
 import com.dk.mp.core.view.MyGridView;
 import com.dk.mp.core.widget.ErrorLayout;
 import com.dk.mp.csyxy.R;
@@ -29,6 +30,7 @@ import com.dk.mp.csyxy.ui.LoginActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -86,15 +88,38 @@ public class YdoaFragment extends BaseFragment{
         }else {
             if(DeviceUtil.checkNet()){
                 error.setErrorType(ErrorLayout.LOADDATA);
+                getWdnum();
                 getSchedule();
                 getList();
                 getUserInfo();
+
             }else{
                 setUserindo("NOnetwork");
 //                error.setErrorType(ErrorLayout.HIDE_LAYOUT);
 //                MsgDialog.show(mContext, getString(R.string.net_no2));
             }
         }
+    }
+
+    private void getWdnum() {
+        HttpUtil.getInstance().postJsonObjectRequest("apps/oa/getWaitCount", null, new HttpListener<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                try {
+                  String num = result.getJSONObject("data").getString("waitCount");
+                  if (StringUtils.isNotEmpty(num) && !(num.equals("0")) ){
+                      helper.setValue("num",num);
+                  }else {
+                      helper.setValue("num",null);
+                  }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onError(VolleyError error) {
+            }
+        });
     }
 
     private void initView(){

@@ -1,8 +1,14 @@
 package com.dk.mp.core.util;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
+import android.util.Log;
+
+import com.dk.mp.core.application.MyApplication;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -93,6 +99,8 @@ public class FileUtil {
             return null;
 		/* 取得扩展名 */
         String end = file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length()).toLowerCase();
+
+
 		/* 依扩展名的类型决定MimeType */
         if (end.equals("m4a") || end.equals("mp3") || end.equals("mid") || end.equals("xmf") || end.equals("ogg") || end.equals("wav")) {
             return getAudioFileIntent(filePath);
@@ -174,7 +182,15 @@ public class FileUtil {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.addCategory("android.intent.category.DEFAULT");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri uri = Uri.fromFile(new File(param));
+//        Uri uri = Uri.fromFile(new File(param));
+        Context context = MyApplication.getContext();
+        Uri uri = null;
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+        } else {
+            uri = Uri.fromFile(new File(param));
+        }
+        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
         intent.setDataAndType(uri, "image/*");
         return intent;
     }
@@ -184,7 +200,15 @@ public class FileUtil {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.addCategory("android.intent.category.DEFAULT");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri uri = Uri.fromFile(new File(param));
+//        Uri uri = Uri.fromFile(new File(param));
+        Context context = MyApplication.getContext();
+        Uri uri = null;
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+        } else {
+            uri = Uri.fromFile(new File(param));
+        }
+        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
         intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
         return intent;
     }
@@ -194,17 +218,35 @@ public class FileUtil {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.addCategory("android.intent.category.DEFAULT");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri uri = Uri.fromFile(new File(param));
+//        Uri uri = Uri.fromFile(new File(param));
+        Context context = MyApplication.getContext();
+        Uri uri = null;
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+        } else {
+            uri = Uri.fromFile(new File(param));
+        }
+        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
         intent.setDataAndType(uri, "application/vnd.ms-excel");
         return intent;
     }
 
     // Android获取一个用于打开Word文件的intent
     public static Intent getWordFileIntent(String param) {
+        Log.e("----------------",param+"");
+
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.addCategory("android.intent.category.DEFAULT");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri uri = Uri.fromFile(new File(param));
+//        Uri uri = Uri.fromFile(new File(param));
+        Context context = MyApplication.getContext();
+        Uri uri = null;
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+        } else {
+            uri = Uri.fromFile(new File(param));
+        }
+        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
         intent.setDataAndType(uri, "application/msword");
         return intent;
     }
@@ -224,11 +266,20 @@ public class FileUtil {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.addCategory("android.intent.category.DEFAULT");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
         if (paramBoolean) {
             Uri uri1 = Uri.parse(param);
             intent.setDataAndType(uri1, "text/plain");
         } else {
-            Uri uri2 = Uri.fromFile(new File(param));
+//            Uri uri2 = Uri.fromFile(new File(param));
+            Context context = MyApplication.getContext();
+            Uri uri2 = null;
+            if (Build.VERSION.SDK_INT >= 24) {
+                uri2 = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+            } else {
+                uri2 = Uri.fromFile(new File(param));
+            }
+            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
             intent.setDataAndType(uri2, "text/plain");
         }
         return intent;
@@ -239,7 +290,15 @@ public class FileUtil {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.addCategory("android.intent.category.DEFAULT");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri uri = Uri.fromFile(new File(param));
+//        Uri uri = Uri.fromFile(new File(param));
+        Context context = MyApplication.getContext();
+        Uri uri = null;
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri = FileProvider.getUriForFile(context, "com.dk.mp.core.fileprovider", new File(param));
+        } else {
+            uri = Uri.fromFile(new File(param));
+        }
+        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//增加读写权限
         intent.setDataAndType(uri, "application/pdf");
         return intent;
     }

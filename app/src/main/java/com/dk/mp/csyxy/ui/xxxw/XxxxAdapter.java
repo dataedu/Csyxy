@@ -82,7 +82,7 @@ public class XxxxAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolder>{
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, NewsDetailActivity.class);
                 intent.putExtra("news", (Serializable) news);
-
+                intent.putExtra("topimg","gone");
                 if ((position+1)%4 == 1){
                     if (!StringUtils.isNotEmpty(news.getImage())){
                         intent.putExtra("mType","xw");

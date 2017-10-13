@@ -5,9 +5,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.dk.mp.core.entity.JsonData;
+import com.dk.mp.core.http.HttpUtil;
+import com.dk.mp.core.http.request.HttpListener;
 import com.dk.mp.core.ui.BaseFragment;
+import com.dk.mp.core.util.StringUtils;
 import com.dk.mp.csyxy.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -26,6 +35,8 @@ public class NavFragment extends BaseFragment implements View.OnClickListener{
     private FragmentManager mFragmentManager;
     private NavigationButton mCurrentNavButton;
     private OnNavigationReselectListener mOnNavigationReselectListener;
+
+    private TextView wdxx;
 
     public NavFragment() {
     }
@@ -62,6 +73,49 @@ public class NavFragment extends BaseFragment implements View.OnClickListener{
         nav_item_grzx.init(R.drawable.tab_icon_me,
                 R.string.main_tab_name_grzx,
                 CenterPersonFragment.class);
+
+        wdxx = findView(R.id.wdxx);
+//        getWdnum();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        getWdnum();
+    }
+
+    private void getWdnum() {
+        HttpUtil.getInstance().postJsonObjectRequest("apps/oa/getWaitCount", null, new HttpListener<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                try {
+                    String num = result.getJSONObject("data").getString("waitCount");
+                    if (StringUtils.isNotEmpty(num)){
+                        if (num.length()>3){
+                            wdxx.setVisibility(View.VISIBLE);
+                            wdxx.setText("99");
+                        }else if (num.equals("0")){
+                            wdxx.setVisibility(View.GONE);
+                        }else {
+                            wdxx.setVisibility(View.VISIBLE);
+                            wdxx.setText(num);
+                        }
+
+                    }else {
+                        wdxx.setVisibility(View.GONE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    wdxx.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                wdxx.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override

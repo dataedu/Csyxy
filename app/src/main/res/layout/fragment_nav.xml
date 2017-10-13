@@ -4,8 +4,7 @@
     android:layout_height="58dp"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:background="#f4f4f4"
-    tools:context="com.dk.edu.csyxy.com.dk.mp.csyxy.fragment.NavFragment">
+    android:background="#f4f4f4">
 
     <com.dk.mp.csyxy.fragment.NavigationButton
         android:id="@+id/nav_item_cyxx"
@@ -15,13 +14,39 @@
         android:paddingLeft="12dp"
         android:paddingRight="12dp" />
 
-    <com.dk.mp.csyxy.fragment.NavigationButton
+   <!-- <com.dk.mp.csyxy.fragment.NavigationButton
         android:id="@+id/nav_item_ydoa"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:paddingLeft="12dp"
-        android:paddingRight="12dp" />
+        android:paddingRight="12dp" />-->
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <com.dk.mp.csyxy.fragment.NavigationButton
+            android:id="@+id/nav_item_ydoa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp" />
+
+        <TextView
+            android:id="@+id/wdxx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:background="@drawable/red_round"
+            android:text="0"/>
+    </FrameLayout>
 
     <com.dk.mp.csyxy.fragment.NavigationButton
         android:id="@+id/nav_item_cygn"
