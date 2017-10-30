@@ -44,6 +44,7 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/white"
             android:textSize="10sp"
+            android:visibility="gone"
             android:background="@drawable/red_round"
             android:text="0"/>
     </FrameLayout>

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -68,7 +69,7 @@ public class AboutActivity extends MyActivity {
             }
         });
         mError = (ErrorLayout) findViewById(R.id.error_layout);
-        getData();
+        getDatas();
     }
 
     @Override
@@ -105,7 +106,7 @@ public class AboutActivity extends MyActivity {
     /**
      * 获取更新日志
      */
-    public void getData(){
+    public void getDatas(){
         if(DeviceUtil.checkNet()){
             Map<String,Object> map = new HashMap<>();
 //            map.put("versionId", DeviceUtil.getVersionCode(mContext));
@@ -128,6 +129,8 @@ public class AboutActivity extends MyActivity {
                                     if(StringUtils.isNotEmpty(url) && StringUtils.isNotEmpty(desc)){
                                         update_layout.setVisibility(View.VISIBLE);
                                     }
+
+                                    Log.e("----------","请求结束");
                                 }
                             } else {
                                 showErrorMsg(mrootview,"获取版本内容失败");

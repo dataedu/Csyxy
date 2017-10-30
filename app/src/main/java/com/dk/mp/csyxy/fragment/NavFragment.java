@@ -101,7 +101,6 @@ public class NavFragment extends BaseFragment implements View.OnClickListener{
                             wdxx.setVisibility(View.VISIBLE);
                             wdxx.setText(num);
                         }
-
                     }else {
                         wdxx.setVisibility(View.GONE);
                     }
@@ -122,6 +121,9 @@ public class NavFragment extends BaseFragment implements View.OnClickListener{
     public void onClick(View view) {
         NavigationButton nav = (NavigationButton) view;
         doSelect(nav);
+        if(view.getId() == R.id.nav_item_ydoa){
+            getWdnum();
+        }
     }
 
     public void setup(Context context, FragmentManager fragmentManager, int contentId, OnNavigationReselectListener listener) {
