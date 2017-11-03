@@ -66,7 +66,7 @@ public class YdoaScheduleAdapter extends RecyclerView.Adapter<YdoaScheduleAdapte
                 if (da.startsWith("0")){
                     da = da.replace("0", "");
                 }
-                holder.ydoa_date.setText(mo + "月" + da + "号");
+                holder.ydoa_date.setText(mo + "月" + da + "日");
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 try {

@@ -168,9 +168,14 @@ public class YdOaAdapter extends BaseAdapter{
             case "tzgggk":
             	holder.imageView.setImageResource(R.drawable.app_tzgg_zdy);
             	break;
-            default:
-                holder.imageView.setImageResource(R.drawable.app_hygl);
+            case "qsbgcy":
+                holder.imageView.setImageResource(R.drawable.app_qsbgcy);
                 break;
+            case "hyjycy":
+                holder.imageView.setImageResource(R.drawable.app_hyjycy);
+                break;
+            default:
+                holder.imageView.setImageResource(R.drawable.oa_def);
         }
     }
 }

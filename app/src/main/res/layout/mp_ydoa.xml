@@ -124,13 +124,16 @@
                         layout="@layout/core_line"/>
                     <TextView
                         android:id="@+id/themeTv"
-                        android:layout_height="31dp"
+                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:text="主题"
                         android:textColor="#212121"
                         android:textSize="15sp"
                         android:gravity="center_vertical"
-                        android:layout_marginLeft="10dp">
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="10dp">
                     </TextView>
                     <include
                         layout="@layout/core_line_padding"/>

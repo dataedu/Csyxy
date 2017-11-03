@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.dk.mp.core.entity.JsonData;
 import com.dk.mp.core.http.HttpUtil;
 import com.dk.mp.core.http.request.HttpListener;
 import com.dk.mp.core.ui.BaseFragment;

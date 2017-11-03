@@ -2,13 +2,16 @@ package com.dk.mp.csyxy.ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -64,6 +67,13 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
     @Override
     protected void initialize() {
         super.initialize();
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(ContextCompat.getColor(this, com.dk.mp.core.R.color.colorPrimary));
+        }
+
+
         mImageViewTop = (ImageView) findViewById(R.id.iv_new_detail_top);
         mProgressBar = (ProgressBar) findViewById(R.id.pb_new_detail);
         mWebView = (WebView) findViewById(R.id.webview_new_detail);
