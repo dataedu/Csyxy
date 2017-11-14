@@ -1,8 +1,10 @@
 package com.dk.mp.core.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -149,6 +151,17 @@ public class HttpWebActivity extends MyActivity{
             mProgressBar.setVisibility ( View.INVISIBLE );
             mError.setErrorType(ErrorLayout.HIDE_LAYOUT);
         }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (url.startsWith("tel:")){
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
+                startActivity(intent);
+            }
+            view.loadUrl(url);
+            return true;
+        }
+
     }
 
     public class MyWebChromeClient extends WebChromeClient {
@@ -171,6 +184,8 @@ public class HttpWebActivity extends MyActivity{
         public void onReceivedTitle ( WebView view, String title ) {
             super.onReceivedTitle ( view, title );
         }
+
+
     }
 
 

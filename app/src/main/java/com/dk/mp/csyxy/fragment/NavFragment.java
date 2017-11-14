@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.dk.mp.core.entity.LoginMsg;
 import com.dk.mp.core.http.HttpUtil;
 import com.dk.mp.core.http.request.HttpListener;
 import com.dk.mp.core.ui.BaseFragment;
+import com.dk.mp.core.util.CoreSharedPreferencesHelper;
 import com.dk.mp.core.util.StringUtils;
 import com.dk.mp.csyxy.R;
 
@@ -34,6 +36,7 @@ public class NavFragment extends BaseFragment implements View.OnClickListener{
     private FragmentManager mFragmentManager;
     private NavigationButton mCurrentNavButton;
     private OnNavigationReselectListener mOnNavigationReselectListener;
+    private CoreSharedPreferencesHelper helper;
 
     private TextView wdxx;
 
@@ -48,6 +51,7 @@ public class NavFragment extends BaseFragment implements View.OnClickListener{
     @Override
     protected void initWidget(View root) {
         super.initWidget(root);
+        helper = new CoreSharedPreferencesHelper(getContext());
         nav_item_cyxx = findView(R.id.nav_item_cyxx);
         nav_item_ydoa = findView(R.id.nav_item_ydoa);
         nav_item_cygn = findView(R.id.nav_item_cygn);
@@ -80,8 +84,12 @@ public class NavFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onResume() {
         super.onResume();
-
-        getWdnum();
+        LoginMsg loginMsg = helper.getLoginMsg();
+        if(loginMsg != null) {
+            getWdnum();
+        }else{
+            wdxx.setVisibility(View.GONE);
+        }
     }
 
     private void getWdnum() {

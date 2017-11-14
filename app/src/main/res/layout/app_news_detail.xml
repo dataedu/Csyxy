@@ -64,11 +64,9 @@
     <RelativeLayout
         android:id="@+id/top"
         android:layout_width="fill_parent"
-        android:layout_height="48dip"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:visibility="gone"
-        android:layout_alignParentTop="true"
-        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <Button
@@ -76,16 +74,16 @@
             style="@style/but_back"
             android:onClick="titleback"
             android:layout_width="60dip"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_height="48dip"/>
+            android:layout_height="48dip"
+            android:layout_alignParentTop="true"/>
 
         <TextView
             android:id="@+id/top_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
             android:paddingLeft="60dip"
             android:paddingRight="60dp"
             android:background="@null"
@@ -93,19 +91,25 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:gravity="center"
+            android:maxLines="3"
+            android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:paddingBottom="10dp"
             android:text=""/>
 
         <TextView
             android:id="@+id/top_title2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
             android:paddingLeft="60dip"
             android:paddingRight="10dp"
             android:background="@null"
             android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:layout_marginTop="12dp"
+            android:paddingBottom="10dp"
             android:text=""/>
 
     </RelativeLayout>

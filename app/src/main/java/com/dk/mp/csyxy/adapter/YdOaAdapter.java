@@ -70,6 +70,17 @@ public class YdOaAdapter extends BaseAdapter{
 		final YdOaEntity entity = mData.get(position);
 		if(StringUtils.isNotEmpty(entity.getUrl())) {
             setAppIcon(holder, entity.getName());//自定义oa
+            String count = entity.getCount();
+            if (StringUtils.isNotEmpty(count) && !"0".equals(count)){
+                holder.wdxx.setVisibility(View.VISIBLE);
+                if (count.length()<3){
+                    holder.wdxx.setText(count);
+                }else {
+                    holder.wdxx.setText("99");
+                }
+            }else {
+                holder.wdxx.setVisibility(View.GONE);
+            }
         }else{
             setAppIcon(holder, entity.getIdentity());//非自定义
         }
@@ -145,16 +156,16 @@ public class YdOaAdapter extends BaseAdapter{
                 break;
             case "wddb"://我的待办
                 holder.imageView.setImageResource(R.drawable.app_wddb);
-                if (helper.getValue("num") != null){
-                    holder.wdxx.setVisibility(View.VISIBLE);
-                    if (helper.getValue("num").length()<3){
-                        holder.wdxx.setText(helper.getValue("num"));
-                    }else {
-                       holder.wdxx.setText("99");
-                    }
-                }else {
-                    holder.wdxx.setVisibility(View.GONE);
-                }
+//                if (helper.getValue("num") != null){
+//                    holder.wdxx.setVisibility(View.VISIBLE);
+//                    if (helper.getValue("num").length()<3){
+//                        holder.wdxx.setText(helper.getValue("num"));
+//                    }else {
+//                       holder.wdxx.setText("99");
+//                    }
+//                }else {
+//                    holder.wdxx.setVisibility(View.GONE);
+//                }
                 break;
             case "dwsq"://我的申请
                 holder.imageView.setImageResource(R.drawable.app_wdsq);

@@ -197,6 +197,39 @@
                     android:background="@color/linecolor" />
 
                 <LinearLayout
+                    android:id="@+id/uppwd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_bg_while"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/setting_img"
+                        android:layout_marginLeft="10.0dip"
+                        android:src="@mipmap/setting_uppwd" />
+
+                    <TextView
+                        style="@style/setting_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:text="修改密码"/>
+
+                    <ImageView
+                        style="@style/setting_img_into"
+                        android:src="@mipmap/into_icon" />
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.8dip"
+                    android:layout_marginLeft="40dip"
+                    android:background="@color/linecolor" />
+
+                <LinearLayout
                     android:id="@+id/about"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

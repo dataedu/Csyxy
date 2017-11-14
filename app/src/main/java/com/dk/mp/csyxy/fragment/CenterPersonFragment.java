@@ -18,21 +18,23 @@ import android.widget.TextView;
 import com.dk.mp.core.dialog.AlertDialog;
 import com.dk.mp.core.entity.User;
 import com.dk.mp.core.ui.BaseFragment;
-import com.dk.mp.csyxy.R;
-import com.dk.mp.csyxy.ui.LoginActivity;
 import com.dk.mp.core.util.BroadcastUtil;
 import com.dk.mp.core.util.CoreSharedPreferencesHelper;
 import com.dk.mp.core.util.FileUtil;
 import com.dk.mp.core.util.SnackBarUtil;
+import com.dk.mp.csyxy.R;
+import com.dk.mp.csyxy.push.PushUtil;
 import com.dk.mp.csyxy.ui.AboutActivity;
+import com.dk.mp.csyxy.ui.LoginActivity;
 import com.dk.mp.csyxy.ui.UserInfoActivity;
+import com.dk.mp.csyxy.ui.password.UpdatePwdActivity;
 
 /**
  * 作者：janabo on 2017/6/7 16:34
  */
 public  class CenterPersonFragment extends BaseFragment implements View.OnClickListener{
     private TextView name,xm,bmhyx;
-    private LinearLayout login,feedback,version,cleanCache,about;
+    private LinearLayout login,feedback,version,cleanCache,about,uppwd;
     private CoreSharedPreferencesHelper helper;
     private LinearLayout xsxx;
     SwitchCompat checkbox_settting;
@@ -53,6 +55,7 @@ public  class CenterPersonFragment extends BaseFragment implements View.OnClickL
         version = (LinearLayout) root.findViewById(R.id.version_lin);
         cleanCache = (LinearLayout) root.findViewById(R.id.cleanCache);
         about = (LinearLayout) root.findViewById(R.id.about);
+        uppwd = (LinearLayout) root.findViewById(R.id.uppwd);
 
         setting_scro = (ScrollView) root.findViewById(R.id.setting_scro);
         name = (TextView) root.findViewById(R.id.name);
@@ -68,6 +71,7 @@ public  class CenterPersonFragment extends BaseFragment implements View.OnClickL
                 SnackBarUtil.showShort(setting_scro,
                         isChecked?"开启推送设置，您将及时收到学校公布的各类重要消息！":"关闭推送设置，您将不会收到学校公布的各类重要消息！");
                 helper.setBoolean("push_check",isChecked);
+                PushUtil.setStatus(mContext,isChecked?1:0);
             }
         });
 
@@ -79,6 +83,7 @@ public  class CenterPersonFragment extends BaseFragment implements View.OnClickL
         version.setOnClickListener(this);
         cleanCache.setOnClickListener(this);
         about.setOnClickListener(this);
+        uppwd.setOnClickListener(this);
     }
 
     private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
@@ -102,10 +107,12 @@ public  class CenterPersonFragment extends BaseFragment implements View.OnClickL
             SnackBarUtil.showShort(setting_scro,"关闭推送设置，您将不会收到学校公布的各类重要消息！");
             checkbox_settting.setChecked(false);
             helper.setBoolean("push_check",false);
+            PushUtil.setStatus(mContext,0);
         }else{
             SnackBarUtil.showShort(setting_scro,"开启推送设置，您将及时收到学校公布的各类重要消息！");
             checkbox_settting.setChecked(true);
             helper.setBoolean("push_check",true);
+            PushUtil.setStatus(mContext,1);
         }
     }
 
@@ -158,6 +165,15 @@ public  class CenterPersonFragment extends BaseFragment implements View.OnClickL
         }
     }
 
+    /**
+     * 修改密码
+     */
+    public void topwd(){
+        Intent intent = new Intent(getContext(), UpdatePwdActivity.class);
+        intent.putExtra("userid",helper.getUser().getUserId());
+        startActivity(intent);
+    }
+
     private void setUser() {
         User user = helper.getUser();
         if (user != null) {
@@ -194,6 +210,13 @@ public  class CenterPersonFragment extends BaseFragment implements View.OnClickL
                 break;
             case R.id.about:
                 toabout();
+                break;
+            case R.id.uppwd:
+                User user = helper.getUser();
+                if (user != null)
+                    topwd();
+                else
+                    tologin();
                 break;
         }
     }

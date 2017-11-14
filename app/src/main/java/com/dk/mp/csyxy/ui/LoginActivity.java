@@ -33,6 +33,7 @@ import com.dk.mp.core.view.ValidationCode;
 import com.dk.mp.core.view.edittext.CleanEditText;
 import com.dk.mp.csyxy.MainActivity;
 import com.dk.mp.csyxy.R;
+import com.dk.mp.csyxy.push.PushUtil;
 
 import org.json.JSONObject;
 
@@ -174,6 +175,8 @@ public class LoginActivity extends MyActivity implements View.OnClickListener{
 
                         preference.setValue("userIdDes",preference.getUser().getUserIdDes());
                         preference.setValue(TimeUtils.getToday()+userId,"false");
+
+                        new PushUtil(mContext).setTag();
                         BroadcastUtil.sendBroadcast(mContext,"user");
 //                        new PushUtil(mContext).setTag();
                         new Handler().postDelayed(new Runnable() {//等待成功动画结束
